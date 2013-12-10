@@ -2,19 +2,49 @@ package tollBarrier.vehicule;
 
 import static org.junit.Assert.*;
 
+import java.util.HashSet;
+
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 public class TestFabriqueDeVehicule {
 
+	FabriqueDeVehicule f;
+	HashSet<MoyenDePaiment> s1;
+
+	@Before
+	public void setUp() {
+		f = new FabriqueDeVehicule();
+
+		s1 = new HashSet<MoyenDePaiment>();
+		s1.add(MoyenDePaiment.Abonnement);
+		s1.add(MoyenDePaiment.CB);
+		s1.add(MoyenDePaiment.Liquide);
+	}
+
+	@After
+	public void tearDown() {
+	}
+   
 	@Test
 	public void testCreerVehicule() {
-		FabriqueDeVehicule f = new FabriqueDeVehicule();
 
-		assertTrue(f.creerVehicule("Camion") instanceof Camion); 
-		assertTrue(f.creerVehicule("DeuxRoues") instanceof DeuxRoues); 
-		assertTrue(f.creerVehicule("Voiture") instanceof Voiture);
 
-		assertTrue(f.creerVehicule("E") == null); 
+		
+		Vehicule v1 = f.creerVehicule("Camion", s1);
+		Vehicule v2 = f.creerVehicule("DeuxRoues", s1);
+		Vehicule v3 = f.creerVehicule("Voiture", s1);
+
+		assertTrue(v1 instanceof Camion); 
+		assertTrue(v2 instanceof DeuxRoues); 
+		assertTrue(v3 instanceof Voiture);
+
+		assertTrue(v1.getMoyensDePaiment().equals(s1));
+		assertTrue(v2.getMoyensDePaiment().equals(s1));
+		assertTrue(v3.getMoyensDePaiment().equals(s1));
+		
+		assertTrue(f.creerVehicule("E", s1) == null); 
 	}
 
 }
