@@ -153,4 +153,14 @@ public class TollBarrierTest {
 		} catch (NotAValidBorneTypeException e) {
 		}
 	}
+	
+	
+	
+	public void testgetNextNumeroBorne()
+	{
+		assertTrue(tb.getNextNumeroBorne() instanceof Integer);
+		assertTrue(tb.getNextNumeroBorne() >= 0);
+		assertTrue(tb.getNextNumeroBorne() <= tb.getNombreBornes()+1);
+		
+	}
 }

@@ -154,5 +154,11 @@ public class TollBarrier
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public Integer getNextNumeroBorne()
+	{
+		// TODO Auto-generated method stub
+		
+	}
 
 }
