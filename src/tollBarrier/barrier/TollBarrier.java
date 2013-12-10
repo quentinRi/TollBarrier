@@ -14,6 +14,9 @@
  */
 package tollBarrier.barrier;
 
+import tollBarrier.bornes.exceptions.NotAValidBorneTypeException;
+import tollBarrier.vehicule.MoyenDePaiment;
+
 /**
  * @author lebarbe
  *
@@ -24,7 +27,7 @@ public class TollBarrier
 	/**
 	 * @return
 	 */
-	public void addDebit(typeVehicule v, Integer nbParMinute, typePaiement mdp)
+	public void addDebit(typeVehicule v, Integer nbParMinute, MoyenDePaiment mdp)
 	{
 		// TODO Auto-generated method stub
 	
@@ -35,8 +38,7 @@ public class TollBarrier
 	 */
 	public Float getTempsPassageMoyen()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		for()
 	}
 
 	/**
@@ -84,7 +86,7 @@ public class TollBarrier
 	
 	}
 	
-	public void addBorne(typeBorne tb, typePaiement mdp)
+	public void addBorne(String typeborne, MoyenDePaiment mdp)
 	{
 		// TODO Auto-generated method stub
 	
@@ -120,7 +122,7 @@ public class TollBarrier
 	/**
 	 * @return
 	 */
-	public Float getTempsPassageMoyenParTypeDeBorne(typeBorne b)
+	public Float getTempsPassageMoyenParTypeDeBorne(String borne) throws NotAValidBorneTypeException
 	{
 		// TODO Auto-generated method stub
 		return null;
@@ -129,7 +131,7 @@ public class TollBarrier
 	/**
 	 * @return
 	 */
-	public Float getTempsInnocupationBorne(typeBorne b)
+	public Float getTempsInnocupationBorne(String typeborne) throws NotAValidBorneTypeException
 	{
 		// TODO Auto-generated method stub
 		return null;
