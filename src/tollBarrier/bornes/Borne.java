@@ -1,20 +1,28 @@
 package tollBarrier.bornes;
+import java.util.ArrayList;
+import tollBarrier.vehicule.*;
+
+
+/**
+ * 
+ * @todo calculerTmpMoyen
+ * et faire le lien avec la barriere
+ *
+ */
 
 public abstract class Borne {
 
-	private Array<MoyenDePaiment> _payment;
-	private boolean _boutonUrgence = false;
-	private boolean _vehAutorise = true;
-	private boolean _paymentAccepte = false;
-	private boolean _barriereLevee = false;
-	private boolean _vehAval = false;
-	private boolean _vehAmont = false;
-	private int _numBorne;
+	protected ArrayList<MoyenDePaiment> _payment;
+	protected boolean _boutonUrgence = false;
+	protected boolean _vehAutorise = true;
+	protected boolean _paymentAccepte = false;
+	protected boolean _barriereLevee = false;
+	protected boolean _vehAval = false;
+	protected boolean _vehAmont = false;
+	private long nbVeh;
+	private double tmpMoyen;
 	
-	public Borne(int numBorne){
-
-		_numBorne = numBorne;
-	}
+	public Borne(){}
 	
 	public void leverBarriere(){
 		
@@ -26,9 +34,16 @@ public abstract class Borne {
 	
 	public boolean demanderAccord(){
 		
+		return false;
 	}
 	
-	public void envoyerAlarme(){
+	private void calculerTmpMoyen(long tmp){	
 		
 	}
+	
+	public double getTempsPassageMoyen(){
+		
+		return tmpMoyen;		
+	}
+	
 }
