@@ -1,8 +1,10 @@
 package tollBarrier.vehicule;
 
+import java.util.ArrayList;
+
 public abstract class Vehicule {
 
-	private MoyenDePaiment mdp [];
+	private ArrayList<MoyenDePaiment> mdp;
 	private long hDebut;
 	private long hFin;
 	
@@ -23,4 +25,7 @@ public abstract class Vehicule {
 		return hFin - hDebut; 
 	}
 	
+	public ArrayList<MoyenDePaiment> getMoyensDePaiment() {
+		return mdp;
+	}
 }
