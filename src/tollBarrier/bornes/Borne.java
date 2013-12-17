@@ -24,9 +24,13 @@ public abstract class Borne extends Thread
 	private long					time;
 	private double					tmpMoyen;
 	private Vehicule				vehicule;
+	private int						num;
+	private static int				nbInstance		= 0;
 
 	public Borne()
 	{
+		num = nbInstance;
+		nbInstance ++;
 	}
 
 	public void leverBarriere()
@@ -77,7 +81,7 @@ public abstract class Borne extends Thread
 				}
 				nbVeh++;
 				this.time += time;
-				System.out.println(vehicule + " est passé.");
+				System.out.println(vehicule + " est passé à la borne " + num);
 				vehicule = null;
 			} catch (PasDeVehiculeTrouveException e)
 			{
@@ -100,6 +104,11 @@ public abstract class Borne extends Thread
 	public void setVehicule(Vehicule remove)
 	{
 		vehicule = remove;
+	}
+	
+	public String toString()
+	{
+		return ""+num;
 	}
 
 }

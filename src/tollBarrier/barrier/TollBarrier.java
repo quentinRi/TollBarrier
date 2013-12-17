@@ -93,7 +93,7 @@ public class TollBarrier
 					{
 						borne.setVehicule(vehicules.remove(vehiculesCopy
 								.indexOf(v)));
-						System.out.println(v + " commence à passer.");
+						System.out.println(v + " commence à passer à la borne "+ borne);
 						return true;
 					}
 			}
@@ -277,7 +277,7 @@ public class TollBarrier
 		for (int i = 0; i < nbBornes; i++)
 		{
 			System.out.println("Borne " + i);
-			System.out.println("Quel type de borne ?");
+			System.out.println("Quel type de borne (T)elepeage, (A)utomatique, (M)anuelle ?");
 			String typeB = sc.nextLine();
 
 			barriere.addBorne(typeB);
@@ -292,7 +292,6 @@ public class TollBarrier
 		{
 			d.start();
 		}
-		System.out.println("e");
 	}
 
 	public void add(Vehicule v)
