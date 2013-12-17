@@ -15,6 +15,7 @@
 package tollBarrier.barrier;
 
 import java.util.LinkedList;
+import java.util.Scanner;
 
 import tollBarrier.bornes.BoAutomatique;
 import tollBarrier.bornes.BoManuelle;
@@ -28,6 +29,7 @@ import java.util.ArrayList;
 
 import tollBarrier.vehicule.Vehicule;
 import tollBarrier.vehicule.Camion;
+
 public class TollBarrier
 {
 	private static TollBarrier		instance;
@@ -250,8 +252,39 @@ public class TollBarrier
 	public static void main(String[] args)
 	{
 		TollBarrier barriere = getInstance();
-		barriere.addDebit("Voiture", 60, "CB");
-		barriere.addBorne("Manuelle");
+
+		Scanner sc = new Scanner(System.in);
+
+		System.out.println("Combien de débits ?");
+		int nbDebits = Integer.parseInt(sc.nextLine());
+		for (int i = 0; i < nbDebits; i++)
+		{
+			System.out.println("Débit " + i);
+			System.out
+					.println("Quel type de véhicules ((V)oiture,(C)amion,(D)eux-roues) ?");
+			String typeV = sc.nextLine();
+			System.out.println("Combien de véhicules par minute ?");
+			int nbV = Integer.parseInt(sc.nextLine());
+			System.out
+					.println("Quel Moyen de paiment ((C)B,(A)bonnement,(L)iquide,(T)elepeage) ?");
+			String typeP = sc.nextLine();
+
+			barriere.addDebit(typeV, nbV, typeP);
+		}
+
+		System.out.println("Combien de bornes ?");
+		int nbBornes = Integer.parseInt(sc.nextLine());
+		for (int i = 0; i < nbBornes; i++)
+		{
+			System.out.println("Borne " + i);
+			System.out.println("Quel type de borne ?");
+			String typeB = sc.nextLine();
+
+			barriere.addBorne(typeB);
+		}
+
+		sc.close();
+
 		for (Borne b : barriere.bornes)
 			b.start();
 
