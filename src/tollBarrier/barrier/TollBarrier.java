@@ -14,20 +14,33 @@
  */
 package tollBarrier.barrier;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedList;
+
+import tollBarrier.vehicule.Vehicule;
+
 /**
  * @author lebarbe
  *
  */
 public class TollBarrier
 {
+	private LinkedList<Vehicule> file;
+	private ArrayList<Debit> debits;
+	
+	public TollBarrier()
+	{
+		file = new LinkedList<Vehicule>();
+		debits = new ArrayList<Debit>();
+	}
 	
 	/**
 	 * @return
 	 */
-	public void addDebit(typeVehicule v, Integer nbParMinute, typePaiement mdp)
+	public void addDebit(String typeVehicule, Integer nbParMinute, String typePaiement)
 	{
-		// TODO Auto-generated method stub
-	
+		debits.add(new Debit(typeVehicule, nbParMinute, typePaiement));
 	}
 
 	/**
