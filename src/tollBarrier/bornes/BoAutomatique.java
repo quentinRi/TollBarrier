@@ -5,6 +5,7 @@ import tollBarrier.vehicule.MoyenDePaiment;
 
 public class BoAutomatique extends Borne{
 
+	
 	public BoAutomatique(){
 
 		super();

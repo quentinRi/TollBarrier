@@ -9,6 +9,7 @@ import tollBarrier.vehicule.MoyenDePaiment;
 
 public class BoManuelle extends Borne{
 
+	
 	public BoManuelle(){
 
 		super();

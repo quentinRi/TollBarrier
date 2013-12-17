@@ -27,6 +27,7 @@ public abstract class Borne extends Thread{
 		_nbVeh = 0;
 	}
 	
+	
 	public void arriveeVehicule(Vehicule V){
 		
 		_vehicule = V;

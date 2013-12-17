@@ -14,6 +14,7 @@ public class FabriqueDeBorne {
 			case "Automatique": return new BoAutomatique();
 			default: return null;
 		
+			
 		}
 	}
 }
