@@ -9,4 +9,8 @@ public class Voiture extends Vehicule {
 		// TODO Auto-generated constructor stub
 	}
 
+	public long getTime()
+	{
+		return 7;
+	}
 }

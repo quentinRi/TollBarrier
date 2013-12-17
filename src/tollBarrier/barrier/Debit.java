@@ -6,7 +6,7 @@
  * This file is owned by ENSICAEN students.
  * No portion of this document may be reproduced, copied
  * or revised without written permission of the authors.
- */ 
+ */
 /**
  * @author Gaëtan Le Barbé gaetan.lebarbe@ecole.ensicaen.fr
  * @version 0.0.1
@@ -14,33 +14,56 @@
  */
 package tollBarrier.barrier;
 
-import java.util.TimerTask;
+import java.util.Collection;
+import java.util.HashSet;
+
+import tollBarrier.vehicule.FabriqueDeVehicule;
+import tollBarrier.vehicule.MoyenDePaiment;
+import tollBarrier.vehicule.Vehicule;
 
 /**
  * @author lebarbe
- *
+ * 
  */
-public class Debit extends TimerTask
+public class Debit extends Thread
 {
+	private FabriqueDeVehicule	fabrique	= FabriqueDeVehicule.getInstance();	;
+	private String				typeVehicule;
+	private String				typePaiement;
+	private int					nbParMn;
+	private TollBarrier			tb;
 
 	/**
 	 * @param typeVehicule
 	 * @param nbParMinute
 	 * @param typePaiement
+	 * @param vehicules
 	 */
-	public Debit(String typeVehicule, Integer nbParMinute, String typePaiement)
+	public Debit(String typeVehicule, Integer nbParMinute, String typePaiement,
+			Collection<Vehicule> vehicules, TollBarrier tb)
 	{
-		// TODO Auto-generated constructor stub
+		this.typePaiement = typePaiement;
+		this.typeVehicule = typeVehicule;
+		this.nbParMn = nbParMinute;
+		this.tb = tb;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.util.TimerTask#run()
-	 */
 	@Override
 	public void run()
 	{
-		// TODO Auto-generated method stub
-		
+		while (true)
+		{
+			HashSet<MoyenDePaiment> moyens = new HashSet<MoyenDePaiment>();
+			moyens.add(MoyenDePaiment.getByName(typePaiement));
+			tb.add(fabrique.creerVehicule(typeVehicule, moyens));
+			try
+			{
+				Thread.sleep(60000 / nbParMn);
+			} catch (InterruptedException e)
+			{
+				e.printStackTrace();
+			}
+		}
 	}
 
 }

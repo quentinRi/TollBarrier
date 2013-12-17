@@ -9,4 +9,9 @@ public class DeuxRoues extends Vehicule{
 		// TODO Auto-generated constructor stub
 	}
 
+	public long getTime()
+	{
+		return 5;
+	}
+	
 }

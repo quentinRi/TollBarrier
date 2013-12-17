@@ -1,5 +1,6 @@
 package tollBarrier.bornes;
-import java.util.ArrayList;
+import java.util.HashSet;
+
 import tollBarrier.vehicule.MoyenDePaiment;
 
 public class BoTelePeage extends Borne{
@@ -7,8 +8,8 @@ public class BoTelePeage extends Borne{
 	public BoTelePeage(){
 
 		super();	
-		_payment = new ArrayList<MoyenDePaiment>();
-		_payment.add(MoyenDePaiment.Telepeage);	
+		_payment = new HashSet<MoyenDePaiment>();
+		_payment.add(MoyenDePaiment.TELEPEAGE);	
 	}
 	
 	public void leverBarriere(){
@@ -22,10 +23,6 @@ public class BoTelePeage extends Borne{
 		
 	}
 */
-	
-	public boolean demanderAccord(){
-		return false;
-	}
 
 
 }

@@ -15,12 +15,12 @@ public class TestFabriqueDeVehicule {
 
 	@Before
 	public void setUp() {
-		f = new FabriqueDeVehicule();
+		f = FabriqueDeVehicule.getInstance();
 
 		s1 = new HashSet<MoyenDePaiment>();
-		s1.add(MoyenDePaiment.Abonnement);
+		s1.add(MoyenDePaiment.ABONNEMENT);
 		s1.add(MoyenDePaiment.CB);
-		s1.add(MoyenDePaiment.Liquide);
+		s1.add(MoyenDePaiment.LIQUIDE);
 	}
 
 	@After

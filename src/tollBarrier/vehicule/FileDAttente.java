@@ -1,4 +1,4 @@
-package tollBarrier.vehicule;
+/*package tollBarrier.vehicule;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -46,4 +46,4 @@ public class FileDAttente {
 		
 		throw new PasDeVehiculeTrouveException(s);
 	}
-}
+}*/
