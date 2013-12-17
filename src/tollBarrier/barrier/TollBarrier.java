@@ -19,19 +19,35 @@ import java.util.LinkedList;
 import tollBarrier.bornes.Borne;
 import tollBarrier.bornes.exceptions.NotAValidBorneTypeException;
 import tollBarrier.vehicule.MoyenDePaiment;
+import java.util.ArrayList;
+import java.util.HashSet;
 
-/**
- * @author lebarbe
- * 
- */
-public class TollBarrier {
+import tollBarrier.vehicule.Vehicule;
+
+public class TollBarrier
+{
 	private static TollBarrier instance;
 
 	private LinkedList<Borne> bornes;
-
-	private TollBarrier() {
+	private LinkedList<Vehicule> vehicules;
+	private ArrayList<Debit> debits;
+	
+	public TollBarrier()
+	{
 		bornes = new LinkedList<Borne>();
+		vehicules = new LinkedList<Vehicule>();
+		debits = new ArrayList<Debit>();
 	}
+	
+	/**
+	 * @return
+	 */
+	public void addDebit(String typeVehicule, Integer nbParMinute, String typePaiement)
+	{
+		debits.add(new Debit(typeVehicule, nbParMinute, typePaiement));
+		
+	}
+
 
 	public static TollBarrier getInstance() {
 		if (instance == null)
