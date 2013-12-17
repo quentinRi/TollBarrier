@@ -28,7 +28,6 @@ import java.util.ArrayList;
 
 import tollBarrier.vehicule.Vehicule;
 import tollBarrier.vehicule.Camion;
-
 public class TollBarrier
 {
 	private static TollBarrier		instance;
