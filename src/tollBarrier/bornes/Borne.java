@@ -36,13 +36,15 @@ public abstract class Borne extends Thread
 		_vehicule = null;
 		_nbVeh = 0;
 	}
-
-	public void arriveeVehicule(Vehicule V)
-	{
-
-		_vehicule = V;
-		_nbVeh++;
-	}
+	
+/*	
+	public void arriveeVehicule(Vehicule V){
+		
+		if(_vehicule == null){
+			_vehicule = V;
+			_nbVeh++;
+		}
+*/
 
 	public void leverBarriere()
 	{
@@ -57,7 +59,9 @@ public abstract class Borne extends Thread
 
 		return true;
 	}
-
+	
+	public void alarme(){}
+		
 	public void run()
 	{
 		while (true)
