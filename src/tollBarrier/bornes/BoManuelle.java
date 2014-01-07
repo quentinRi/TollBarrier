@@ -3,29 +3,41 @@ import java.util.HashSet;
 
 import tollBarrier.vehicule.MoyenDePaiment;
 
+
 public class BoManuelle extends Borne{
 
+	
 	public BoManuelle(){
 
 		super();
-		_payment = new HashSet<MoyenDePaiment>();
-		_payment.add(MoyenDePaiment.CB);
-		_payment.add(MoyenDePaiment.LIQUIDE);
-		_payment.add(MoyenDePaiment.ABONNEMENT);
+		_paiement = new HashSet<MoyenDePaiment>();
+		_paiement.add(MoyenDePaiment.CB);
+		_paiement.add(MoyenDePaiment.LIQUIDE);
+		_paiement.add(MoyenDePaiment.ABONNEMENT);
 	}
 	
-	public void leverBarriere(){
-		
-		_paymentAccepte = demanderAccord();
-		if(_paymentAccepte)
-			_barriereLevee = true;
+	
+	public void envoyerRapport(){
+
 	}
 
-/*
-	public void envoyerRapport(){
+
+	@Override
+	public void run() {
+
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			System.err.println(e);
+		}
 		
-		
+		envoyerRapport();
+		leverBarriere();
+
+		_vehicule.quitterPeage();
+		long tmp = _vehicule.getTempsPassage();
+		calculerTmpMoyen(tmp);
+		_vehicule = null;
 	}
-*/
 	
 }

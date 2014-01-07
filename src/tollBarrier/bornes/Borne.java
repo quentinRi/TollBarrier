@@ -9,55 +9,55 @@ import tollBarrier.vehicule.*;
  * 
  * @todo calculerTmpMoyen et faire le lien avec la barriere
  * 
+ * 
+ * 
  */
 
-public abstract class Borne extends Thread
+public abstract class Borne // extends Thread
 {
-	protected Set<MoyenDePaiment>	_payment;
-	protected boolean				_boutonUrgence	= false;
-	protected boolean				_vehAutorise	= true;
-	protected boolean				_paymentAccepte	= false;
-	protected boolean				_barriereLevee	= false;
-	protected boolean				_vehAval		= false;
-	protected boolean				_vehAmont		= false;
-	private long					nbVeh;
-	private long					time;
-	private double					tmpMoyen;
-	private Vehicule				vehicule;
-	private int						num;
-	private static int				nbInstance		= 0;
+	protected Set<MoyenDePaiment> _paiement;
+	protected boolean _boutonUrgence = false;
+	protected boolean _vehAutorise = true;
+	protected boolean _paymentAccepte = false;
+	protected boolean _barriereLevee = false;
+	protected boolean _vehAval = false;
+	protected boolean _vehAmont = false;
+	protected long _nbVeh;
+	protected double _tmpMoyen;
+	protected Vehicule _vehicule;
+	private long time;
+	private Vehicule vehicule;
+	private int num;
+	private static int nbInstance = 0;
 
 	public Borne()
 	{
 		num = nbInstance;
-		nbInstance ++;
+		nbInstance++;
+		_vehicule = null;
+		_tmpMoyen = 0;
+		_nbVeh = 0;
+	}
+
+	public void arriveeVehicule(Vehicule V)
+	{
+
+		_vehicule = V;
+		_nbVeh++;
 	}
 
 	public void leverBarriere()
 	{
 
-	}
-
-	public void envoyerRapport()
-	{
-
+		_paymentAccepte = demanderAccord();
+		if (_paymentAccepte)
+			_barriereLevee = true;
 	}
 
 	public boolean demanderAccord()
 	{
 
-		return false;
-	}
-
-	private void calculerTmpMoyen(long tmp)
-	{
-
-	}
-
-	public double getTempsPassageMoyen()
-	{
-
-		return tmpMoyen;
+		return true;
 	}
 
 	public void run()
@@ -79,7 +79,7 @@ public abstract class Borne extends Thread
 				{
 					e.printStackTrace();
 				}
-				nbVeh++;
+				_nbVeh++;
 				this.time += time;
 				System.out.println(vehicule + " est passé à la borne " + num);
 				vehicule = null;
@@ -95,7 +95,7 @@ public abstract class Borne extends Thread
 	 */
 	public Set<MoyenDePaiment> getMoyensDePaiment()
 	{
-		return _payment;
+		return _paiement;
 	}
 
 	/**
@@ -105,10 +105,32 @@ public abstract class Borne extends Thread
 	{
 		vehicule = remove;
 	}
-	
+
+	public void envoyerRapport()
+	{
+	}
+
+	protected void calculerTmpMoyen(long tmp)
+	{
+
+		_tmpMoyen = (_tmpMoyen * (_nbVeh - 1) + tmp) / _nbVeh;
+	}
+
 	public String toString()
 	{
-		return ""+num;
+		return "" + num;
+	}
+
+	public double getTempsPassageMoyen()
+	{
+
+		return _tmpMoyen;
+	}
+
+	public Set<MoyenDePaiment> getMoyenDePaiment()
+	{
+
+		return _paiement;
 	}
 
 }
