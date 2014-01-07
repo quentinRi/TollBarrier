@@ -8,6 +8,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import tollBarrier.vehicule.vehiculesObjects.Camion;
+import tollBarrier.vehicule.vehiculesObjects.DeuxRoues;
+import tollBarrier.vehicule.vehiculesObjects.Vehicule;
+import tollBarrier.vehicule.vehiculesObjects.Voiture;
+
 public class TestFabriqueDeVehicule {
 
 	FabriqueDeVehicule f;
@@ -15,12 +20,12 @@ public class TestFabriqueDeVehicule {
 
 	@Before
 	public void setUp() {
-		f = new FabriqueDeVehicule();
+		f = FabriqueDeVehicule.getInstance();
 
 		s1 = new HashSet<MoyenDePaiment>();
-		s1.add(MoyenDePaiment.Abonnement);
+		s1.add(MoyenDePaiment.ABONNEMENT);
 		s1.add(MoyenDePaiment.CB);
-		s1.add(MoyenDePaiment.Liquide);
+		s1.add(MoyenDePaiment.LIQUIDE);
 	}
 
 	@After

@@ -3,9 +3,6 @@ import java.util.HashSet;
 
 import tollBarrier.vehicule.MoyenDePaiment;
 
-import java.util.ArrayList;
-
-import tollBarrier.vehicule.MoyenDePaiment;
 
 public class BoManuelle extends Borne{
 
@@ -15,33 +12,12 @@ public class BoManuelle extends Borne{
 		super();
 		_paiement = new HashSet<MoyenDePaiment>();
 		_paiement.add(MoyenDePaiment.CB);
-		_paiement.add(MoyenDePaiment.Liquide);
-		_paiement.add(MoyenDePaiment.Abonnement);
+		_paiement.add(MoyenDePaiment.LIQUIDE);
+		_paiement.add(MoyenDePaiment.ABONNEMENT);
 	}
 	
 	
 	public void envoyerRapport(){
-		
 
-	}
-
-
-	@Override
-	public void run() {
-
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			System.err.println(e);
-		}
-		
-		envoyerRapport();
-		leverBarriere();
-
-		_vehicule.quitterPeage();
-		long tmp = _vehicule.getTempsPassage();
-		calculerTmpMoyen(tmp);
-		_vehicule = null;
-	}
-	
+	}	
 }

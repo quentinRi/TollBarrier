@@ -9,7 +9,7 @@ public class BoTelePeage extends Borne{
 
 		super();	
 		_paiement = new HashSet<MoyenDePaiment>();
-		_paiement.add(MoyenDePaiment.Telepeage);	
+		_paiement.add(MoyenDePaiment.TELEPEAGE);	
 	}
 	
 /*
@@ -17,23 +17,4 @@ public class BoTelePeage extends Borne{
 		
 	}
 */
-	
-
-	@Override
-	public void run() {
-
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			System.err.println(e);
-		}
-		
-		envoyerRapport();
-		leverBarriere();
-
-		_vehicule.quitterPeage();
-		long tmp = _vehicule.getTempsPassage();
-		calculerTmpMoyen(tmp);
-		_vehicule = null;
-	}
 }

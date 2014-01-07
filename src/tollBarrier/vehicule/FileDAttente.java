@@ -1,4 +1,4 @@
-package tollBarrier.vehicule;
+/*package tollBarrier.vehicule;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -66,4 +66,4 @@ public class FileDAttente {
 	public int getLongueurFileDAttente() {
 		return file.size();
 	}
-}
+}*/
