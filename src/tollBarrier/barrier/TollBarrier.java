@@ -307,4 +307,10 @@ public class TollBarrier
 			System.out.println(v + " arrive au péage");
 		}
 	}
+
+	public void addDebit(Object selectedItem, int parseInt,
+			HashSet<MoyenDePaiment> mdp) {
+		// TODO Auto-generated method stub
+		
+	}
 }

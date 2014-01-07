@@ -171,11 +171,11 @@ public class ConfigDebit extends javax.swing.JFrame {
 		if (jRadioButton1.isSelected())
 			mdp.add(MoyenDePaiment.CB);
 		if (jRadioButton2.isSelected())
-			mdp.add(MoyenDePaiment.Liquide);
+			mdp.add(MoyenDePaiment.LIQUIDE);
 		if (jRadioButton3.isSelected())
-			mdp.add(MoyenDePaiment.Abonnement);
+			mdp.add(MoyenDePaiment.ABONNEMENT);
 		if (jRadioButton4.isSelected())
-			mdp.add(MoyenDePaiment.Telepeage);
+			mdp.add(MoyenDePaiment.TELEPEAGE);
 		tb.addDebit(jComboBox1.getSelectedItem(), Integer.parseInt(jTextField1.getText()), mdp);
 		parent.setVisible(true);
 		this.setVisible(false);
