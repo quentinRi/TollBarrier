@@ -6,7 +6,7 @@
  * This file is owned by ENSICAEN students.
  * No portion of this document may be reproduced, copied
  * or revised without written permission of the authors.
- */ 
+ */
 /**
  * @author Gaëtan Le Barbé gaetan.lebarbe@ecole.ensicaen.fr
  * @version 0.0.1
@@ -14,27 +14,105 @@
  */
 package tollBarrier.barrier;
 
+import java.util.LinkedList;
+
+import tollBarrier.bornes.Borne;
+import tollBarrier.bornes.exceptions.NotAValidBorneTypeException;
+import tollBarrier.vehicule.MoyenDePaiment;
+
 /**
  * @author lebarbe
- *
+ * 
  */
-public class TollBarrier
-{
-	
-	/**
-	 * @return
-	 */
-	public void addDebit(typeVehicule v, Integer nbParMinute, typePaiement mdp)
-	{
-		// TODO Auto-generated method stub
-	
+public class TollBarrier {
+	private static TollBarrier instance;
+
+	private LinkedList<Borne> bornes;
+
+	private TollBarrier() {
+		bornes = new LinkedList<Borne>();
+	}
+
+	public static TollBarrier getInstance() {
+		if (instance == null)
+			instance = new TollBarrier();
+		return instance;
 	}
 
 	/**
 	 * @return
 	 */
-	public Float getTempsPassageMoyen()
-	{
+	public void addDebit(String typeVehicule, Integer nbParMinute,
+			MoyenDePaiment mdp) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/**
+	 * @return
+	 */
+	public Float getTempsPassageMoyen() {
+		int nbBornes = getNombreBornes();
+		float sum = 0;
+
+		for (int i = 0; i < nbBornes; i++) {
+			sum += getTempsPassageMoyenParBorne(i);
+		}
+		return sum / nbBornes;
+
+	}
+
+	/**
+	 * @return
+	 */
+	public Float getTempsPassageMoyenParBorne(int numBorne) {
+		Borne borne=bornes.get(numBorne);
+		return borne.getTempsPassage();
+	}
+
+	/**
+	 * @return
+	 */
+	public Integer getNombreVehiculeEnAttente() {
+		int cpt = 0;
+		while (vehiculeAttente != 0) {
+			cpt += 1;
+		}
+		return cpt;
+	}
+
+	/**
+	 * @return
+	 */
+	public void addIntervenant() {
+		// TODO Auto-generated method stub
+
+	}
+
+	public void demarrerSimulation() {
+		// TODO Auto-generated method stub
+
+	}
+
+	public void arreterSimulation() {
+		// TODO Auto-generated method stub
+
+	}
+
+	public void reinitialiser() {
+		// TODO Auto-generated method stub
+
+	}
+
+	public void addBorne(String typeborne, MoyenDePaiment mdp) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/**
+	 * @return
+	 */
+	public Integer getNombreBornes(String typeBorne) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -42,8 +120,7 @@ public class TollBarrier
 	/**
 	 * @return
 	 */
-	public Float getTempsPassageMoyenParBorne(Integer i)
-	{
+	public Integer getNombreBornes() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -51,8 +128,7 @@ public class TollBarrier
 	/**
 	 * @return
 	 */
-	public Integer getNombreVehiculeEnAttente()
-	{
+	public Float getDebitEntree() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -60,50 +136,8 @@ public class TollBarrier
 	/**
 	 * @return
 	 */
-	public void addIntervenant()
-	{
-		// TODO Auto-generated method stub
-	
-	}
-	
-	public void demarrerSimulation()
-	{
-		// TODO Auto-generated method stub
-	
-	}
-	
-	public void arreterSimulation()
-	{
-		// TODO Auto-generated method stub
-	
-	}
-	
-	public void reinitialiser()
-	{
-		// TODO Auto-generated method stub
-	
-	}
-	
-	public void addBorne(typeBorne tb, typePaiement mdp)
-	{
-		// TODO Auto-generated method stub
-	
-	}
-
-	/**
-	 * @return
-	 */
-	public Integer getNombreBornes(String typeBorne)
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	/**
-	 * @return
-	 */
-	public Integer getNombreBornes()
-	{
+	public Float getTempsPassageMoyenParTypeDeBorne(String borne)
+			throws NotAValidBorneTypeException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -111,8 +145,8 @@ public class TollBarrier
 	/**
 	 * @return
 	 */
-	public Float getDebitEntree()
-	{
+	public Float getTempsInnocupationBorne(String typeborne)
+			throws NotAValidBorneTypeException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -120,26 +154,7 @@ public class TollBarrier
 	/**
 	 * @return
 	 */
-	public Float getTempsPassageMoyenParTypeDeBorne(typeBorne b)
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/**
-	 * @return
-	 */
-	public Float getTempsInnocupationBorne(typeBorne b)
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/**
-	 * @return
-	 */
-	public Integer getNombreIntervenants()
-	{
+	public Integer getNombreIntervenants() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -147,10 +162,14 @@ public class TollBarrier
 	/**
 	 * 
 	 */
-	public void removeIntervenant()
-	{
+	public void removeIntervenant() {
 		// TODO Auto-generated method stub
-		
+
+	}
+
+	public Integer getNextNumeroBorne() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
