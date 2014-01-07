@@ -5,3 +5,9 @@
 *.war
 *.ear
 /bin
+
+
+# Eclipse Files #
+.project
+.metadata
+.classpath
