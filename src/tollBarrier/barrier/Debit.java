@@ -19,7 +19,7 @@ import java.util.HashSet;
 
 import tollBarrier.vehicule.FabriqueDeVehicule;
 import tollBarrier.vehicule.MoyenDePaiment;
-import tollBarrier.vehicule.Vehicule;
+import tollBarrier.vehicule.vehiculesObjects.Vehicule;
 
 /**
  * @author lebarbe
@@ -55,7 +55,8 @@ public class Debit extends Thread
 		{
 			HashSet<MoyenDePaiment> moyens = new HashSet<MoyenDePaiment>();
 			moyens.add(MoyenDePaiment.getByName(typePaiement));
-			tb.add(fabrique.creerVehicule(typeVehicule, moyens));
+			Vehicule v = fabrique.creerVehicule(typeVehicule, moyens);
+			tb.add(v);
 			try
 			{
 				Thread.sleep(60000 / nbParMn);

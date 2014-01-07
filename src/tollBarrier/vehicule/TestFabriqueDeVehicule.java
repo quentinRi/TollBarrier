@@ -8,6 +8,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import tollBarrier.vehicule.vehiculesObjects.Camion;
+import tollBarrier.vehicule.vehiculesObjects.DeuxRoues;
+import tollBarrier.vehicule.vehiculesObjects.Vehicule;
+import tollBarrier.vehicule.vehiculesObjects.Voiture;
+
 public class TestFabriqueDeVehicule {
 
 	FabriqueDeVehicule f;

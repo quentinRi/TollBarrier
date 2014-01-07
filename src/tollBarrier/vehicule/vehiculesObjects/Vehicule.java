@@ -1,6 +1,8 @@
-package tollBarrier.vehicule;
+package tollBarrier.vehicule.vehiculesObjects;
 
 import java.util.Set;
+
+import tollBarrier.vehicule.MoyenDePaiment;
 
 public abstract class Vehicule
 {

@@ -1,6 +1,8 @@
-package tollBarrier.vehicule;
+package tollBarrier.vehicule.vehiculesObjects;
 
 import java.util.Set;
+
+import tollBarrier.vehicule.MoyenDePaiment;
 
 public class Camion extends Vehicule
 {
@@ -13,7 +15,7 @@ public class Camion extends Vehicule
 
 	public long getTime()
 	{
-		return 10;
+		return 10000;
 	}
 
 }

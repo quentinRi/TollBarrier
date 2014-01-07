@@ -27,8 +27,8 @@ import tollBarrier.vehicule.PasDeVehiculeTrouveException;
 
 import java.util.ArrayList;
 
-import tollBarrier.vehicule.Vehicule;
-import tollBarrier.vehicule.Camion;
+import tollBarrier.vehicule.vehiculesObjects.Camion;
+import tollBarrier.vehicule.vehiculesObjects.Vehicule;
 
 public class TollBarrier
 {

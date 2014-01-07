@@ -4,6 +4,7 @@ import java.util.Set;
 
 import tollBarrier.barrier.TollBarrier;
 import tollBarrier.vehicule.*;
+import tollBarrier.vehicule.vehiculesObjects.Vehicule;
 
 /**
  * 
@@ -13,7 +14,7 @@ import tollBarrier.vehicule.*;
  * 
  */
 
-public abstract class Borne // extends Thread
+public abstract class Borne extends Thread
 {
 	protected Set<MoyenDePaiment> _paiement;
 	protected boolean _boutonUrgence = false;
@@ -23,10 +24,8 @@ public abstract class Borne // extends Thread
 	protected boolean _vehAval = false;
 	protected boolean _vehAmont = false;
 	protected long _nbVeh;
-	protected double _tmpMoyen;
 	protected Vehicule _vehicule;
 	private long time;
-	private Vehicule vehicule;
 	private int num;
 	private static int nbInstance = 0;
 
@@ -35,7 +34,6 @@ public abstract class Borne // extends Thread
 		num = nbInstance;
 		nbInstance++;
 		_vehicule = null;
-		_tmpMoyen = 0;
 		_nbVeh = 0;
 	}
 
@@ -67,11 +65,18 @@ public abstract class Borne // extends Thread
 			try
 			{
 				TollBarrier.getInstance().getVehicule(this);
-				if (vehicule == null)
+				if (_vehicule == null)
 				{
+					try
+					{
+						Thread.sleep(100);
+					} catch (InterruptedException e)
+					{
+						e.printStackTrace();
+					}
 					continue;
 				}
-				long time = vehicule.getTime();
+				long time = _vehicule.getTime();
 				try
 				{
 					Thread.sleep(time);
@@ -81,12 +86,17 @@ public abstract class Borne // extends Thread
 				}
 				_nbVeh++;
 				this.time += time;
-				System.out.println(vehicule + " est passÃ© Ã  la borne " + num);
-				vehicule = null;
+				envoyerRapport();
+				leverBarriere();
+				_vehicule.quitterPeage();
+				System.out.println(_vehicule + " est passé à la borne " + num);
+				_vehicule = null;
+
 			} catch (PasDeVehiculeTrouveException e)
 			{
 				e.printStackTrace();
 			}
+
 		}
 	}
 
@@ -103,17 +113,11 @@ public abstract class Borne // extends Thread
 	 */
 	public void setVehicule(Vehicule remove)
 	{
-		vehicule = remove;
+		_vehicule = remove;
 	}
 
 	public void envoyerRapport()
 	{
-	}
-
-	protected void calculerTmpMoyen(long tmp)
-	{
-
-		_tmpMoyen = (_tmpMoyen * (_nbVeh - 1) + tmp) / _nbVeh;
 	}
 
 	public String toString()
@@ -124,7 +128,7 @@ public abstract class Borne // extends Thread
 	public double getTempsPassageMoyen()
 	{
 
-		return _tmpMoyen;
+		return time/_nbVeh;
 	}
 
 	public Set<MoyenDePaiment> getMoyenDePaiment()
