@@ -1,5 +1,7 @@
 package tollBarrier.bornes;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 import tollBarrier.vehicule.MoyenDePaiment;
 
@@ -20,7 +22,7 @@ public class BoAutomatique extends Borne{
 		
 	}
 */
-	public void paiment(MoyenDePaiment m){
+	public void paiement(MoyenDePaiment m){
 		
 		switch(m){
 		
@@ -45,12 +47,32 @@ public class BoAutomatique extends Borne{
 		}
 	}
 	
+	public void alarme(){
+		
+		try {
+			Thread.sleep(120000);
+		} catch (InterruptedException e){
+			System.err.println(e);
+		}
+	}
+	
 	@Override
 	public void run() {
 
 		// @todo Lire le moyen de paiment de la voiture
-		paiment(MoyenDePaiment.CB);
-		
+		Set<MoyenDePaiment> mdp = _vehicule.getMoyensDePaiment();
+		Iterator<MoyenDePaiment> It = mdp.iterator();
+		MoyenDePaiment m = It.next();
+		boolean paiementEffectue = false;
+		do{
+			if(_paiement.contains(m)){
+				paiement(m);
+				paiementEffectue = true;
+			}
+		}while(It.hasNext() && paiementEffectue == false);
+		if(!paiementEffectue){
+			alarme();
+		}
 		envoyerRapport();
 		leverBarriere();
 

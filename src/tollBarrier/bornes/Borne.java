@@ -19,7 +19,6 @@ public abstract class Borne extends Thread{
 	protected long _nbVeh;
 	protected double _tmpMoyen;
 	protected Vehicule _vehicule;
-	protected TollBarrier _barrier;
 	
 	public Borne(){
 		
@@ -49,9 +48,7 @@ public abstract class Borne extends Thread{
 		return true;
 	}
 	
-	public void alarme(){
-		
-	}
+	public void alarme(){}
 	
 	public void envoyerRapport(){}
 	

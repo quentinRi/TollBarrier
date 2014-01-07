@@ -1,5 +1,7 @@
 package tollBarrier.bornes;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 import tollBarrier.vehicule.MoyenDePaiment;
 
@@ -17,7 +19,7 @@ public class BoTelePeage extends Borne{
 		
 	}
 */
-	public void paiment(){
+	public void paiement(){
 		
 		try {
 			Thread.sleep(4000);
@@ -26,10 +28,20 @@ public class BoTelePeage extends Borne{
 		}
 	}
 
+	public void alarme(){
+		
+		try {
+			Thread.sleep(120000);
+		} catch (InterruptedException e){
+			System.err.println(e);
+		}
+	}
+	
 	@Override
 	public void run() {
 
-		paiment();
+		// @todo Lire le moyen de paiment de la voiture
+		paiement();
 		
 		envoyerRapport();
 		leverBarriere();
