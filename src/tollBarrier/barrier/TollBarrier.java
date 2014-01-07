@@ -14,6 +14,8 @@
  */
 package tollBarrier.barrier;
 
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -32,11 +34,11 @@ import tollBarrier.vehicule.vehiculesObjects.Vehicule;
 
 public class TollBarrier
 {
-	private static TollBarrier		instance;
+	private static TollBarrier instance;
 
-	private LinkedList<Borne>		bornes;
-	private LinkedList<Vehicule>	vehicules;
-	private ArrayList<Debit>		debits;
+	private LinkedList<Borne> bornes;
+	private LinkedList<Vehicule> vehicules;
+	private ArrayList<Debit> debits;
 
 	public TollBarrier()
 	{
@@ -49,10 +51,10 @@ public class TollBarrier
 	 * @return
 	 */
 	public void addDebit(String typeVehicule, Integer nbParMinute,
-			String typePaiement)
+			Collection<String> typePaiement)
 	{
-		debits.add(new Debit(typeVehicule, nbParMinute, typePaiement,
-				vehicules, this));
+		for (String s : typePaiement)
+			debits.add(new Debit(typeVehicule, nbParMinute, s, vehicules, this));
 	}
 
 	public static TollBarrier getInstance()
@@ -93,7 +95,8 @@ public class TollBarrier
 					{
 						borne.setVehicule(vehicules.remove(vehiculesCopy
 								.indexOf(v)));
-						System.out.println(v + " commence à passer à la borne "+ borne);
+						System.out.println(v
+								+ " commence à passer à la borne " + borne);
 						return true;
 					}
 			}
@@ -104,14 +107,14 @@ public class TollBarrier
 		 * demandeuse // de véhicule Set<MoyenDePaiment> bmdp =
 		 * borne.getMoyensDePaiment();
 		 * 
-		 * // Pour chaque véhicule dans la file for (int i = 0; i < file.size();
-		 * i++) {
+		 * // Pour chaque véhicule dans la file for (int i = 0; i <
+		 * file.size(); i++) {
 		 * 
 		 * // On récupère ses moyens de paiement possibles Set<MoyenDePaiment>
 		 * vmdp = file.get(i).getMoyensDePaiment();
 		 * 
-		 * // On vérifie si ce véhicule peut aller dans la borne demandeuse for
-		 * (MoyenDePaiment mv : vmdp)
+		 * // On vérifie si ce véhicule peut aller dans la borne demandeuse
+		 * for (MoyenDePaiment mv : vmdp)
 		 * 
 		 * // Si le véhicule correpsond, on l'envoie à la borne if
 		 * (bmdp.contains(mv)) { Vehicule v = file.get(i); file.remove(i);
@@ -268,8 +271,9 @@ public class TollBarrier
 			System.out
 					.println("Quel Moyen de paiment ((C)B,(A)bonnement,(L)iquide,(T)elepeage) ?");
 			String typeP = sc.nextLine();
-
-			barriere.addDebit(typeV, nbV, typeP);
+			HashSet<String> typesP = new HashSet<String>();
+			typesP.add(typeP);
+			barriere.addDebit(typeV, nbV, typesP);
 		}
 
 		System.out.println("Combien de bornes ?");
@@ -277,7 +281,8 @@ public class TollBarrier
 		for (int i = 0; i < nbBornes; i++)
 		{
 			System.out.println("Borne " + i);
-			System.out.println("Quel type de borne (T)elepeage, (A)utomatique, (M)anuelle ?");
+			System.out
+					.println("Quel type de borne (T)elepeage, (A)utomatique, (M)anuelle ?");
 			String typeB = sc.nextLine();
 
 			barriere.addBorne(typeB);
