@@ -22,18 +22,40 @@ public class BoManuelle extends Borne{
 	
 	public void envoyerRapport(){
 		
-
+		
 	}
 
-
+	public void paiment(MoyenDePaiment m){
+		
+		switch(m){
+		
+		case CB :
+			try {
+				Thread.sleep(8000);
+			} catch (InterruptedException e){
+				System.err.println(e);
+			}
+		case Liquide :
+			try {
+				Thread.sleep(15000);
+			} catch (InterruptedException e){
+				System.err.println(e);
+			}
+		case Abonnement :
+			try {
+				Thread.sleep(6000);
+			} catch (InterruptedException e){
+				System.err.println(e);
+			}
+		}
+	}
+	
 	@Override
 	public void run() {
 
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			System.err.println(e);
-		}
+		// @todo Lire le moyen de paiment de la voiture
+		_vehicule.getMoyensDePaiment()
+		paiment(m);
 		
 		envoyerRapport();
 		leverBarriere();

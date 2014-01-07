@@ -26,6 +26,6 @@ public class FileDAttente {
  * 	récupéer collection de moyen de paiùment de la borne
  * itérer sur la file
  * si moyen de paiment du vehicule in collection return ce vehicule
- * fin itération 
+ * fin itération
  * throw exception
  */

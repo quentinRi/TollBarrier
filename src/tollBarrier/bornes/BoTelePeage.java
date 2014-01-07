@@ -17,16 +17,19 @@ public class BoTelePeage extends Borne{
 		
 	}
 */
-	
+	public void paiment(){
+		
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			System.err.println(e);
+		}
+	}
 
 	@Override
 	public void run() {
 
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			System.err.println(e);
-		}
+		paiment();
 		
 		envoyerRapport();
 		leverBarriere();
