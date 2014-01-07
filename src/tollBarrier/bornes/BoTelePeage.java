@@ -1,7 +1,5 @@
 package tollBarrier.bornes;
 import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
 
 import tollBarrier.vehicule.MoyenDePaiment;
 
@@ -11,7 +9,7 @@ public class BoTelePeage extends Borne{
 
 		super();	
 		_paiement = new HashSet<MoyenDePaiment>();
-		_paiement.add(MoyenDePaiment.Telepeage);	
+		_paiement.add(MoyenDePaiment.TELEPEAGE);	
 	}
 	
 /*
@@ -19,6 +17,7 @@ public class BoTelePeage extends Borne{
 		
 	}
 */
+/*
 	public void paiement(){
 		
 		try {
@@ -50,5 +49,5 @@ public class BoTelePeage extends Borne{
 		long tmp = _vehicule.getTempsPassage();
 		calculerTmpMoyen(tmp);
 		_vehicule = null;
-	}
+	}*/
 }

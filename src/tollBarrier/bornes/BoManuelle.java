@@ -1,13 +1,8 @@
 package tollBarrier.bornes;
 import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
 
 import tollBarrier.vehicule.MoyenDePaiment;
 
-import java.util.ArrayList;
-
-import tollBarrier.vehicule.MoyenDePaiment;
 
 public class BoManuelle extends Borne{
 
@@ -17,14 +12,13 @@ public class BoManuelle extends Borne{
 		super();
 		_paiement = new HashSet<MoyenDePaiment>();
 		_paiement.add(MoyenDePaiment.CB);
-		_paiement.add(MoyenDePaiment.Liquide);
-		_paiement.add(MoyenDePaiment.Abonnement);
+		_paiement.add(MoyenDePaiment.LIQUIDE);
+		_paiement.add(MoyenDePaiment.ABONNEMENT);
 	}
 	
 	
 	public void envoyerRapport(){
-		
-		
+/*
 	}
 
 	public void paiement(MoyenDePaiment m){
@@ -87,5 +81,7 @@ public class BoManuelle extends Borne{
 		calculerTmpMoyen(tmp);
 		_vehicule = null;
 	}
-	
+	*/
+
+	}	
 }

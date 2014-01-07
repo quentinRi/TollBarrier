@@ -1,4 +1,4 @@
-package tollBarrier.vehicule;
+/*package tollBarrier.vehicule;
 
 import static org.junit.Assert.*;
 
@@ -112,3 +112,4 @@ public class TestFileDAttente {
 	}
 
 }
+*/

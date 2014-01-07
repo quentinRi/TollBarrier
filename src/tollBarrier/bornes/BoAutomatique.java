@@ -13,15 +13,16 @@ public class BoAutomatique extends Borne{
 		super();
 		_paiement = new HashSet<MoyenDePaiment>();
 		_paiement.add(MoyenDePaiment.CB);
-		_paiement.add(MoyenDePaiment.Liquide);
-		_paiement.add(MoyenDePaiment.Abonnement);
+		_paiement.add(MoyenDePaiment.LIQUIDE);
+		_paiement.add(MoyenDePaiment.ABONNEMENT);
 	}
+
 	
 /*
 	public void envoyerRapport(){
 		
 	}
-*/
+
 	public void paiement(MoyenDePaiment m){
 		
 		switch(m){
@@ -81,6 +82,6 @@ public class BoAutomatique extends Borne{
 		calculerTmpMoyen(tmp);
 		_vehicule = null;
 	}
-
+*/
 	
 }

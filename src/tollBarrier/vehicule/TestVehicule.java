@@ -9,6 +9,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import tollBarrier.vehicule.vehiculesObjects.Vehicule;
+import tollBarrier.vehicule.vehiculesObjects.Voiture;
+
 public class TestVehicule {
 
 	Vehicule v;
@@ -25,7 +28,7 @@ public class TestVehicule {
 
 	@Test
 	public void testGetTempsPassage() {
-		v.rejoindreFile(new FileDAttente());
+		//TODO v.rejoindreFile(new FileDAttente());
 		int millis = 2000;
 		try {
 			Thread.sleep(millis);
