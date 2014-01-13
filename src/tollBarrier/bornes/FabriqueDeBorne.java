@@ -1,5 +1,7 @@
 package tollBarrier.bornes;
 
+import tollBarrier.bornes.exceptions.NotAValidBorneTypeException;
+
 public class FabriqueDeBorne
 {
 
@@ -8,7 +10,7 @@ public class FabriqueDeBorne
 
 	}
 
-	public Borne creerBorne(String type)
+	public Borne creerBorne(String type) throws NotAValidBorneTypeException
 	{
 		char t = type.toLowerCase().charAt(0);
 		switch (t)
@@ -20,7 +22,7 @@ public class FabriqueDeBorne
 		case 'a':
 			return new BoAutomatique();
 		default:
-			return null;
+			throw new NotAValidBorneTypeException();
 
 		}
 	}

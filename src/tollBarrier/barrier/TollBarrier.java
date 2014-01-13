@@ -23,6 +23,7 @@ import tollBarrier.bornes.BoAutomatique;
 import tollBarrier.bornes.BoManuelle;
 import tollBarrier.bornes.BoTelePeage;
 import tollBarrier.bornes.Borne;
+import tollBarrier.bornes.FabriqueDeBorne;
 import tollBarrier.bornes.exceptions.NotAValidBorneTypeException;
 import tollBarrier.vehicule.MoyenDePaiment;
 
@@ -77,17 +78,12 @@ public class TollBarrier
 
 	public void addBorne(String typeborne)
 	{
-		switch (typeborne.toLowerCase().charAt(0))
+		try
 		{
-		case 'm':
-			bornes.add(new BoManuelle());
-			break;
-		case 'a':
-			bornes.add(new BoAutomatique());
-			break;
-		case 't':
-			bornes.add(new BoTelePeage());
-			break;
+			bornes.add(new FabriqueDeBorne().creerBorne(typeborne));
+		} catch (NotAValidBorneTypeException e)
+		{
+			e.printStackTrace();
 		}
 	}
 
