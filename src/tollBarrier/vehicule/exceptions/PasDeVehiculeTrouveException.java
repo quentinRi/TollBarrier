@@ -20,17 +20,10 @@ package tollBarrier.vehicule.exceptions;
  */
 public class PasDeVehiculeTrouveException extends Exception
 {
-	private static final long	serialVersionUID	= 3985395253834174861L;
-	private String	probleme;
+	private static final long serialVersionUID = 3985395253834174861L;
 
-	public PasDeVehiculeTrouveException(String s)
+	public PasDeVehiculeTrouveException()
 	{
-		probleme = s;
+		super();
 	}
-	
-	public String getProblem()
-	{
-		return probleme;
-	}
-
 }

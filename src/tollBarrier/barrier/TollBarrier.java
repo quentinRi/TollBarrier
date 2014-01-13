@@ -84,6 +84,8 @@ public class TollBarrier
 	{
 		synchronized (vehicules)
 		{
+			if (vehicules == null || vehicules.isEmpty())
+				throw new PasDeVehiculeTrouveException();
 			LinkedList<Vehicule> vehiculesCopy = new LinkedList<Vehicule>(
 					vehicules);
 			for (Vehicule v : vehiculesCopy)
@@ -309,8 +311,9 @@ public class TollBarrier
 	}
 
 	public void addDebit(Object selectedItem, int parseInt,
-			HashSet<MoyenDePaiment> mdp) {
+			HashSet<MoyenDePaiment> mdp)
+	{
 		// TODO Auto-generated method stub
-		
+
 	}
 }

@@ -37,19 +37,15 @@ public abstract class Borne extends Thread
 		_vehicule = null;
 		_nbVeh = 0;
 	}
-	
-/*	
-	public void arriveeVehicule(Vehicule V){
-		
-		if(_vehicule == null){
-			_vehicule = V;
-			_nbVeh++;
-		}
-*/
+
+	/*
+	 * public void arriveeVehicule(Vehicule V){
+	 * 
+	 * if(_vehicule == null){ _vehicule = V; _nbVeh++; }
+	 */
 
 	public void leverBarriere()
 	{
-
 		_paymentAccepte = demanderAccord();
 		if (_paymentAccepte)
 			_barriereLevee = true;
@@ -60,9 +56,11 @@ public abstract class Borne extends Thread
 
 		return true;
 	}
-	
-	public void alarme(){}
-		
+
+	public void alarme()
+	{
+	}
+
 	public void run()
 	{
 		while (true)
@@ -70,37 +68,33 @@ public abstract class Borne extends Thread
 			try
 			{
 				TollBarrier.getInstance().getVehicule(this);
-				if (_vehicule == null)
-				{
-					try
-					{
-						Thread.sleep(100);
-					} catch (InterruptedException e)
-					{
-						e.printStackTrace();
-					}
-					continue;
-				}
-				long time = _vehicule.getTime();
+			} catch (PasDeVehiculeTrouveException pasDeVeh)
+			{
 				try
 				{
-					Thread.sleep(time);
+					Thread.sleep(100);
 				} catch (InterruptedException e)
 				{
 					e.printStackTrace();
 				}
-				_nbVeh++;
-				this.time += time;
-				envoyerRapport();
-				leverBarriere();
-				_vehicule.quitterPeage();
-				System.out.println(_vehicule + " est passé à la borne " + num);
-				_vehicule = null;
-
-			} catch (PasDeVehiculeTrouveException e)
+				continue;
+			}
+			
+			long time = _vehicule.getTime();
+			try
+			{
+				Thread.sleep(time);
+			} catch (InterruptedException e)
 			{
 				e.printStackTrace();
 			}
+			_nbVeh++;
+			this.time += time;
+			envoyerRapport();
+			leverBarriere();
+			_vehicule.quitterPeage();
+			System.out.println(_vehicule + " est passé à la borne " + num);
+			_vehicule = null;
 
 		}
 	}
@@ -133,7 +127,7 @@ public abstract class Borne extends Thread
 	public double getTempsPassageMoyen()
 	{
 
-		return time/_nbVeh;
+		return time / _nbVeh;
 	}
 
 	public Set<MoyenDePaiment> getMoyenDePaiment()
