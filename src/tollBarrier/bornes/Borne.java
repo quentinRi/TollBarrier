@@ -78,7 +78,7 @@ public abstract class Borne extends Thread
 
 	public void run()
 	{
-		while (true)
+		while (TollBarrier.isRunning())
 		{
 			try
 			{
