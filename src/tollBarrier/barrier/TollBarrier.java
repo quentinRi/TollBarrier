@@ -25,10 +25,10 @@ import tollBarrier.bornes.BoTelePeage;
 import tollBarrier.bornes.Borne;
 import tollBarrier.bornes.exceptions.NotAValidBorneTypeException;
 import tollBarrier.vehicule.MoyenDePaiment;
-import tollBarrier.vehicule.PasDeVehiculeTrouveException;
 
 import java.util.ArrayList;
 
+import tollBarrier.vehicule.exceptions.PasDeVehiculeTrouveException;
 import tollBarrier.vehicule.vehiculesObjects.Camion;
 import tollBarrier.vehicule.vehiculesObjects.Vehicule;
 

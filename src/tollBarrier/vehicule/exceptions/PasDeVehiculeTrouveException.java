@@ -12,7 +12,7 @@
  * @version 0.0.1
  * @date 17 déc. 2013
  */
-package tollBarrier.vehicule;
+package tollBarrier.vehicule.exceptions;
 
 /**
  * @author lebarbe

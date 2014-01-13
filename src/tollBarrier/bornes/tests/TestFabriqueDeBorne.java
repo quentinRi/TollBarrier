@@ -1,10 +1,15 @@
-package tollBarrier.bornes;
+package tollBarrier.bornes.tests;
 
 import static org.junit.Assert.*;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import tollBarrier.bornes.BoAutomatique;
+import tollBarrier.bornes.BoManuelle;
+import tollBarrier.bornes.BoTelePeage;
+import tollBarrier.bornes.FabriqueDeBorne;
 
 public class TestFabriqueDeBorne {
 

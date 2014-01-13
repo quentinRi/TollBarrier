@@ -4,6 +4,7 @@ import java.util.Set;
 
 import tollBarrier.barrier.TollBarrier;
 import tollBarrier.vehicule.*;
+import tollBarrier.vehicule.exceptions.PasDeVehiculeTrouveException;
 import tollBarrier.vehicule.vehiculesObjects.Vehicule;
 
 /**
