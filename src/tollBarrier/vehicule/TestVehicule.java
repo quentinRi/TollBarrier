@@ -1,7 +1,5 @@
 package tollBarrier.vehicule;
 
-import static org.junit.Assert.*;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -28,15 +26,6 @@ public class TestVehicule {
 
 	@Test
 	public void testGetTempsPassage() {
-		//TODO v.rejoindreFile(new FileDAttente());
-		int millis = 2000;
-		try {
-			Thread.sleep(millis);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		v.quitterPeage();
 		
-		assertTrue(v.getTempsPassage()==millis);
 	}
 }

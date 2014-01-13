@@ -3,6 +3,7 @@ package tollBarrier.vehicule.vehiculesObjects;
 import java.util.Set;
 
 import tollBarrier.vehicule.MoyenDePaiment;
+import tollBarrier.vehicule.exceptions.NotGoneVehiculeException;
 
 public abstract class Vehicule
 {
@@ -24,17 +25,12 @@ public abstract class Vehicule
 
 	public void rejoindreFile()
 	{
-		_hDebut = System.currentTimeMillis();
+		_hDebut = System.currentTimeMillis()/1000;
 	}
 
 	public void quitterPeage()
 	{
-		_hFin = System.currentTimeMillis();
-	}
-
-	public long getTempsPassage()
-	{
-		return _hFin - _hDebut;
+		_hFin = System.currentTimeMillis()/1000;
 	}
 
 	public Set<MoyenDePaiment> getMoyensDePaiment()
@@ -42,7 +38,7 @@ public abstract class Vehicule
 		return _mdp;
 	}
 
-	public abstract long getTime();
+	public abstract long getTimeMuliplier();
 
 	public String toString()
 	{
@@ -50,5 +46,12 @@ public abstract class Vehicule
 		s+= getClass().getSimpleName();
 		s+= " n°"+num;
 		return s;
+	}
+
+	public long getTime() throws NotGoneVehiculeException
+	{
+		if (_hDebut == 0 || _hFin == 0)
+			throw new NotGoneVehiculeException();
+		return _hFin - _hDebut;
 	}
 }

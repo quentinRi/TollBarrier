@@ -12,8 +12,8 @@ public class Voiture extends Vehicule
 		super(mdp);
 	}
 
-	public long getTime()
+	public long getTimeMuliplier()
 	{
-		return 7000;
+		return 7;
 	}
 }

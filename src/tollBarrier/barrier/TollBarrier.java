@@ -17,18 +17,18 @@ package tollBarrier.barrier;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 
-import tollBarrier.bornes.BoAutomatique;
 import tollBarrier.bornes.BoManuelle;
-import tollBarrier.bornes.BoTelePeage;
 import tollBarrier.bornes.Borne;
+import tollBarrier.bornes.FabriqueDeBorne;
 import tollBarrier.bornes.exceptions.NotAValidBorneTypeException;
 import tollBarrier.vehicule.MoyenDePaiment;
-import tollBarrier.vehicule.PasDeVehiculeTrouveException;
 
 import java.util.ArrayList;
 
+import tollBarrier.vehicule.exceptions.PasDeVehiculeTrouveException;
 import tollBarrier.vehicule.vehiculesObjects.Camion;
 import tollBarrier.vehicule.vehiculesObjects.Vehicule;
 
@@ -39,12 +39,26 @@ public class TollBarrier
 	private LinkedList<Borne> bornes;
 	private LinkedList<Vehicule> vehicules;
 	private ArrayList<Debit> debits;
+	private List<TollBarrierListener> listeners;
+	private static boolean running = false;
 
-	public TollBarrier()
+	public static boolean isRunning()
+	{
+		return running;
+	}
+
+	private TollBarrier()
 	{
 		bornes = new LinkedList<Borne>();
 		vehicules = new LinkedList<Vehicule>();
 		debits = new ArrayList<Debit>();
+		listeners = new ArrayList<TollBarrierListener>();
+	}
+
+	public static void reset()
+	{
+		instance = new TollBarrier();
+		running = false;
 	}
 
 	/**
@@ -57,6 +71,14 @@ public class TollBarrier
 			debits.add(new Debit(typeVehicule, nbParMinute, s, vehicules, this));
 	}
 
+	public void addDebit(String typeVehicule, Integer nbParMinute,
+			HashSet<MoyenDePaiment> mdp)
+	{
+		for (MoyenDePaiment m : mdp)
+			debits.add(new Debit(typeVehicule, nbParMinute, m.name(),
+					vehicules, this));
+	}
+
 	public static TollBarrier getInstance()
 	{
 		if (instance == null)
@@ -66,76 +88,79 @@ public class TollBarrier
 
 	public void addBorne(String typeborne)
 	{
-		switch (typeborne.toLowerCase().charAt(0))
+		try
 		{
-		case 'm':
-			bornes.add(new BoManuelle());
-			break;
-		case 'a':
-			bornes.add(new BoAutomatique());
-			break;
-		case 't':
-			bornes.add(new BoTelePeage());
-			break;
+			bornes.add(new FabriqueDeBorne().creerBorne(typeborne));
+		} catch (NotAValidBorneTypeException e)
+		{
+			e.printStackTrace();
 		}
 	}
 
-	public boolean getVehicule(Borne borne) throws PasDeVehiculeTrouveException
+	public static boolean compatible(Borne borne, Vehicule vehicule)
+	{
+		if (vehicule instanceof Camion && !(borne instanceof BoManuelle))
+			return false;
+		for (MoyenDePaiment mdp : vehicule.getMoyensDePaiment())
+			if (borne.getMoyensDePaiment().contains(mdp))
+			{
+				return true;
+			}
+		return false;
+	}
+
+	public Vehicule getVehicule(Borne borne)
+			throws PasDeVehiculeTrouveException
 	{
 		synchronized (vehicules)
 		{
+			if (vehicules == null || vehicules.isEmpty())
+				throw new PasDeVehiculeTrouveException();
 			LinkedList<Vehicule> vehiculesCopy = new LinkedList<Vehicule>(
 					vehicules);
 			for (Vehicule v : vehiculesCopy)
 			{
-				if (v instanceof Camion && !(borne instanceof BoManuelle))
-					continue;
-				for (MoyenDePaiment mdp : v.getMoyensDePaiment())
-					if (borne.getMoyensDePaiment().contains(mdp))
-					{
-						borne.setVehicule(vehicules.remove(vehiculesCopy
-								.indexOf(v)));
-						System.out.println(v
-								+ " commence à passer à la borne " + borne);
-						return true;
-					}
+				if (compatible(borne, v))
+				{
+					Vehicule retour = vehicules
+							.remove(vehiculesCopy.indexOf(v));
+					for (TollBarrierListener listener : listeners)
+						listener.updateVehiculesEnAttente();
+					return retour;
+				}
 			}
-			return false;
+			throw new PasDeVehiculeTrouveException();
 		}
-		/*
-		 * // Recupération des moyens de paiement acceptés par la borne
-		 * demandeuse // de véhicule Set<MoyenDePaiment> bmdp =
-		 * borne.getMoyensDePaiment();
-		 * 
-		 * // Pour chaque véhicule dans la file for (int i = 0; i <
-		 * file.size(); i++) {
-		 * 
-		 * // On récupère ses moyens de paiement possibles Set<MoyenDePaiment>
-		 * vmdp = file.get(i).getMoyensDePaiment();
-		 * 
-		 * // On vérifie si ce véhicule peut aller dans la borne demandeuse
-		 * for (MoyenDePaiment mv : vmdp)
-		 * 
-		 * // Si le véhicule correpsond, on l'envoie à la borne if
-		 * (bmdp.contains(mv)) { Vehicule v = file.get(i); file.remove(i);
-		 * return v; } }
-		 * 
-		 * // Si aucun véhicule dans la file ne correspond, on renvoie une //
-		 * exception String s = "Pas de Véhicule ac mdp: " + bmdp;
-		 * 
-		 * throw new PasDeVehiculeTrouveException(s);
-		 */
 	}
 
-	/**
-	 * @return
-	 */
+	public void envoyerRapport()
+	{
+		for (TollBarrierListener listener : listeners)
+			listener.updateTempsPassageMoyen();
+	}
+
+	public Float getTempsPassageMoyen()
+	{
+		float sum = 0;
+		int nbBorne = 0;
+		for (int i = 0; i < getNombreBornes(); i++)
+		{
+			double a = bornes.get(i).getTempsPassageMoyen();
+			if (a > 0)
+			{
+				sum += a;
+				nbBorne++;
+			}
+		}
+		return sum / nbBorne;
+	}
+
 	/*
 	 * public Float getTempsPassageMoyen() { int nbBornes = getNombreBornes();
 	 * float sum = 0;
 	 * 
 	 * for (int i = 0; i < nbBornes; i++) { sum +=
-	 * getTempsPassageMoyenParBorne(i); } return sum / nbBornes; TODO }
+	 * getTempsPassageMoyenParTypeDeBorne(i); } return sum / nbBornes; }
 	 */
 
 	/**
@@ -165,20 +190,16 @@ public class TollBarrier
 
 	public void demarrerSimulation()
 	{
-		// TODO Auto-generated method stub
-
+		running = true;
+		for (Borne b : bornes)
+			b.start();
+		for (Debit d : debits)
+			d.start();
 	}
 
 	public void arreterSimulation()
 	{
-		// TODO Auto-generated method stub
-
-	}
-
-	public void reinitialiser()
-	{
-		// TODO Auto-generated method stub
-
+		running = false;
 	}
 
 	/**
@@ -195,8 +216,7 @@ public class TollBarrier
 	 */
 	public Integer getNombreBornes()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return bornes.size();
 	}
 
 	/**
@@ -294,9 +314,7 @@ public class TollBarrier
 			b.start();
 
 		for (Debit d : barriere.debits)
-		{
 			d.start();
-		}
 	}
 
 	public void add(Vehicule v)
@@ -305,12 +323,13 @@ public class TollBarrier
 		{
 			vehicules.add(v);
 			System.out.println(v + " arrive au péage");
+			for (TollBarrierListener listener : listeners)
+				listener.updateVehiculesEnAttente();
 		}
 	}
 
-	public void addDebit(Object selectedItem, int parseInt,
-			HashSet<MoyenDePaiment> mdp) {
-		// TODO Auto-generated method stub
-		
+	public void addListener(TollBarrierListener listener)
+	{
+		listeners.add(listener);
 	}
 }

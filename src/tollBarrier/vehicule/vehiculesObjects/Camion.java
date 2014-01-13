@@ -13,9 +13,9 @@ public class Camion extends Vehicule
 	}
 	
 
-	public long getTime()
+	public long getTimeMuliplier()
 	{
-		return 10000;
+		return 10;
 	}
 
 }

@@ -3,6 +3,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.HashSet;
 
+import javax.swing.AbstractButton;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
@@ -43,19 +44,6 @@ public class ConfigDebit extends javax.swing.JFrame {
 	private JComboBox jComboBox1;
 	private JButton jButton2;
 	private InterfaceGraphique parent;
-
-	/**
-	* Auto-generated main method to display this JFrame
-	*/
-	/*public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				ConfigDebit inst = new ConfigDebit();
-				inst.setLocationRelativeTo(null);
-				inst.setVisible(true);
-			}
-		});
-	}*/
 	
 	public ConfigDebit(InterfaceGraphique gui) {
 		super();
@@ -110,7 +98,7 @@ public class ConfigDebit extends javax.swing.JFrame {
 			}
 			{
 				jTextField1 = new JTextField();
-				jTextField1.setText("0");
+				jTextField1.setText("10");
 			}
 			{
 				jLabel1 = new JLabel();
@@ -176,7 +164,7 @@ public class ConfigDebit extends javax.swing.JFrame {
 			mdp.add(MoyenDePaiment.ABONNEMENT);
 		if (jRadioButton4.isSelected())
 			mdp.add(MoyenDePaiment.TELEPEAGE);
-		tb.addDebit(jComboBox1.getSelectedItem(), Integer.parseInt(jTextField1.getText()), mdp);
+		tb.addDebit(jComboBox1.getSelectedItem().toString(), Integer.parseInt(jTextField1.getText()), mdp);
 		parent.setVisible(true);
 		this.setVisible(false);
 	}

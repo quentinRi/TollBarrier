@@ -1,4 +1,4 @@
-package tollBarrier.bornes;
+package tollBarrier.bornes.tests;
 
 import static org.junit.Assert.*;
 

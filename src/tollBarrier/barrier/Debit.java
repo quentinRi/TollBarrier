@@ -51,7 +51,7 @@ public class Debit extends Thread
 	@Override
 	public void run()
 	{
-		while (true)
+		while (TollBarrier.isRunning())
 		{
 			HashSet<MoyenDePaiment> moyens = new HashSet<MoyenDePaiment>();
 			moyens.add(MoyenDePaiment.getByName(typePaiement));
