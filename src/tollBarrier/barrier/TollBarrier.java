@@ -80,7 +80,7 @@ public class TollBarrier
 		}
 	}
 
-	public boolean getVehicule(Borne borne) throws PasDeVehiculeTrouveException
+	public Vehicule getVehicule(Borne borne) throws PasDeVehiculeTrouveException
 	{
 		synchronized (vehicules)
 		{
@@ -95,14 +95,11 @@ public class TollBarrier
 				for (MoyenDePaiment mdp : v.getMoyensDePaiment())
 					if (borne.getMoyensDePaiment().contains(mdp))
 					{
-						borne.setVehicule(vehicules.remove(vehiculesCopy
-								.indexOf(v)));
-						System.out.println(v
-								+ " commence à passer à la borne " + borne);
-						return true;
+						return vehicules.remove(vehiculesCopy
+								.indexOf(v));
 					}
 			}
-			return false;
+			throw new PasDeVehiculeTrouveException();
 		}
 		/*
 		 * // Recupération des moyens de paiement acceptés par la borne

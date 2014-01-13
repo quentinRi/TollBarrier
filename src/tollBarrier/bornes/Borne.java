@@ -48,7 +48,11 @@ public abstract class Borne extends Thread
 	{
 		_paymentAccepte = demanderAccord();
 		if (_paymentAccepte)
-			_barriereLevee = true;
+		{
+			System.out.println(_vehicule + " est passé à la borne " + num);
+			_vehicule.quitterPeage();
+			_vehicule = null;
+		}
 	}
 
 	public boolean demanderAccord()
@@ -67,7 +71,7 @@ public abstract class Borne extends Thread
 		{
 			try
 			{
-				TollBarrier.getInstance().getVehicule(this);
+				_vehicule = TollBarrier.getInstance().getVehicule(this);
 			} catch (PasDeVehiculeTrouveException pasDeVeh)
 			{
 				try
@@ -79,22 +83,17 @@ public abstract class Borne extends Thread
 				}
 				continue;
 			}
-			
-			long time = _vehicule.getTime();
+
+			System.out.println(_vehicule + " arrive à la borne " + num);
 			try
 			{
-				Thread.sleep(time);
+				Thread.sleep(_vehicule.getTime());
 			} catch (InterruptedException e)
 			{
 				e.printStackTrace();
 			}
-			_nbVeh++;
-			this.time += time;
 			envoyerRapport();
 			leverBarriere();
-			_vehicule.quitterPeage();
-			System.out.println(_vehicule + " est passé à la borne " + num);
-			_vehicule = null;
 
 		}
 	}
@@ -107,16 +106,10 @@ public abstract class Borne extends Thread
 		return _paiement;
 	}
 
-	/**
-	 * @param remove
-	 */
-	public void setVehicule(Vehicule remove)
-	{
-		_vehicule = remove;
-	}
-
 	public void envoyerRapport()
 	{
+		_nbVeh++;
+		this.time += _vehicule.getTime();
 	}
 
 	public String toString()
