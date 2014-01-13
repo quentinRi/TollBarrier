@@ -44,19 +44,6 @@ public class ConfigDebit extends javax.swing.JFrame {
 	private JComboBox jComboBox1;
 	private JButton jButton2;
 	private InterfaceGraphique parent;
-
-	/**
-	* Auto-generated main method to display this JFrame
-	*/
-	/*public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				ConfigDebit inst = new ConfigDebit();
-				inst.setLocationRelativeTo(null);
-				inst.setVisible(true);
-			}
-		});
-	}*/
 	
 	public ConfigDebit(InterfaceGraphique gui) {
 		super();
