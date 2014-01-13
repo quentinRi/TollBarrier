@@ -10,30 +10,59 @@ import tollBarrier.bornes.BoAutomatique;
 import tollBarrier.bornes.BoManuelle;
 import tollBarrier.bornes.BoTelePeage;
 import tollBarrier.bornes.FabriqueDeBorne;
+import tollBarrier.bornes.exceptions.NotAValidBorneTypeException;
 
-public class TestFabriqueDeBorne {
+public class TestFabriqueDeBorne
+{
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() throws Exception
+	{
 	}
 
 	@After
-	public void tearDown() throws Exception {
+	public void tearDown() throws Exception
+	{
 	}
 
 	@Test
-	public void test() {
+	public void test()
+	{
 		fail("Not yet implemented");
 	}
-	
-	public void testCreerBorne(){
-		
-		FabriqueDeBorne f = new FabriqueDeBorne();
-		
-		assertTrue(f.creerBorne("Manuelle") instanceof BoManuelle);
-		assertTrue(f.creerBorne("Telepeage") instanceof BoTelePeage);
-		assertTrue(f.creerBorne("Automatique") instanceof BoAutomatique);
-		assertTrue(f.creerBorne("x") == null);
-	}
 
+	public void testCreerBorne()
+	{
+
+		FabriqueDeBorne f = new FabriqueDeBorne();
+
+		try
+		{
+			assertTrue(f.creerBorne("Manuelle") instanceof BoManuelle);
+		} catch (NotAValidBorneTypeException e)
+		{
+			fail("Exception inattendue");
+		}
+		try
+		{
+			assertTrue(f.creerBorne("Telepeage") instanceof BoTelePeage);
+		} catch (NotAValidBorneTypeException e)
+		{
+			fail("Exception inattendue");
+		}
+		try
+		{
+			assertTrue(f.creerBorne("Automatique") instanceof BoAutomatique);
+		} catch (NotAValidBorneTypeException e)
+		{
+			fail("Exception inattendue");
+		}
+		try
+		{
+			assertTrue(f.creerBorne("x") == null);
+			fail("Exception attendue non survenue");
+		} catch (NotAValidBorneTypeException e)
+		{
+		}
+	}
 }

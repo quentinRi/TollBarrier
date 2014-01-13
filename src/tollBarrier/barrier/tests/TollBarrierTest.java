@@ -16,7 +16,7 @@ public class TollBarrierTest
 	@Before
 	public void setUp() throws Exception
 	{
-		tb = new TollBarrier();
+		tb = TollBarrier.getInstance();
 	}
 
 	@After
