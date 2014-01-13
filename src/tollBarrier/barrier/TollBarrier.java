@@ -40,13 +40,18 @@ public class TollBarrier
 	private LinkedList<Vehicule> vehicules;
 	private ArrayList<Debit> debits;
 
-	public TollBarrier()
+	private TollBarrier()
 	{
 		bornes = new LinkedList<Borne>();
 		vehicules = new LinkedList<Vehicule>();
 		debits = new ArrayList<Debit>();
 	}
-
+	
+	public static void reset()
+	{
+		instance = new TollBarrier();		
+	}
+	
 	/**
 	 * @return
 	 */
@@ -57,6 +62,12 @@ public class TollBarrier
 			debits.add(new Debit(typeVehicule, nbParMinute, s, vehicules, this));
 	}
 
+	public void addDebit(String typeVehicule, Integer nbParMinute, HashSet<MoyenDePaiment> mdp)
+	{
+		for (MoyenDePaiment m : mdp)
+			debits.add(new Debit(typeVehicule, nbParMinute, m.name(), vehicules, this));
+	}
+	
 	public static TollBarrier getInstance()
 	{
 		if (instance == null)
@@ -170,12 +181,6 @@ public class TollBarrier
 	}
 
 	public void arreterSimulation()
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	public void reinitialiser()
 	{
 		// TODO Auto-generated method stub
 
@@ -306,11 +311,5 @@ public class TollBarrier
 			vehicules.add(v);
 			System.out.println(v + " arrive au péage");
 		}
-	}
-
-	public void addDebit(Object selectedItem, int parseInt,
-			HashSet<MoyenDePaiment> mdp) {
-		// TODO Auto-generated method stub
-		
 	}
 }
