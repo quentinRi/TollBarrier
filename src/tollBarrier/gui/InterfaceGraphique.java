@@ -14,6 +14,7 @@ import javax.swing.WindowConstants;
 import javax.swing.SwingUtilities;
 
 import tollBarrier.barrier.TollBarrier;
+import tollBarrier.barrier.TollBarrierListener;
 
 /**
  * This code was edited or generated using CloudGarden's Jigloo SWT/Swing GUI
@@ -25,7 +26,7 @@ import tollBarrier.barrier.TollBarrier;
  * PURCHASED FOR THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED LEGALLY FOR
  * ANY CORPORATE OR COMMERCIAL PURPOSE.
  */
-public class InterfaceGraphique extends javax.swing.JFrame
+public class InterfaceGraphique extends javax.swing.JFrame implements TollBarrierListener
 {
 	private static final long serialVersionUID = 7829192739725085653L;
 
@@ -41,7 +42,6 @@ public class InterfaceGraphique extends javax.swing.JFrame
 	private JTextField jTextField3;
 	private JTextField jTextField4;
 	private JEditorPane jEditorPane4;
-	private Chrono task;
 	private JButton jButton10;
 	private JButton jButton9;
 	private JButton jButton8;
@@ -74,13 +74,6 @@ public class InterfaceGraphique extends javax.swing.JFrame
 	{
 		super();
 		initGUI();
-	}
-
-	public void majVehiculeAttente()
-	{
-		task = new Chrono(jTextField4);
-		timer = new Timer();
-		timer.schedule(task, 0, 1000);
 	}
 
 	private void initGUI()
@@ -118,9 +111,9 @@ public class InterfaceGraphique extends javax.swing.JFrame
 				jButton7.setText("+");
 				jButton7.addMouseListener(new MouseAdapter() {
 					public void mouseClicked(MouseEvent evt) {
-						int tmp = Integer.parseInt(jTextField1.getText());
+						int tmp = Integer.parseInt(jTextField2.getText());
 						tmp++;
-						jTextField1.setText("" + tmp);
+						jTextField2.setText("" + tmp);
 					}
 				});
 			}
@@ -129,9 +122,9 @@ public class InterfaceGraphique extends javax.swing.JFrame
 				jButton8.setText("+");
 				jButton8.addMouseListener(new MouseAdapter() {
 					public void mouseClicked(MouseEvent evt) {
-						int tmp = Integer.parseInt(jTextField1.getText());
+						int tmp = Integer.parseInt(jTextField5.getText());
 						tmp++;
-						jTextField1.setText("" + tmp);
+						jTextField5.setText("" + tmp);
 					}
 				});
 			}
@@ -141,10 +134,10 @@ public class InterfaceGraphique extends javax.swing.JFrame
 				jButton9.addMouseListener(new MouseAdapter() {
 					public void mouseClicked(MouseEvent evt) {
 						
-						int tmp = Integer.parseInt(jTextField1.getText());
+						int tmp = Integer.parseInt(jTextField2.getText());
 						if (tmp > 0)
 							tmp--;
-						jTextField1.setText("" + tmp);
+						jTextField2.setText("" + tmp);
 					}
 				});
 			}
@@ -154,10 +147,10 @@ public class InterfaceGraphique extends javax.swing.JFrame
 				jButton10.addMouseListener(new MouseAdapter() {
 					public void mouseClicked(MouseEvent evt) {
 						
-						int tmp = Integer.parseInt(jTextField1.getText());
+						int tmp = Integer.parseInt(jTextField5.getText());
 						if (tmp > 0)
 							tmp--;
-						jTextField1.setText("" + tmp);
+						jTextField5.setText("" + tmp);
 					}
 				});
 			}
@@ -180,10 +173,15 @@ public class InterfaceGraphique extends javax.swing.JFrame
 					public void mouseClicked(MouseEvent evt)
 					{
 						TollBarrier barrier = TollBarrier.getInstance();
-						int nbVoies = Integer.parseInt(jTextField1.getText());
-						for (int i = 0; i < nbVoies; i++)
+						int nbVoiesManuelles = Integer.parseInt(jTextField1.getText());
+						for (int i = 0; i < nbVoiesManuelles; i++)
 							barrier.addBorne("Manuel");
-						majVehiculeAttente();
+						int nbVoiesAuto = Integer.parseInt(jTextField1.getText());
+						for (int i = 0; i < nbVoiesManuelles; i++)
+							barrier.addBorne("Auto");
+						int nbVoiesTele = Integer.parseInt(jTextField1.getText());
+						for (int i = 0; i < nbVoiesManuelles; i++)
+							barrier.addBorne("Telepeage");
 						barrier.demarrerSimulation();
 					}
 				});
@@ -368,6 +366,7 @@ public class InterfaceGraphique extends javax.swing.JFrame
 				.addContainerGap(38, 38));
 			pack();
 			this.setSize(572, 402);
+			TollBarrier.getInstance().addListener(this);
 		} catch (Exception e)
 		{
 			// add your error handling code here
@@ -380,6 +379,18 @@ public class InterfaceGraphique extends javax.swing.JFrame
 		cd = new ConfigDebit(this);
 		cd.setVisible(true);
 		this.setVisible(false);
+	}
+
+	@Override
+	public void updateVehiculesEnAttente()
+	{
+		jTextField4.setText(TollBarrier.getInstance().getNombreVehiculeEnAttente().toString());
+	}
+
+	@Override
+	public void updateTempsPassageMoyen()
+	{
+		jTextField3.setText(TollBarrier.getInstance().getTempsPassageMoyen().toString());
 	}
 
 }

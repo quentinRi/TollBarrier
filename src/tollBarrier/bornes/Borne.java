@@ -43,9 +43,9 @@ public abstract class Borne extends Thread
 	{
 		_paymentAccepte = demanderAccord();
 		long tempsPassage = 0;
-		if (! _paymentAccepte)
+		if (!_paymentAccepte)
 		{
-			alarme();//TODO Implémenter les différentes alarmes
+			alarme();// TODO Implémenter les différentes alarmes
 		}
 		System.out.println(_vehicule + " est passé à la borne " + num);
 		_vehicule.quitterPeage();
@@ -109,7 +109,7 @@ public abstract class Borne extends Thread
 
 		}
 	}
-	
+
 	private void payer()
 	{
 		MoyenDePaiment mdp = null;
@@ -145,6 +145,8 @@ public abstract class Borne extends Thread
 	{
 		_nbVeh++;
 		this.time += time;
+		System.out.println(time + " " + _nbVeh);
+		TollBarrier.getInstance().envoyerRapport();
 	}
 
 	public String toString()
@@ -154,7 +156,8 @@ public abstract class Borne extends Thread
 
 	public double getTempsPassageMoyen()
 	{
-
+		if (time == 0)
+			return 0;
 		return time / _nbVeh;
 	}
 

@@ -17,6 +17,7 @@ package tollBarrier.barrier;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 
 import tollBarrier.bornes.BoManuelle;
@@ -38,8 +39,9 @@ public class TollBarrier
 	private LinkedList<Borne> bornes;
 	private LinkedList<Vehicule> vehicules;
 	private ArrayList<Debit> debits;
+	private List<TollBarrierListener> listeners;
 	private static boolean running = false;
-	
+
 	public static boolean isRunning()
 	{
 		return running;
@@ -50,6 +52,7 @@ public class TollBarrier
 		bornes = new LinkedList<Borne>();
 		vehicules = new LinkedList<Vehicule>();
 		debits = new ArrayList<Debit>();
+		listeners = new ArrayList<TollBarrierListener>();
 	}
 
 	public static void reset()
@@ -119,22 +122,45 @@ public class TollBarrier
 			{
 				if (compatible(borne, v))
 				{
-					return vehicules.remove(vehiculesCopy.indexOf(v));
+					Vehicule retour = vehicules
+							.remove(vehiculesCopy.indexOf(v));
+					for (TollBarrierListener listener : listeners)
+						listener.updateVehiculesEnAttente();
+					return retour;
 				}
 			}
 			throw new PasDeVehiculeTrouveException();
 		}
 	}
 
-	/**
-	 * @return
-	 */
+	public void envoyerRapport()
+	{
+		for (TollBarrierListener listener : listeners)
+			listener.updateTempsPassageMoyen();
+	}
+
+	public Float getTempsPassageMoyen()
+	{
+		float sum = 0;
+		int nbBorne = 0;
+		for (int i = 0; i < getNombreBornes(); i++)
+		{
+			double a = bornes.get(i).getTempsPassageMoyen();
+			if (a > 0)
+			{
+				sum += a;
+				nbBorne++;
+			}
+		}
+		return sum / nbBorne;
+	}
+
 	/*
 	 * public Float getTempsPassageMoyen() { int nbBornes = getNombreBornes();
 	 * float sum = 0;
 	 * 
 	 * for (int i = 0; i < nbBornes; i++) { sum +=
-	 * getTempsPassageMoyenParBorne(i); } return sum / nbBornes; TODO }
+	 * getTempsPassageMoyenParTypeDeBorne(i); } return sum / nbBornes; }
 	 */
 
 	/**
@@ -190,8 +216,7 @@ public class TollBarrier
 	 */
 	public Integer getNombreBornes()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return bornes.size();
 	}
 
 	/**
@@ -298,6 +323,13 @@ public class TollBarrier
 		{
 			vehicules.add(v);
 			System.out.println(v + " arrive au péage");
+			for (TollBarrierListener listener : listeners)
+				listener.updateVehiculesEnAttente();
 		}
+	}
+
+	public void addListener(TollBarrierListener listener)
+	{
+		listeners.add(listener);
 	}
 }
