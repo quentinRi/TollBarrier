@@ -4,6 +4,7 @@ import java.util.Set;
 
 import tollBarrier.barrier.TollBarrier;
 import tollBarrier.vehicule.*;
+import tollBarrier.vehicule.exceptions.NotGoneVehiculeException;
 import tollBarrier.vehicule.exceptions.PasDeVehiculeTrouveException;
 import tollBarrier.vehicule.vehiculesObjects.Vehicule;
 
@@ -38,31 +39,41 @@ public abstract class Borne extends Thread
 		_nbVeh = 0;
 	}
 
-	/*
-	 * public void arriveeVehicule(Vehicule V){
-	 * 
-	 * if(_vehicule == null){ _vehicule = V; _nbVeh++; }
-	 */
-
-	public void leverBarriere()
+	public long leverBarriere()
 	{
 		_paymentAccepte = demanderAccord();
-		if (_paymentAccepte)
+		long tempsPassage = 0;
+		if (! _paymentAccepte)
 		{
-			System.out.println(_vehicule + " est passé à la borne " + num);
-			_vehicule.quitterPeage();
-			_vehicule = null;
+			alarme();//TODO Implémenter les différentes alarmes
 		}
+		System.out.println(_vehicule + " est passé à la borne " + num);
+		_vehicule.quitterPeage();
+		try
+		{
+			tempsPassage = _vehicule.getTime();
+		} catch (NotGoneVehiculeException e)
+		{
+			e.printStackTrace();
+		}
+		_vehicule = null;
+		return tempsPassage;
 	}
 
 	public boolean demanderAccord()
 	{
-
 		return true;
 	}
 
 	public void alarme()
 	{
+		try
+		{
+			Thread.sleep(12000);
+		} catch (InterruptedException e)
+		{
+			System.err.println(e);
+		}
 	}
 
 	public void run()
@@ -84,17 +95,41 @@ public abstract class Borne extends Thread
 				continue;
 			}
 
-			System.out.println(_vehicule + " arrive à la borne " + num);
 			try
 			{
-				Thread.sleep(_vehicule.getTime());
-			} catch (InterruptedException e)
+				System.out.println(_vehicule + " arrive à la borne " + num);
+				_vehicule.rejoindreFile();
+				payer();
+				long timePassed = leverBarriere();
+				envoyerRapport(timePassed);
+			} catch (Exception e)
 			{
 				e.printStackTrace();
 			}
-			envoyerRapport();
-			leverBarriere();
 
+		}
+	}
+	
+	private void payer()
+	{
+		MoyenDePaiment mdp = null;
+
+		for (MoyenDePaiment obj : _vehicule.getMoyensDePaiment())
+		{
+			if (_paiement.contains(obj))
+			{
+				mdp = obj;
+				break;
+			}
+		}
+		long time = 500 * _vehicule.getTimeMuliplier()
+				* mdp.getTimeMultiplier();
+		try
+		{
+			Thread.sleep(time);
+		} catch (InterruptedException e)
+		{
+			e.printStackTrace();
 		}
 	}
 
@@ -106,10 +141,10 @@ public abstract class Borne extends Thread
 		return _paiement;
 	}
 
-	public void envoyerRapport()
+	public void envoyerRapport(long time) throws NotGoneVehiculeException
 	{
 		_nbVeh++;
-		this.time += _vehicule.getTime();
+		this.time += time;
 	}
 
 	public String toString()

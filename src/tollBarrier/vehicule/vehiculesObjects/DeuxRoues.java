@@ -12,9 +12,9 @@ public class DeuxRoues extends Vehicule
 		super(mdp);
 	}
 
-	public long getTime()
+	public long getTimeMuliplier()
 	{
-		return 5000;
+		return 5;
 	}
 
 }
