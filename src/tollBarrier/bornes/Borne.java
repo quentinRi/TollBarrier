@@ -33,6 +33,7 @@ public abstract class Borne extends Thread
 	private static int nbInstance = 0;
 	private long _argent;
 	private int _acc;
+	private boolean _accFlag;
 	private int _alarmeRate;
 	private int _nbAlarme;
 
@@ -44,6 +45,7 @@ public abstract class Borne extends Thread
 		_nbVeh = 0;
 		_argent = 0;
 		_acc = 1;
+		_accFlag = false;
 		_alarmeRate = 1000;
 		_nbAlarme = 0;
 	}
@@ -73,15 +75,9 @@ public abstract class Borne extends Thread
 		return tempsPassage;
 	}
 	
-	public void accelerate(int n){
+	public void accelerate(){
 		
-		if(n==0){
-			System.err.println("Erreur: acceleration par 0.");
-			_acc = 1;
-		}
-		else{
-			_acc = n;
-		}
+		_accFlag = !_accFlag;
 	}
 
 	public boolean demanderAccord()
@@ -105,7 +101,7 @@ public abstract class Borne extends Thread
 		if(n == 1) time += 108000;
 		try
 		{
-			time = time/_acc;
+			if(_accFlag) time = time/10;
 			Thread.sleep(time);
 		} catch (InterruptedException e)
 		{
@@ -125,7 +121,9 @@ public abstract class Borne extends Thread
 			{
 				try
 				{
-					Thread.sleep(n/_acc);
+					if(_accFlag) n = 10;
+					else n = 100;
+					Thread.sleep(n);
 				} catch (InterruptedException e)
 				{
 					e.printStackTrace();
@@ -169,7 +167,7 @@ public abstract class Borne extends Thread
 				* mdp.getTimeMultiplier() + additionalTime();
 		try
 		{
-			time = time/_acc;
+			if(_accFlag) time = time/10;
 			Thread.sleep(time);
 		} catch (InterruptedException e)
 		{ 
