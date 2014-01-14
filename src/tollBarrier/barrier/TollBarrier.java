@@ -151,6 +151,17 @@ public class TollBarrier
 		}
 		return tempsTotal / nbVeh;
 	}
+	
+	public long getArgentEncaisse()
+	{
+		long argentTotal = 0;
+		
+		for (int i = 0; i < getNombreBornes(); i++)
+		{
+			argentTotal += bornes.get(i).getArgentEncaisse();
+		}
+		return argentTotal;
+	}
 
 	/**
 	 * @return

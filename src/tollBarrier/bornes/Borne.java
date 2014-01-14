@@ -31,6 +31,11 @@ public abstract class Borne extends Thread
 	private long _time;
 	private int num;
 	private static int nbInstance = 0;
+	private long _argent;
+	private int _acc;
+	private boolean _accFlag;
+	private int _alarmeRate;
+	private int _nbAlarme;
 
 	public Borne()
 	{
@@ -38,6 +43,15 @@ public abstract class Borne extends Thread
 		nbInstance++;
 		_vehicule = null;
 		_nbVeh = 0;
+		_argent = 0;
+		_acc = 1;
+		_accFlag = false;
+		_alarmeRate = 1000;
+		_nbAlarme = 0;
+	}
+	
+	public void setAlarmeRate(int n){
+		_alarmeRate = n;
 	}
 
 	public long leverBarriere()
@@ -48,7 +62,7 @@ public abstract class Borne extends Thread
 		{
 			alarme();
 		}
-		System.out.println(_vehicule + " est passé à la borne " + num);
+		System.out.println(_vehicule + " est passï¿½ ï¿½ la borne " + num);
 		_vehicule.quitterPeage();
 		try
 		{
@@ -60,23 +74,34 @@ public abstract class Borne extends Thread
 		_vehicule = null;
 		return tempsPassage;
 	}
+	
+	public void accelerate(){
+		
+		_accFlag = !_accFlag;
+	}
 
 	public boolean demanderAccord()
 	{
 		Random R = new Random();
-		int n = R.nextInt(1000);
+		int n = R.nextInt(_alarmeRate);
 		if(n == 0) return false;
 		return true;
 	}
 
+	public int getNbAlarme(){
+		return _nbAlarme;
+	}
+	
 	public void alarme()
 	{
+		_nbAlarme++;
 		Random R = new Random();
-		int n = R.nextInt(100);
+		int n = R.nextInt(10);
 		int time = 12000;
-		if(n <= 10) time += 108000;
+		if(n == 1) time += 108000;
 		try
 		{
+			if(_accFlag) time = time/10;
 			Thread.sleep(time);
 		} catch (InterruptedException e)
 		{
@@ -86,6 +111,7 @@ public abstract class Borne extends Thread
 
 	public void run()
 	{
+		int n = 100;
 		while (TollBarrier.isRunning())
 		{
 			try
@@ -95,7 +121,9 @@ public abstract class Borne extends Thread
 			{
 				try
 				{
-					Thread.sleep(100);
+					if(_accFlag) n = 10;
+					else n = 100;
+					Thread.sleep(n);
 				} catch (InterruptedException e)
 				{
 					e.printStackTrace();
@@ -105,7 +133,7 @@ public abstract class Borne extends Thread
 
 			try
 			{
-				System.out.println(_vehicule + " arrive à la borne " + num);
+				System.out.println(_vehicule + " arrive ï¿½ la borne " + num);
 				_vehicule.rejoindreFile();
 				payer();
 				long timePassed = leverBarriere();
@@ -130,10 +158,16 @@ public abstract class Borne extends Thread
 				break;
 			}
 		}
+		
+		
+		_argent += _vehicule.getMontantPaiment();
+		
+		
 		long time = 500 * _vehicule.getTimeMuliplier()
 				* mdp.getTimeMultiplier() + additionalTime();
 		try
 		{
+			if(_accFlag) time = time/10;
 			Thread.sleep(time);
 		} catch (InterruptedException e)
 		{ 
@@ -174,6 +208,10 @@ public abstract class Borne extends Thread
 	public long getNbVeh()
 	{
 		return _nbVeh;
+	}
+	
+	public long getArgentEncaisse() {
+		return _argent;
 	}
 
 	public Set<MoyenDePaiment> getMoyenDePaiment()
