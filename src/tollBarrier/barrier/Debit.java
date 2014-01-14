@@ -32,6 +32,7 @@ public class Debit extends Thread
 	private Collection<String> 	typePaiement;
 	private int					nbParMn;
 	private TollBarrier			tb;
+	private boolean				accFlag;
 
 	/**
 	 * @param typeVehicule
@@ -46,6 +47,7 @@ public class Debit extends Thread
 		this.typeVehicule = typeVehicule;
 		this.nbParMn = nbParMinute;
 		this.tb = tb;
+		this.accFlag = false;
 	}
 
 	public Debit(String typeVehicule, Integer nbParMinute,
@@ -58,11 +60,17 @@ public class Debit extends Thread
 		this.typeVehicule = typeVehicule;
 		this.nbParMn = nbParMinute;
 		this.tb = tb;
+		this.accFlag = false;
 	}
 
+	public void accelerate(){
+		accFlag = !accFlag;
+	}
+	
 	@Override
 	public void run()
 	{
+		int n = nbParMn;
 		while (TollBarrier.isRunning())
 		{
 			HashSet<MoyenDePaiment> moyens = new HashSet<MoyenDePaiment>();
@@ -70,9 +78,12 @@ public class Debit extends Thread
 			moyens.add(MoyenDePaiment.getByName(mdp));
 			Vehicule v = FabriqueDeVehicule.getInstance().creerVehicule(typeVehicule, moyens);
 			tb.add(v);
+			
+			if(accFlag) n = nbParMn/10;
+			else n = nbParMn;
 			try
 			{
-				Thread.sleep(60000 / nbParMn);
+				Thread.sleep(60000 / n);
 			} catch (InterruptedException e)
 			{
 				e.printStackTrace();
