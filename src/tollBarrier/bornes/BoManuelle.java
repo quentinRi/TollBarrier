@@ -15,12 +15,7 @@ public class BoManuelle extends Borne{
 		_paiement.add(MoyenDePaiment.LIQUIDE);
 		_paiement.add(MoyenDePaiment.ABONNEMENT);
 	}
-	
-	
-	public void envoyerRapport(){
-/*
-	}
-
+	/*
 	public void paiement(MoyenDePaiment m){
 		
 		switch(m){
@@ -83,5 +78,4 @@ public class BoManuelle extends Borne{
 	}
 	*/
 
-	}	
 }

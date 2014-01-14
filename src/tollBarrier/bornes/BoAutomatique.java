@@ -8,7 +8,6 @@ public class BoAutomatique extends Borne
 {
 	public BoAutomatique()
 	{
-
 		super();
 		_paiement = new HashSet<MoyenDePaiment>();
 		_paiement.add(MoyenDePaiment.CB);
