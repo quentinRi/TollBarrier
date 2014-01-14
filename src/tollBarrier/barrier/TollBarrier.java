@@ -109,6 +109,7 @@ public class TollBarrier
 			if (b.getType().toLowerCase().charAt(0) == string.toLowerCase()
 					.charAt(0))
 			{
+				b.stopIt();
 				iterator.remove();
 				for (TollBarrierListener listener : listeners)
 					listener.updateBornes();

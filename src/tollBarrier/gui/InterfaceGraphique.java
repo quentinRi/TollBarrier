@@ -430,7 +430,6 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 	private void jButton6MouseClicked() {
 		cd = new ConfigDebit(this);
 		cd.setVisible(true);
-		this.setVisible(false);
 	}
 
 	@Override
@@ -458,7 +457,6 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 		viewDebitFrame = new ViewDebit(this, TollBarrier.getInstance()
 				.getListDebit());
 		viewDebitFrame.setVisible(true);
-		this.setVisible(false);
 	}
 
 	@Override
@@ -470,27 +468,17 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 	@Override
 	public void startRunning()
 	{
-		jButton1.setEnabled(false);
-		jButton2.setEnabled(false);
 		jButton3.setEnabled(false);
+		jButton5.setEnabled(false);
 		jButton6.setEnabled(false);
-		jButton7.setEnabled(false);
-		jButton8.setEnabled(false);
-		jButton9.setEnabled(false);
-		jButton10.setEnabled(false);
 	}
 
 	@Override
 	public void stopRunning()
 	{
-		jButton1.setEnabled(true);
-		jButton2.setEnabled(true);
 		jButton3.setEnabled(true);
+		jButton5.setEnabled(true);
 		jButton6.setEnabled(true);
-		jButton7.setEnabled(true);
-		jButton8.setEnabled(true);
-		jButton9.setEnabled(true);
-		jButton10.setEnabled(true);
 	}
 	
 	private void jRadioButton1ActionPerformed(ActionEvent evt) {
