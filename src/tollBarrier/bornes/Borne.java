@@ -1,5 +1,6 @@
 package tollBarrier.bornes;
 
+import java.util.Random;
 import java.util.Set;
 
 import tollBarrier.barrier.TollBarrier;
@@ -45,7 +46,7 @@ public abstract class Borne extends Thread
 		long tempsPassage = 0;
 		if (!_paymentAccepte)
 		{
-			alarme();// TODO Implémenter les différentes alarmes
+			alarme();
 		}
 		System.out.println(_vehicule + " est passé à la borne " + num);
 		_vehicule.quitterPeage();
@@ -62,14 +63,21 @@ public abstract class Borne extends Thread
 
 	public boolean demanderAccord()
 	{
+		Random R = new Random();
+		int n = R.nextInt(1000);
+		if(n == 0) return false;
 		return true;
 	}
 
 	public void alarme()
 	{
+		Random R = new Random();
+		int n = R.nextInt(100);
+		int time = 12000;
+		if(n <= 10) time += 108000;
 		try
 		{
-			Thread.sleep(12000);
+			Thread.sleep(time);
 		} catch (InterruptedException e)
 		{
 			System.err.println(e);
@@ -123,16 +131,18 @@ public abstract class Borne extends Thread
 			}
 		}
 		long time = 500 * _vehicule.getTimeMuliplier()
-				* mdp.getTimeMultiplier();
+				* mdp.getTimeMultiplier() + additionalTime();
 		try
 		{
 			Thread.sleep(time);
 		} catch (InterruptedException e)
-		{
+		{ 
 			e.printStackTrace();
 		}
 	}
 
+	protected abstract int additionalTime();
+	
 	/**
 	 * @return
 	 */
