@@ -124,10 +124,24 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 			{
 				jTextField2 = new JTextField();
 				jTextField2.setText("0");
+				jTextField2.setEditable(false);				
 			}
 			{
 				jTextField5 = new JTextField();
 				jTextField5.setText("0");
+				jTextField5.setEditable(false);	
+			}
+			{
+				jButton1 = new JButton();
+				jButton1.setText("+");
+				jButton1.addActionListener(new ActionListener()
+				{
+					@Override
+					public void actionPerformed(ActionEvent evt)
+					{
+						TollBarrier.getInstance().addBorne("Manuelle");
+					}
+				});
 			}
 			{
 				jButton7 = new JButton();
@@ -137,9 +151,7 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 					@Override
 					public void actionPerformed(ActionEvent evt)
 					{
-						int tmp = Integer.parseInt(jTextField2.getText());
-						tmp++;
-						jTextField2.setText("" + tmp);
+						TollBarrier.getInstance().addBorne("Automatique");
 					}
 				});
 			}
@@ -151,9 +163,19 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 					@Override
 					public void actionPerformed(ActionEvent evt)
 					{
-						int tmp = Integer.parseInt(jTextField5.getText());
-						tmp++;
-						jTextField5.setText("" + tmp);
+						TollBarrier.getInstance().addBorne("Telepeage");
+					}
+				});
+			}
+			{
+				jButton2 = new JButton();
+				jButton2.setText("-");
+				jButton2.addActionListener(new ActionListener()
+				{
+					@Override
+					public void actionPerformed(ActionEvent evt)
+					{
+						TollBarrier.getInstance().rmBorne("Manuelle");
 					}
 				});
 			}
@@ -165,10 +187,7 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 					@Override
 					public void actionPerformed(ActionEvent evt)
 					{
-						int tmp = Integer.parseInt(jTextField2.getText());
-						if (tmp > 0)
-							tmp--;
-						jTextField2.setText("" + tmp);
+						TollBarrier.getInstance().rmBorne("Automatique");
 					}
 				});
 			}
@@ -180,10 +199,7 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 					@Override
 					public void actionPerformed(ActionEvent evt)
 					{
-						int tmp = Integer.parseInt(jTextField5.getText());
-						if (tmp > 0)
-							tmp--;
-						jTextField5.setText("" + tmp);
+						TollBarrier.getInstance().rmBorne("Telepeage");
 					}
 				});
 			}
@@ -207,7 +223,7 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 					@Override
 					public void actionPerformed(ActionEvent evt)
 					{
-						demarrerSimulation();
+						TollBarrier.getInstance().demarrerSimulation();
 					}
 				});
 			}
@@ -243,6 +259,7 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 			{
 				jTextField4 = new JTextField();
 				jTextField4.setText("0");
+				jTextField4.setEditable(false);	
 			}
 			{
 				jEditorPane4 = new JEditorPane();
@@ -251,35 +268,7 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 			{
 				jTextField3 = new JTextField();
 				jTextField3.setText("0");
-			}
-			{
-				jButton1 = new JButton();
-				jButton1.setText("+");
-				jButton1.addActionListener(new ActionListener()
-				{
-					@Override
-					public void actionPerformed(ActionEvent evt)
-					{
-						int tmp = Integer.parseInt(jTextField1.getText());
-						tmp++;
-						jTextField1.setText("" + tmp);
-					}
-				});
-			}
-			{
-				jButton2 = new JButton();
-				jButton2.setText("-");
-				jButton2.addActionListener(new ActionListener()
-				{
-					@Override
-					public void actionPerformed(ActionEvent evt)
-					{
-						int tmp = Integer.parseInt(jTextField1.getText());
-						if (tmp > 0)
-							tmp--;
-						jTextField1.setText("" + tmp);
-					}
-				});
+				jTextField3.setEditable(false);	
 			}
 			{
 				jEditorPane2 = new JEditorPane();
@@ -289,6 +278,7 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 			{
 				jTextField1 = new JTextField();
 				jTextField1.setText("0");
+				jTextField1.setEditable(false);	
 			}
 			thisLayout.setVerticalGroup(thisLayout.createSequentialGroup()
 				.addContainerGap()
@@ -438,23 +428,13 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 				.toString());
 	}
 
-	private void demarrerSimulation() {
-		TollBarrier barrier = TollBarrier.getInstance();
-		for (int i = 0; i < Integer.parseInt(jTextField1.getText()); i++)
-			barrier.addBorne("Manuelle");
-		for (int i = 0; i < Integer.parseInt(jTextField2.getText()); i++)
-			barrier.addBorne("Automatique");
-		for (int i = 0; i < Integer.parseInt(jTextField5.getText()); i++)
-			barrier.addBorne("Telepeage");
-		barrier.demarrerSimulation();
-	}
-
 	@Override
 	public void updateAll()
 	{
 		updateVehiculesEnAttente();
 		updateTempsPassageMoyen();
 		updateArgentEncaisse();
+		updateBornes();
 	}
 
 	private void jButton11MouseClicked() {
@@ -473,8 +453,6 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 	@Override
 	public void startRunning()
 	{
-		// TODO Auto-generated method stub
-
 		jButton1.setEnabled(false);
 		jButton2.setEnabled(false);
 		jButton3.setEnabled(false);
@@ -488,8 +466,6 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 	@Override
 	public void stopRunning()
 	{
-		// TODO Auto-generated method stub
-		
 		jButton1.setEnabled(true);
 		jButton2.setEnabled(true);
 		jButton3.setEnabled(true);
@@ -503,6 +479,14 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 	private void jRadioButton1ActionPerformed(ActionEvent evt) {
 		for (Borne b : TollBarrier.getInstance().getBornes())
 			b.accelerate();
+	}
+
+	@Override
+	public void updateBornes()
+	{
+		jTextField1.setText(""+TollBarrier.getInstance().getNombreBornes("Manuelles"));
+		jTextField2.setText(""+TollBarrier.getInstance().getNombreBornes("Automatiques"));
+		jTextField5.setText(""+TollBarrier.getInstance().getNombreBornes("Telepeage"));
 	}
 
 }
