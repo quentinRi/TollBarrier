@@ -89,6 +89,7 @@ public class ViewDebit extends javax.swing.JFrame {
 	
 	private void jButton1MouseClicked(MouseEvent evt) {
 		this.setVisible(false);
+		parent.unlockAll();
 	}
 
 }

@@ -266,11 +266,13 @@ public class ConfigDebit extends javax.swing.JFrame
 		tb.addDebit(jComboBox1.getSelectedItem().toString(),
 				Integer.parseInt(jTextField1.getText()), mdp);
 		this.setVisible(false);
+		parent.unlockAll();
 	}
 
 	private void jButton2Evt()
 	{
 		this.setVisible(false);
+		parent.unlockAll();
 	}
 	
 	private void jComboBox1ActionPerformed(ActionEvent evt) {		

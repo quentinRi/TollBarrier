@@ -1,4 +1,3 @@
-
 package tollBarrier.gui;
 
 import java.awt.event.ActionEvent;
@@ -30,7 +29,8 @@ import tollBarrier.bornes.Borne;
  * ANY CORPORATE OR COMMERCIAL PURPOSE.
  */
 public class InterfaceGraphique extends javax.swing.JFrame implements
-		TollBarrierListener {
+		TollBarrierListener
+{
 	private static final long serialVersionUID = 7829192739725085653L;
 
 	private JEditorPane jEditorPane1;
@@ -69,9 +69,12 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 	/**
 	 * Auto-generated main method to display this JFrame
 	 */
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
+	public static void main(String[] args)
+	{
+		SwingUtilities.invokeLater(new Runnable()
+		{
+			public void run()
+			{
 				InterfaceGraphique inst = new InterfaceGraphique();
 				inst.setLocationRelativeTo(null);
 				inst.setVisible(true);
@@ -79,7 +82,8 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 		});
 	}
 
-	public InterfaceGraphique() {
+	public InterfaceGraphique()
+	{
 		super();
 		initGUI();
 	}
@@ -100,8 +104,10 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 			{
 				jRadioButton1 = new JRadioButton();
 				jRadioButton1.setText("Accélérer (X10)");
-				jRadioButton1.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent evt) {
+				jRadioButton1.addActionListener(new ActionListener()
+				{
+					public void actionPerformed(ActionEvent evt)
+					{
 						jRadioButton1ActionPerformed(evt);
 					}
 				});
@@ -114,11 +120,6 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 				jTextField8 = new JTextField();
 				jTextField8.setText("0");
 				jTextField8.setEditable(false);
-				jTextField8.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent evt) {
-						jTextField8ActionPerformed(evt);
-					}
-				});
 			}
 			{
 				jEditorPane8 = new JEditorPane();
@@ -128,11 +129,6 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 				jTextField7 = new JTextField();
 				jTextField7.setText("0");
 				jTextField7.setEditable(false);
-				jTextField7.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent evt) {
-						jTextField7ActionPerformed(evt);
-					}
-				});
 			}
 			{
 				jEditorPane7 = new JEditorPane();
@@ -142,11 +138,6 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 				jTextField6 = new JTextField();
 				jTextField6.setEditable(false);
 				jTextField6.setText("0");
-				jTextField6.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent evt) {
-						jTextField6ActionPerformed(evt);
-					}
-				});
 			}
 			{
 				jButton11 = new JButton();
@@ -173,12 +164,12 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 			{
 				jTextField2 = new JTextField();
 				jTextField2.setText("0");
-				jTextField2.setEditable(false);				
+				jTextField2.setEditable(false);
 			}
 			{
 				jTextField5 = new JTextField();
 				jTextField5.setText("0");
-				jTextField5.setEditable(false);	
+				jTextField5.setEditable(false);
 			}
 			{
 				jButton1 = new JButton();
@@ -308,7 +299,7 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 			{
 				jTextField4 = new JTextField();
 				jTextField4.setText("0");
-				jTextField4.setEditable(false);	
+				jTextField4.setEditable(false);
 			}
 			{
 				jEditorPane4 = new JEditorPane();
@@ -317,7 +308,7 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 			{
 				jTextField3 = new JTextField();
 				jTextField3.setText("0");
-				jTextField3.setEditable(false);	
+				jTextField3.setEditable(false);
 			}
 			{
 				jEditorPane2 = new JEditorPane();
@@ -327,7 +318,7 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 			{
 				jTextField1 = new JTextField();
 				jTextField1.setText("0");
-				jTextField1.setEditable(false);	
+				jTextField1.setEditable(false);
 			}
 			thisLayout.setVerticalGroup(thisLayout.createSequentialGroup()
 				.addContainerGap()
@@ -475,9 +466,12 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 		}
 	}
 
-	private void jButton6MouseClicked() {
+	private void jButton6MouseClicked()
+	{
 		cd = new ConfigDebit(this);
 		cd.setVisible(true);
+
+		lockAll();
 	}
 
 	@Override
@@ -500,13 +494,15 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 	}
 
 	@Override
-	public void updateVehiculesEnAttente() {
+	public void updateVehiculesEnAttente()
+	{
 		jTextField4.setText(TollBarrier.getInstance()
 				.getNombreVehiculeEnAttente().toString());
 	}
 
 	@Override
-	public void updateTempsPassageMoyen() {
+	public void updateTempsPassageMoyen()
+	{
 		jTextField3.setText(TollBarrier.getInstance().getTempsPassageMoyen()
 				.toString());
 	}
@@ -522,10 +518,12 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 		updateNombreAlarmes();
 	}
 
-	private void jButton11MouseClicked() {
+	private void jButton11MouseClicked()
+	{
 		viewDebitFrame = new ViewDebit(this, TollBarrier.getInstance()
 				.getListDebit());
 		viewDebitFrame.setVisible(true);
+		lockAll();
 	}
 
 	@Override
@@ -543,8 +541,43 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 		jButton5.setEnabled(true);
 		jButton6.setEnabled(true);
 	}
-	
-	private void jRadioButton1ActionPerformed(ActionEvent evt) {
+
+	private void lockAll()
+	{
+		jButton1.setEnabled(false);
+		jButton2.setEnabled(false);
+		jButton3.setEnabled(false);
+		jButton4.setEnabled(false);
+		jButton5.setEnabled(false);
+		jButton6.setEnabled(false);
+		jButton7.setEnabled(false);
+		jButton8.setEnabled(false);
+		jButton9.setEnabled(false);
+		jButton10.setEnabled(false);
+		jButton11.setEnabled(false);
+		
+		jRadioButton1.setEnabled(false);
+	}
+
+	protected void unlockAll()
+	{
+		jButton1.setEnabled(true);
+		jButton2.setEnabled(true);
+		jButton3.setEnabled(true);
+		jButton4.setEnabled(true);
+		jButton5.setEnabled(true);
+		jButton6.setEnabled(true);
+		jButton7.setEnabled(true);
+		jButton8.setEnabled(true);
+		jButton9.setEnabled(true);
+		jButton10.setEnabled(true);
+		jButton11.setEnabled(true);
+		
+		jRadioButton1.setEnabled(true);
+	}
+
+	private void jRadioButton1ActionPerformed(ActionEvent evt)
+	{
 		for (Borne b : TollBarrier.getInstance().getBornes())
 			b.accelerate();
 		for (Debit d : TollBarrier.getInstance().getListDebit())
