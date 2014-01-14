@@ -36,6 +36,7 @@ public abstract class Borne extends Thread
 	private boolean _accFlag;
 	private int _alarmeRate;
 	private int _nbAlarme;
+	private long _total_passage_time;
 	private boolean stop = false;
 
 	public void stopIt()
@@ -54,6 +55,7 @@ public abstract class Borne extends Thread
 		_accFlag = false;
 		_alarmeRate = 1000;
 		_nbAlarme = 0;
+		_total_passage_time = 0;
 	}
 
 	public void setAlarmeRate(int n)
@@ -149,6 +151,7 @@ public abstract class Borne extends Thread
 				_vehicule.rejoindreFile();
 				payer();
 				long timePassed = leverBarriere();
+				_total_passage_time += timePassed;
 				envoyerRapport(timePassed);
 			} catch (Exception e)
 			{
@@ -223,6 +226,10 @@ public abstract class Borne extends Thread
 	public long getArgentEncaisse()
 	{
 		return _argent;
+	}
+	
+	public long getIdleTime() {
+		return _time - _total_passage_time;
 	}
 
 	public Set<MoyenDePaiment> getMoyenDePaiment()

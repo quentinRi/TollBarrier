@@ -186,6 +186,11 @@ public class TollBarrier
 		}
 		return argentTotal;
 	}
+	
+	public Float getArgentEncaisseMoyen()
+	{
+		return (new Float(getArgentEncaisse()) / getNombreBornes());
+	}
 
 	/**
 	 * @return
@@ -261,15 +266,31 @@ public class TollBarrier
 	public Float getTempsPassageMoyenParTypeDeBorne(String borne)
 			throws NotAValidBorneTypeException
 	{
-		// TODO Auto-generated method stub
-		return null;
+		Float total = new Float(0);
+		int nbBornes = 0;
+		for (Borne b : bornes)
+			if(b.getType().toLowerCase().charAt(0) == borne.toLowerCase().charAt(0))
+			{
+				nbBornes++;
+				total +=  new Float(b.getTempsPassageMoyen());
+			}
+		
+		return total/nbBornes;
 	}
 
 	public Float getTempsInnocupationBorne(String typeborne)
 			throws NotAValidBorneTypeException
 	{
-		// TODO Auto-generated method stub
-		return null;
+		Float total = new Float(0);
+		int nbBornes = 0;
+		for (Borne b : bornes)
+			if(b.getType().toLowerCase().charAt(0) == typeborne.toLowerCase().charAt(0))
+			{
+				nbBornes++;
+				total +=  new Float(b.getIdleTime());
+			}
+		
+		return total/nbBornes;
 	}
 
 	/*
