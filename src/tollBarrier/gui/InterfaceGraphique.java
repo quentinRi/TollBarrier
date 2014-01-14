@@ -200,11 +200,7 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 				{
 					public void mouseClicked(MouseEvent evt)
 					{
-						TollBarrier barrier = TollBarrier.getInstance();
-						if (timer == null)
-							return;
-						timer.cancel();
-						barrier.arreterSimulation();
+						TollBarrier.getInstance().arreterSimulation();
 					}
 				});
 			}
@@ -442,6 +438,36 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 	public void updateArgentEncaisse()
 	{
 		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void startRunning()
+	{
+		// TODO Auto-generated method stub
+
+		jButton1.setEnabled(false);
+		jButton2.setEnabled(false);
+		jButton3.setEnabled(false);
+		jButton6.setEnabled(false);
+		jButton7.setEnabled(false);
+		jButton8.setEnabled(false);
+		jButton9.setEnabled(false);
+		jButton10.setEnabled(false);
+	}
+
+	@Override
+	public void stopRunning()
+	{
+		// TODO Auto-generated method stub
+		
+		jButton1.setEnabled(true);
+		jButton2.setEnabled(true);
+		jButton3.setEnabled(true);
+		jButton6.setEnabled(true);
+		jButton7.setEnabled(true);
+		jButton8.setEnabled(true);
+		jButton9.setEnabled(true);
+		jButton10.setEnabled(true);
 	}
 
 }

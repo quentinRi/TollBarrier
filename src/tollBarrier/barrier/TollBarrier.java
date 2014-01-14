@@ -55,14 +55,6 @@ public class TollBarrier
 		listeners = new ArrayList<TollBarrierListener>();
 	}
 
-	public static void reset()
-	{
-		instance = new TollBarrier();
-		running = false;
-		for (TollBarrierListener listener : instance.listeners)
-			listener.updateAll();
-	}
-
 	/**
 	 * @return
 	 */
@@ -176,11 +168,21 @@ public class TollBarrier
 			b.start();
 		for (Debit d : debits)
 			d.start();
+		for (TollBarrierListener listener : listeners)
+			listener.startRunning();
+	}
+	
+	public static void reset()
+	{
+		instance = new TollBarrier();
+		instance.arreterSimulation();
 	}
 
 	public void arreterSimulation()
 	{
 		running = false;
+		for (TollBarrierListener listener : listeners)
+			listener.stopRunning();
 		for (TollBarrierListener listener : listeners)
 			listener.updateTempsPassageMoyen();
 	}
