@@ -61,7 +61,6 @@ public class ViewDebit extends javax.swing.JFrame {
 				});
 			}
 			{
-				System.out.println(listDebit);
 				ListModel windowListDebitModel = new DefaultComboBoxModel(listDebit.toArray());
 				windowListDebit = new JList();
 				windowListDebit.setModel(windowListDebitModel);
