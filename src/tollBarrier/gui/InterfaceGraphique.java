@@ -8,6 +8,7 @@ import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JEditorPane;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.WindowConstants;
@@ -15,6 +16,7 @@ import javax.swing.SwingUtilities;
 
 import tollBarrier.barrier.TollBarrier;
 import tollBarrier.barrier.TollBarrierListener;
+import tollBarrier.bornes.Borne;
 
 /**
  * This code was edited or generated using CloudGarden's Jigloo SWT/Swing GUI
@@ -47,6 +49,7 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 	private JButton jButton8;
 	private JButton jButton7;
 	private JTextField jTextField5;
+	private JRadioButton jRadioButton1;
 	private JButton jButton11;
 	private JTextField jTextField2;
 	private JEditorPane jEditorPane6;
@@ -84,12 +87,21 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 			setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 			{
 				jEditorPane1 = new JEditorPane();
-				jEditorPane1.setText("Logiciel simulation barrière");
+				jEditorPane1.setText("Logiciel simulation barriï¿½re");
 				jEditorPane1.setEditable(false);
 			}
 			{
+				jRadioButton1 = new JRadioButton();
+				jRadioButton1.setText("AccÃ©lÃ©rer (X10)");
+				jRadioButton1.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent evt) {
+						jRadioButton1ActionPerformed(evt);
+					}
+				});
+			}
+			{
 				jButton11 = new JButton();
-				jButton11.setText("Consulter Débits");
+				jButton11.setText("Consulter Dï¿½bits");
 				jButton11.addActionListener(new ActionListener()
 				{
 					@Override
@@ -106,7 +118,7 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 			}
 			{
 				jEditorPane6 = new JEditorPane();
-				jEditorPane6.setText("Nombre de voies télépeage");
+				jEditorPane6.setText("Nombre de voies tï¿½lï¿½peage");
 				jEditorPane6.setEditable(false);
 			}
 			{
@@ -177,7 +189,7 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 			}
 			{
 				jButton6 = new JButton();
-				jButton6.setText("Ajouter Débit");
+				jButton6.setText("Ajouter Dï¿½bit");
 				jButton6.addActionListener(new ActionListener()
 				{
 					@Override
@@ -189,7 +201,7 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 			}
 			{
 				jButton3 = new JButton();
-				jButton3.setText("Démarrer simulation");
+				jButton3.setText("Dï¿½marrer simulation");
 				jButton3.addActionListener(new ActionListener()
 				{
 					@Override
@@ -201,7 +213,7 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 			}
 			{
 				jButton4 = new JButton();
-				jButton4.setText("Arrêter simulation");
+				jButton4.setText("Arrï¿½ter simulation");
 				jButton4.addActionListener(new ActionListener()
 				{
 					@Override
@@ -213,7 +225,7 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 			}
 			{
 				jButton5 = new JButton();
-				jButton5.setText("Réinitialiser");
+				jButton5.setText("Rï¿½initialiser");
 				jButton5.addActionListener(new ActionListener()
 				{
 					@Override
@@ -225,7 +237,7 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 			}
 			{
 				jEditorPane5 = new JEditorPane();
-				jEditorPane5.setText("Nombre véhicule en attente");
+				jEditorPane5.setText("Nombre vï¿½hicule en attente");
 				jEditorPane5.setEditable(false);
 			}
 			{
@@ -309,23 +321,25 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 				.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
 				.addGroup(thisLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 				    .addComponent(jButton3, GroupLayout.Alignment.BASELINE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
-				    .addComponent(jButton4, GroupLayout.Alignment.BASELINE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
-				    .addComponent(jButton5, GroupLayout.Alignment.BASELINE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE))
-				.addGap(30)
+				    .addComponent(jButton5, GroupLayout.Alignment.BASELINE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
+				    .addComponent(jButton4, GroupLayout.Alignment.BASELINE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE))
+				.addGap(14)
+				.addComponent(jRadioButton1, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
+				.addGap(31)
 				.addGroup(thisLayout.createParallelGroup()
 				    .addGroup(GroupLayout.Alignment.LEADING, thisLayout.createSequentialGroup()
 				        .addComponent(jTextField3, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
-				        .addGap(9))
+				        .addGap(10))
 				    .addComponent(jEditorPane4, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE))
-				.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+				.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
 				.addGroup(thisLayout.createParallelGroup()
-				    .addGroup(thisLayout.createSequentialGroup()
-				        .addComponent(jEditorPane5, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
-				        .addGap(0, 0, Short.MAX_VALUE))
 				    .addGroup(GroupLayout.Alignment.LEADING, thisLayout.createSequentialGroup()
 				        .addComponent(jTextField4, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
-				        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 0, Short.MAX_VALUE)))
-				.addContainerGap(78, 78));
+				        .addGap(0, 6, Short.MAX_VALUE))
+				    .addGroup(thisLayout.createSequentialGroup()
+				        .addComponent(jEditorPane5, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
+				        .addGap(0, 0, Short.MAX_VALUE)))
+				.addContainerGap(173, 173));
 			thisLayout.setHorizontalGroup(thisLayout.createSequentialGroup()
 				.addContainerGap()
 				.addGroup(thisLayout.createParallelGroup()
@@ -333,43 +347,50 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 				        .addGroup(thisLayout.createParallelGroup()
 				            .addComponent(jButton3, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 172, GroupLayout.PREFERRED_SIZE)
 				            .addComponent(jEditorPane1, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 170, GroupLayout.PREFERRED_SIZE))
-				        .addGap(31)
+				        .addGap(25)
 				        .addGroup(thisLayout.createParallelGroup()
 				            .addGroup(GroupLayout.Alignment.LEADING, thisLayout.createSequentialGroup()
-				                .addComponent(jButton4, GroupLayout.PREFERRED_SIZE, 148, GroupLayout.PREFERRED_SIZE)
-				                .addGap(24))
+				                .addComponent(jButton4, GroupLayout.PREFERRED_SIZE, 170, GroupLayout.PREFERRED_SIZE)
+				                .addGap(0, 8, Short.MAX_VALUE))
 				            .addGroup(GroupLayout.Alignment.LEADING, thisLayout.createSequentialGroup()
-				                .addGap(36)
-				                .addComponent(jButton6, GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE))))
+				                .addGap(42)
+				                .addComponent(jButton6, GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE)
+				                .addGap(0, 0, Short.MAX_VALUE))))
 				    .addGroup(thisLayout.createSequentialGroup()
 				        .addGroup(thisLayout.createParallelGroup()
 				            .addComponent(jEditorPane6, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 289, GroupLayout.PREFERRED_SIZE)
-				            .addGroup(GroupLayout.Alignment.LEADING, thisLayout.createSequentialGroup()
-				                .addComponent(jEditorPane5, GroupLayout.PREFERRED_SIZE, 268, GroupLayout.PREFERRED_SIZE)
-				                .addGap(21))
-				            .addGroup(GroupLayout.Alignment.LEADING, thisLayout.createSequentialGroup()
-				                .addComponent(jEditorPane4, GroupLayout.PREFERRED_SIZE, 268, GroupLayout.PREFERRED_SIZE)
-				                .addGap(21))
 				            .addComponent(jEditorPane3, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 289, GroupLayout.PREFERRED_SIZE)
 				            .addComponent(jEditorPane2, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 289, GroupLayout.PREFERRED_SIZE))
+				        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+				        .addGroup(thisLayout.createParallelGroup()
+				            .addGroup(thisLayout.createSequentialGroup()
+				                .addComponent(jTextField5, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE))
+				            .addGroup(thisLayout.createSequentialGroup()
+				                .addComponent(jTextField2, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE))
+				            .addGroup(thisLayout.createSequentialGroup()
+				                .addComponent(jTextField1, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE)))
+				        .addGap(0, 12, Short.MAX_VALUE))
+				    .addGroup(thisLayout.createSequentialGroup()
+				        .addGroup(thisLayout.createParallelGroup()
+				            .addGroup(thisLayout.createSequentialGroup()
+				                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+				                .addGroup(thisLayout.createParallelGroup()
+				                    .addComponent(jEditorPane5, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 268, GroupLayout.PREFERRED_SIZE)
+				                    .addGroup(GroupLayout.Alignment.LEADING, thisLayout.createSequentialGroup()
+				                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+				                        .addComponent(jRadioButton1, GroupLayout.PREFERRED_SIZE, 142, GroupLayout.PREFERRED_SIZE)
+				                        .addGap(0, 120, GroupLayout.PREFERRED_SIZE))))
+				            .addGroup(GroupLayout.Alignment.LEADING, thisLayout.createSequentialGroup()
+				                .addComponent(jEditorPane4, GroupLayout.PREFERRED_SIZE, 268, GroupLayout.PREFERRED_SIZE)
+				                .addGap(0, 6, GroupLayout.PREFERRED_SIZE)))
+				        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
 				        .addGroup(thisLayout.createParallelGroup()
 				            .addGroup(GroupLayout.Alignment.LEADING, thisLayout.createSequentialGroup()
 				                .addComponent(jTextField4, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE)
-				                .addGap(12))
-				            .addGroup(GroupLayout.Alignment.LEADING, thisLayout.createSequentialGroup()
-				                .addComponent(jTextField3, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE)
-				                .addGap(12))
-				            .addGroup(thisLayout.createSequentialGroup()
-				                .addPreferredGap(jTextField4, jTextField5, LayoutStyle.ComponentPlacement.INDENT)
-				                .addGroup(thisLayout.createParallelGroup()
-				                    .addComponent(jTextField5, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE)
-				                    .addComponent(jTextField2, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE)
-				                    .addComponent(jTextField1, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE))))
-				        .addGap(12)))
+				                .addGap(0, 0, Short.MAX_VALUE))
+				            .addComponent(jTextField3, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE))
+				        .addGap(27)))
 				.addGroup(thisLayout.createParallelGroup()
-				    .addGroup(GroupLayout.Alignment.LEADING, thisLayout.createSequentialGroup()
-				        .addComponent(jButton5, GroupLayout.PREFERRED_SIZE, 107, GroupLayout.PREFERRED_SIZE)
-				        .addGap(0, 44, Short.MAX_VALUE))
 				    .addGroup(thisLayout.createSequentialGroup()
 				        .addGroup(thisLayout.createParallelGroup()
 				            .addComponent(jButton8, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE)
@@ -377,20 +398,20 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 				            .addComponent(jButton1, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE))
 				        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
 				        .addGroup(thisLayout.createParallelGroup()
-				            .addGroup(thisLayout.createSequentialGroup()
-				                .addComponent(jButton10, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE))
-				            .addGroup(thisLayout.createSequentialGroup()
-				                .addComponent(jButton9, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE))
-				            .addGroup(thisLayout.createSequentialGroup()
-				                .addComponent(jButton2, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE)))
-				        .addGap(0, 22, Short.MAX_VALUE))
-				    .addGroup(GroupLayout.Alignment.LEADING, thisLayout.createSequentialGroup()
-				        .addPreferredGap(jButton5, jButton11, LayoutStyle.ComponentPlacement.INDENT)
-				        .addComponent(jButton11, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE)
-				        .addGap(0, 0, Short.MAX_VALUE)))
-				.addContainerGap(18, 18));
+				            .addComponent(jButton10, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE)
+				            .addComponent(jButton9, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE)
+				            .addComponent(jButton2, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE))
+				        .addGap(22))
+				    .addGroup(thisLayout.createSequentialGroup()
+				        .addPreferredGap(jButton8, jButton5, LayoutStyle.ComponentPlacement.INDENT)
+				        .addGroup(thisLayout.createParallelGroup()
+				            .addGroup(GroupLayout.Alignment.LEADING, thisLayout.createSequentialGroup()
+				                .addComponent(jButton5, GroupLayout.PREFERRED_SIZE, 117, GroupLayout.PREFERRED_SIZE)
+				                .addGap(22))
+				            .addComponent(jButton11, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE))))
+				.addContainerGap(54, 54));
 			pack();
-			this.setSize(572, 402);
+			this.setSize(602, 527);
 			TollBarrier.getInstance().addListener(this);
 		} catch (Exception e)
 		{
@@ -477,6 +498,11 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 		jButton8.setEnabled(true);
 		jButton9.setEnabled(true);
 		jButton10.setEnabled(true);
+	}
+	
+	private void jRadioButton1ActionPerformed(ActionEvent evt) {
+		for (Borne b : TollBarrier.getInstance().getBornes())
+			b.accelerate();
 	}
 
 }

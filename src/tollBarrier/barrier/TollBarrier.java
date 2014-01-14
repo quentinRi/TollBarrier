@@ -218,6 +218,10 @@ public class TollBarrier
 		return bornes.size();
 	}
 
+	public LinkedList<Borne> getBornes () {
+		return bornes;
+	}
+	
 	public Integer getDebitEntree()
 	{
 		int nbVehParMn = 0;
