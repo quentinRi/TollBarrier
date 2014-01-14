@@ -36,6 +36,12 @@ public abstract class Borne extends Thread
 	private boolean _accFlag;
 	private int _alarmeRate;
 	private int _nbAlarme;
+	private boolean stop = false;
+
+	public void stopIt()
+	{
+		stop = true;
+	}
 
 	public Borne()
 	{
@@ -49,8 +55,9 @@ public abstract class Borne extends Thread
 		_alarmeRate = 1000;
 		_nbAlarme = 0;
 	}
-	
-	public void setAlarmeRate(int n){
+
+	public void setAlarmeRate(int n)
+	{
 		_alarmeRate = n;
 	}
 
@@ -74,9 +81,10 @@ public abstract class Borne extends Thread
 		_vehicule = null;
 		return tempsPassage;
 	}
-	
-	public void accelerate(){
-		
+
+	public void accelerate()
+	{
+
 		_accFlag = !_accFlag;
 	}
 
@@ -84,24 +92,28 @@ public abstract class Borne extends Thread
 	{
 		Random R = new Random();
 		int n = R.nextInt(_alarmeRate);
-		if(n == 0) return false;
+		if (n == 0)
+			return false;
 		return true;
 	}
 
-	public int getNbAlarme(){
+	public int getNbAlarme()
+	{
 		return _nbAlarme;
 	}
-	
+
 	public void alarme()
 	{
 		_nbAlarme++;
 		Random R = new Random();
 		int n = R.nextInt(10);
 		int time = 12000;
-		if(n == 1) time += 108000;
+		if (n == 1)
+			time += 108000;
 		try
 		{
-			if(_accFlag) time = time/10;
+			if (_accFlag)
+				time = time / 10;
 			Thread.sleep(time);
 		} catch (InterruptedException e)
 		{
@@ -112,7 +124,7 @@ public abstract class Borne extends Thread
 	public void run()
 	{
 		int n = 100;
-		while (TollBarrier.isRunning())
+		while (TollBarrier.isRunning() && !stop)
 		{
 			try
 			{
@@ -121,8 +133,10 @@ public abstract class Borne extends Thread
 			{
 				try
 				{
-					if(_accFlag) n = 10;
-					else n = 100;
+					if (_accFlag)
+						n = 10;
+					else
+						n = 100;
 					Thread.sleep(n);
 				} catch (InterruptedException e)
 				{
@@ -158,25 +172,24 @@ public abstract class Borne extends Thread
 				break;
 			}
 		}
-		
-		
+
 		_argent += _vehicule.getMontantPaiment();
-		
-		
+
 		long time = 500 * _vehicule.getTimeMuliplier()
 				* mdp.getTimeMultiplier() + additionalTime();
 		try
 		{
-			if(_accFlag) time = time/10;
+			if (_accFlag)
+				time = time / 10;
 			Thread.sleep(time);
 		} catch (InterruptedException e)
-		{ 
+		{
 			e.printStackTrace();
 		}
 	}
 
 	protected abstract int additionalTime();
-	
+
 	/**
 	 * @return
 	 */
@@ -204,13 +217,14 @@ public abstract class Borne extends Thread
 			return -1;
 		return _time / _nbVeh;
 	}
-	
+
 	public long getNbVeh()
 	{
 		return _nbVeh;
 	}
-	
-	public long getArgentEncaisse() {
+
+	public long getArgentEncaisse()
+	{
 		return _argent;
 	}
 

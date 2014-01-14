@@ -61,7 +61,6 @@ public class ViewDebit extends javax.swing.JFrame {
 				});
 			}
 			{
-				System.out.println(listDebit);
 				ListModel windowListDebitModel = new DefaultComboBoxModel(listDebit.toArray());
 				windowListDebit = new JList();
 				windowListDebit.setModel(windowListDebitModel);
@@ -89,8 +88,6 @@ public class ViewDebit extends javax.swing.JFrame {
 	}
 	
 	private void jButton1MouseClicked(MouseEvent evt) {
-		System.out.println("jButton1.mouseClicked, event="+evt);
-		parent.setVisible(true);
 		this.setVisible(false);
 	}
 
