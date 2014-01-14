@@ -31,6 +31,7 @@ public abstract class Borne extends Thread
 	private long _time;
 	private int num;
 	private static int nbInstance = 0;
+	private int _acc;
 
 	public Borne()
 	{
@@ -38,6 +39,7 @@ public abstract class Borne extends Thread
 		nbInstance++;
 		_vehicule = null;
 		_nbVeh = 0;
+		_acc = 1;
 	}
 
 	public long leverBarriere()
@@ -60,6 +62,17 @@ public abstract class Borne extends Thread
 		_vehicule = null;
 		return tempsPassage;
 	}
+	
+	public void accelerate(int n){
+		
+		if(n==0){
+			System.err.println("Erreur: acceleration par 0.");
+			_acc = 1;
+		}
+		else{
+			_acc = n;
+		}
+	}
 
 	public boolean demanderAccord()
 	{
@@ -77,6 +90,7 @@ public abstract class Borne extends Thread
 		if(n <= 10) time += 108000;
 		try
 		{
+			time = time/_acc;
 			Thread.sleep(time);
 		} catch (InterruptedException e)
 		{
@@ -86,6 +100,7 @@ public abstract class Borne extends Thread
 
 	public void run()
 	{
+		int n = 100;
 		while (TollBarrier.isRunning())
 		{
 			try
@@ -95,7 +110,7 @@ public abstract class Borne extends Thread
 			{
 				try
 				{
-					Thread.sleep(100);
+					Thread.sleep(n/_acc);
 				} catch (InterruptedException e)
 				{
 					e.printStackTrace();
@@ -134,6 +149,7 @@ public abstract class Borne extends Thread
 				* mdp.getTimeMultiplier() + additionalTime();
 		try
 		{
+			time = time/_acc;
 			Thread.sleep(time);
 		} catch (InterruptedException e)
 		{ 
