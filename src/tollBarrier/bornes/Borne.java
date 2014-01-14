@@ -202,7 +202,6 @@ public abstract class Borne extends Thread
 	{
 		_nbVeh++;
 		_time += time;
-		System.out.println(time + " " + _nbVeh);
 		TollBarrier.getInstance().envoyerRapport();
 	}
 
