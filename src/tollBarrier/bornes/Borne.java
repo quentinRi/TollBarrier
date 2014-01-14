@@ -151,7 +151,7 @@ public abstract class Borne extends Thread
 
 	public String toString()
 	{
-		return "" + num;
+		return "" + num + " de type " + getType();
 	}
 
 	public double getTempsPassageMoyen()

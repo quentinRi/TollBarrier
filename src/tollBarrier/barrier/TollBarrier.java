@@ -133,7 +133,7 @@ public class TollBarrier
 		}
 	}
 
-	public void envoyerRapport()
+	public synchronized void envoyerRapport()
 	{
 		for (TollBarrierListener listener : listeners)
 			listener.updateTempsPassageMoyen();
@@ -259,7 +259,7 @@ public class TollBarrier
 		return null;
 	}
 
-	public static void main(String[] args)
+	/*public static void main(String[] args)
 	{
 		TollBarrier barriere = getInstance();
 
@@ -303,7 +303,8 @@ public class TollBarrier
 		for (Debit d : barriere.debits)
 			d.start();
 	}
-
+*/
+	
 	public void add(Vehicule v)
 	{
 		synchronized (vehicules)
