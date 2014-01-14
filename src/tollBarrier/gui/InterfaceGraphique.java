@@ -85,12 +85,12 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 			setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 			{
 				jEditorPane1 = new JEditorPane();
-				jEditorPane1.setText("Logiciel simulation barriï¿½re");
+				jEditorPane1.setText("Logiciel simulation barrière");
 				jEditorPane1.setEditable(false);
 			}
 			{
 				jButton11 = new JButton();
-				jButton11.setText("Consulter Dï¿½bits");
+				jButton11.setText("Consulter Débits");
 				jButton11.addMouseListener(new MouseAdapter() {
 					public void mouseClicked(MouseEvent evt) {
 						jButton11MouseClicked(evt);
@@ -104,7 +104,7 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 			}
 			{
 				jEditorPane6 = new JEditorPane();
-				jEditorPane6.setText("Nombre de voies tï¿½lï¿½peage");
+				jEditorPane6.setText("Nombre de voies télépeage");
 				jEditorPane6.setEditable(false);
 			}
 			{
@@ -173,7 +173,7 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 			}
 			{
 				jButton6 = new JButton();
-				jButton6.setText("Configurer Dï¿½bit");
+				jButton6.setText("Ajouter Débit");
 				jButton6.addMouseListener(new MouseAdapter()
 				{
 					public void mouseClicked(MouseEvent evt)
@@ -184,7 +184,7 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 			}
 			{
 				jButton3 = new JButton();
-				jButton3.setText("Dï¿½marrer simulation");
+				jButton3.setText("Démarrer simulation");
 				jButton3.addMouseListener(new MouseAdapter()
 				{
 					public void mouseClicked(MouseEvent evt)
@@ -195,7 +195,7 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 			}
 			{
 				jButton4 = new JButton();
-				jButton4.setText("Arrï¿½ter simulation");
+				jButton4.setText("Arrêter simulation");
 				jButton4.addMouseListener(new MouseAdapter()
 				{
 					public void mouseClicked(MouseEvent evt)
@@ -210,7 +210,7 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 			}
 			{
 				jButton5 = new JButton();
-				jButton5.setText("Rï¿½initialiser");
+				jButton5.setText("Réinitialiser");
 				jButton5.addMouseListener(new MouseAdapter()
 				{
 					public void mouseClicked(MouseEvent evt)
@@ -221,7 +221,7 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 			}
 			{
 				jEditorPane5 = new JEditorPane();
-				jEditorPane5.setText("Nombre vï¿½hicule en attente");
+				jEditorPane5.setText("Nombre véhicule en attente");
 				jEditorPane5.setEditable(false);
 			}
 			{
@@ -436,6 +436,13 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 				.getListDebit());
 		viewDebitFrame.setVisible(true);
 		this.setVisible(false);
+	}
+
+	@Override
+	public void updateArgentEncaisse()
+	{
+		// TODO Auto-generated method stub
+		
 	}
 
 }

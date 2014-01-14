@@ -2,8 +2,8 @@ package tollBarrier.gui;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
-import javax.swing.DefaultComboBoxModel;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -14,6 +14,7 @@ import javax.swing.WindowConstants;
 import javax.swing.SwingUtilities;
 
 import tollBarrier.barrier.Debit;
+import tollBarrier.barrier.TollBarrier;
 
 
 /**
@@ -40,9 +41,9 @@ public class ViewDebit extends javax.swing.JFrame {
 		
 	public ViewDebit(InterfaceGraphique gui, List<Debit> listDebit) {
 		super();
+		this.listDebit = listDebit;
 		initGUI();
 		parent = gui;
-		this.listDebit = listDebit;
 	}
 	
 	private void initGUI() {
@@ -60,7 +61,8 @@ public class ViewDebit extends javax.swing.JFrame {
 				});
 			}
 			{
-				ListModel windowListDebitModel = new DefaultComboBoxModel(new String[] { "Item One", "Item Two" });
+				System.out.println(listDebit);
+				ListModel windowListDebitModel = new DefaultComboBoxModel(listDebit.toArray());
 				windowListDebit = new JList();
 				windowListDebit.setModel(windowListDebitModel);
 			}
