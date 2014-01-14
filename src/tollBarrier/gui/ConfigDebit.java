@@ -2,6 +2,8 @@ package tollBarrier.gui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.HashSet;
@@ -74,11 +76,12 @@ public class ConfigDebit extends javax.swing.JFrame
 			{
 				jButton2 = new JButton();
 				jButton2.setText("Cancel");
-				jButton2.addMouseListener(new MouseAdapter()
+				jButton2.addActionListener(new ActionListener()
 				{
-					public void mouseClicked(MouseEvent evt)
+					@Override
+					public void actionPerformed(ActionEvent evt)
 					{
-						jButton2MouseClicked(evt);
+						jButton2Evt();
 					}
 				});
 			}
@@ -257,26 +260,16 @@ public class ConfigDebit extends javax.swing.JFrame
 			mdp.add(MoyenDePaiment.LIQUIDE);
 		if (jRadioButton3.isSelected())
 			mdp.add(MoyenDePaiment.ABONNEMENT);		
+		if (jRadioButton4.isSelected() && jComboBox1.getSelectedItem() != "Camion")
+			mdp.add(MoyenDePaiment.TELEPEAGE);
 		
-		if (jComboBox1.getSelectedItem() == "Camion")
-		{
-			System.out.println("désactivation du bouton");
-			jRadioButton4.setEnabled(false);
-		}
-		else 
-		{
-			if (jRadioButton4.isSelected())
-				mdp.add(MoyenDePaiment.TELEPEAGE);
-		}
 		tb.addDebit(jComboBox1.getSelectedItem().toString(),
 				Integer.parseInt(jTextField1.getText()), mdp);
-		parent.setVisible(true);
 		this.setVisible(false);
 	}
 
-	private void jButton2MouseClicked(MouseEvent evt)
+	private void jButton2Evt()
 	{
-		parent.setVisible(true);
 		this.setVisible(false);
 	}
 	
