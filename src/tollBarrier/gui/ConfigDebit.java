@@ -257,17 +257,9 @@ public class ConfigDebit extends javax.swing.JFrame
 			mdp.add(MoyenDePaiment.LIQUIDE);
 		if (jRadioButton3.isSelected())
 			mdp.add(MoyenDePaiment.ABONNEMENT);		
+		if (jRadioButton4.isSelected() && jComboBox1.getSelectedItem() != "Camion")
+			mdp.add(MoyenDePaiment.TELEPEAGE);
 		
-		if (jComboBox1.getSelectedItem() == "Camion")
-		{
-			System.out.println("désactivation du bouton");
-			jRadioButton4.setEnabled(false);
-		}
-		else 
-		{
-			if (jRadioButton4.isSelected())
-				mdp.add(MoyenDePaiment.TELEPEAGE);
-		}
 		tb.addDebit(jComboBox1.getSelectedItem().toString(),
 				Integer.parseInt(jTextField1.getText()), mdp);
 		parent.setVisible(true);
