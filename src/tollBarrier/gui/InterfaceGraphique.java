@@ -392,7 +392,6 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 	private void jButton6MouseClicked() {
 		cd = new ConfigDebit(this);
 		cd.setVisible(true);
-		this.setVisible(false);
 	}
 
 	@Override
@@ -420,7 +419,6 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 		viewDebitFrame = new ViewDebit(this, TollBarrier.getInstance()
 				.getListDebit());
 		viewDebitFrame.setVisible(true);
-		this.setVisible(false);
 	}
 
 	@Override
