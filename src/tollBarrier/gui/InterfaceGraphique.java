@@ -428,10 +428,10 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 	{
 		updateVehiculesEnAttente();
 		updateTempsPassageMoyen();
+		updateArgentEncaisse();
 	}
 
 	private void jButton11MouseClicked(MouseEvent evt) {
-		System.out.println("Consulter d�bit, event=" + evt);
 		viewDebitFrame = new ViewDebit(this, TollBarrier.getInstance()
 				.getListDebit());
 		viewDebitFrame.setVisible(true);
@@ -442,7 +442,6 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 	public void updateArgentEncaisse()
 	{
 		// TODO Auto-generated method stub
-		
 	}
 
 }
