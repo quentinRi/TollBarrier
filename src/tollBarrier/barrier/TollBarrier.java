@@ -78,6 +78,11 @@ public class TollBarrier
 			debits.add(new Debit(typeVehicule, nbParMinute, m.name(),
 					vehicules, this));
 	}
+	
+	public List<Debit> getListDebit () 
+	{
+		return debits;
+	}
 
 	public static TollBarrier getInstance()
 	{
