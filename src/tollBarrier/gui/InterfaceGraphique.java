@@ -173,7 +173,7 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 			}
 			{
 				jButton6 = new JButton();
-				jButton6.setText("Configurer Débit");
+				jButton6.setText("Ajouter Débit");
 				jButton6.addMouseListener(new MouseAdapter()
 				{
 					public void mouseClicked(MouseEvent evt)
