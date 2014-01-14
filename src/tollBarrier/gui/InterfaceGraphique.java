@@ -26,8 +26,8 @@ import tollBarrier.barrier.TollBarrierListener;
  * PURCHASED FOR THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED LEGALLY FOR
  * ANY CORPORATE OR COMMERCIAL PURPOSE.
  */
-public class InterfaceGraphique extends javax.swing.JFrame implements TollBarrierListener
-{
+public class InterfaceGraphique extends javax.swing.JFrame implements
+		TollBarrierListener {
 	private static final long serialVersionUID = 7829192739725085653L;
 
 	private JEditorPane jEditorPane1;
@@ -52,7 +52,7 @@ public class InterfaceGraphique extends javax.swing.JFrame implements TollBarrie
 	private JEditorPane jEditorPane6;
 	private JEditorPane jEditorPane3;
 	private JButton jButton6;
-	
+
 	private Timer timer;
 	private ConfigDebit cd;
 	private ViewDebit viewDebitFrame;
@@ -60,12 +60,9 @@ public class InterfaceGraphique extends javax.swing.JFrame implements TollBarrie
 	/**
 	 * Auto-generated main method to display this JFrame
 	 */
-	public static void main(String[] args)
-	{
-		SwingUtilities.invokeLater(new Runnable()
-		{
-			public void run()
-			{
+	public static void main(String[] args) {
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
 				InterfaceGraphique inst = new InterfaceGraphique();
 				inst.setLocationRelativeTo(null);
 				inst.setVisible(true);
@@ -73,8 +70,7 @@ public class InterfaceGraphique extends javax.swing.JFrame implements TollBarrie
 		});
 	}
 
-	public InterfaceGraphique()
-	{
+	public InterfaceGraphique() {
 		super();
 		initGUI();
 	}
@@ -83,7 +79,8 @@ public class InterfaceGraphique extends javax.swing.JFrame implements TollBarrie
 	{
 		try
 		{
-			GroupLayout thisLayout = new GroupLayout((JComponent)getContentPane());
+			GroupLayout thisLayout = new GroupLayout(
+					(JComponent) getContentPane());
 			getContentPane().setLayout(thisLayout);
 			setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 			{
@@ -121,8 +118,10 @@ public class InterfaceGraphique extends javax.swing.JFrame implements TollBarrie
 			{
 				jButton7 = new JButton();
 				jButton7.setText("+");
-				jButton7.addMouseListener(new MouseAdapter() {
-					public void mouseClicked(MouseEvent evt) {
+				jButton7.addMouseListener(new MouseAdapter()
+				{
+					public void mouseClicked(MouseEvent evt)
+					{
 						int tmp = Integer.parseInt(jTextField2.getText());
 						tmp++;
 						jTextField2.setText("" + tmp);
@@ -132,8 +131,10 @@ public class InterfaceGraphique extends javax.swing.JFrame implements TollBarrie
 			{
 				jButton8 = new JButton();
 				jButton8.setText("+");
-				jButton8.addMouseListener(new MouseAdapter() {
-					public void mouseClicked(MouseEvent evt) {
+				jButton8.addMouseListener(new MouseAdapter()
+				{
+					public void mouseClicked(MouseEvent evt)
+					{
 						int tmp = Integer.parseInt(jTextField5.getText());
 						tmp++;
 						jTextField5.setText("" + tmp);
@@ -143,9 +144,11 @@ public class InterfaceGraphique extends javax.swing.JFrame implements TollBarrie
 			{
 				jButton9 = new JButton();
 				jButton9.setText("-");
-				jButton9.addMouseListener(new MouseAdapter() {
-					public void mouseClicked(MouseEvent evt) {
-						
+				jButton9.addMouseListener(new MouseAdapter()
+				{
+					public void mouseClicked(MouseEvent evt)
+					{
+
 						int tmp = Integer.parseInt(jTextField2.getText());
 						if (tmp > 0)
 							tmp--;
@@ -156,9 +159,11 @@ public class InterfaceGraphique extends javax.swing.JFrame implements TollBarrie
 			{
 				jButton10 = new JButton();
 				jButton10.setText("-");
-				jButton10.addMouseListener(new MouseAdapter() {
-					public void mouseClicked(MouseEvent evt) {
-						
+				jButton10.addMouseListener(new MouseAdapter()
+				{
+					public void mouseClicked(MouseEvent evt)
+					{
+
 						int tmp = Integer.parseInt(jTextField5.getText());
 						if (tmp > 0)
 							tmp--;
@@ -184,17 +189,7 @@ public class InterfaceGraphique extends javax.swing.JFrame implements TollBarrie
 				{
 					public void mouseClicked(MouseEvent evt)
 					{
-						TollBarrier barrier = TollBarrier.getInstance();
-						int nbVoiesManuelles = Integer.parseInt(jTextField1.getText());
-						for (int i = 0; i < nbVoiesManuelles; i++)
-							barrier.addBorne("Manuel");
-						int nbVoiesAuto = Integer.parseInt(jTextField1.getText());
-						for (int i = 0; i < nbVoiesManuelles; i++)
-							barrier.addBorne("Auto");
-						int nbVoiesTele = Integer.parseInt(jTextField1.getText());
-						for (int i = 0; i < nbVoiesManuelles; i++)
-							barrier.addBorne("Telepeage");
-						barrier.demarrerSimulation();
+						demarrerSimulation();
 					}
 				});
 			}
@@ -399,28 +394,39 @@ public class InterfaceGraphique extends javax.swing.JFrame implements TollBarrie
 		}
 	}
 
-	private void jButton6MouseClicked(MouseEvent evt)
-	{
+	private void jButton6MouseClicked(MouseEvent evt) {
 		cd = new ConfigDebit(this);
 		cd.setVisible(true);
 		this.setVisible(false);
 	}
 
 	@Override
-	public void updateVehiculesEnAttente()
-	{
-		jTextField4.setText(TollBarrier.getInstance().getNombreVehiculeEnAttente().toString());
+	public void updateVehiculesEnAttente() {
+		jTextField4.setText(TollBarrier.getInstance()
+				.getNombreVehiculeEnAttente().toString());
 	}
 
 	@Override
-	public void updateTempsPassageMoyen()
-	{
-		jTextField3.setText(TollBarrier.getInstance().getTempsPassageMoyen().toString());
+	public void updateTempsPassageMoyen() {
+		jTextField3.setText(TollBarrier.getInstance().getTempsPassageMoyen()
+				.toString());
 	}
-	
+
+	private void demarrerSimulation() {
+		TollBarrier barrier = TollBarrier.getInstance();
+		for (int i = 0; i < Integer.parseInt(jTextField1.getText()); i++)
+			barrier.addBorne("Manuelle");
+		for (int i = 0; i < Integer.parseInt(jTextField2.getText()); i++)
+			barrier.addBorne("Automatique");
+		for (int i = 0; i < Integer.parseInt(jTextField5.getText()); i++)
+			barrier.addBorne("Telepeage");
+		barrier.demarrerSimulation();
+	}
+
 	private void jButton11MouseClicked(MouseEvent evt) {
-		System.out.println("Consulter débit, event="+evt);
-		viewDebitFrame = new ViewDebit(this, TollBarrier.getInstance().getListDebit());
+		System.out.println("Consulter débit, event=" + evt);
+		viewDebitFrame = new ViewDebit(this, TollBarrier.getInstance()
+				.getListDebit());
 		viewDebitFrame.setVisible(true);
 		this.setVisible(false);
 	}

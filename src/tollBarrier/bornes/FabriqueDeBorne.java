@@ -4,10 +4,8 @@ import tollBarrier.bornes.exceptions.NotAValidBorneTypeException;
 
 public class FabriqueDeBorne
 {
-
 	public FabriqueDeBorne()
 	{
-
 	}
 
 	public Borne creerBorne(String type) throws NotAValidBorneTypeException
@@ -23,7 +21,6 @@ public class FabriqueDeBorne
 			return new BoAutomatique();
 		default:
 			throw new NotAValidBorneTypeException();
-
 		}
 	}
 }
