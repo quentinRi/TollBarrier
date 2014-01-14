@@ -18,7 +18,6 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Scanner;
 
 import tollBarrier.bornes.BoManuelle;
 import tollBarrier.bornes.Borne;
@@ -40,6 +39,7 @@ public class TollBarrier
 	private LinkedList<Vehicule> vehicules;
 	private ArrayList<Debit> debits;
 	private List<TollBarrierListener> listeners;
+	private long _tempsDebutSimulation;
 	private static boolean running = false;
 
 	public static boolean isRunning()
@@ -59,6 +59,8 @@ public class TollBarrier
 	{
 		instance = new TollBarrier();
 		running = false;
+		for (TollBarrierListener listener : instance.listeners)
+			listener.updateAll();
 	}
 
 	/**
@@ -163,18 +165,10 @@ public class TollBarrier
 		return vehicules.size();
 	}
 
-	/**
-	 * @return
-	 */
-	public void addIntervenant()
-	{
-		// TODO Auto-generated method stub
-
-	}
-
 	public void demarrerSimulation()
 	{
 		running = true;
+		_tempsDebutSimulation = System.currentTimeMillis() / 1000;
 		for (Borne b : bornes)
 			b.start();
 		for (Debit d : debits)
@@ -184,6 +178,8 @@ public class TollBarrier
 	public void arreterSimulation()
 	{
 		running = false;
+		for (TollBarrierListener listener : listeners)
+			listener.updateTempsPassageMoyen();
 	}
 
 	/**
@@ -206,18 +202,14 @@ public class TollBarrier
 		return bornes.size();
 	}
 
-	/**
-	 * @return
-	 */
-	public Float getDebitEntree()
+	public Integer getDebitEntree()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		int nbVehParMn = 0;
+		for (Debit d : debits)
+			nbVehParMn += d.getNb();
+		return nbVehParMn;
 	}
 
-	/**
-	 * @return
-	 */
 	public Float getTempsPassageMoyenParTypeDeBorne(String borne)
 			throws NotAValidBorneTypeException
 	{
@@ -225,35 +217,8 @@ public class TollBarrier
 		return null;
 	}
 
-	/**
-	 * @return
-	 */
 	public Float getTempsInnocupationBorne(String typeborne)
 			throws NotAValidBorneTypeException
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/**
-	 * @return
-	 */
-	public Integer getNombreIntervenants()
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/**
-	 * 
-	 */
-	public void removeIntervenant()
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	public Integer getNextNumeroBorne()
 	{
 		// TODO Auto-generated method stub
 		return null;

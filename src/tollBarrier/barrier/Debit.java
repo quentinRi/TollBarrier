@@ -67,4 +67,9 @@ public class Debit extends Thread
 		}
 	}
 
+	public int getNb()
+	{
+		return nbParMn;
+	}
+
 }

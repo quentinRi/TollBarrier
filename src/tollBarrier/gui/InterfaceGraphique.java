@@ -702,4 +702,11 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 		barrier.demarrerSimulation();
 	}
 
+	@Override
+	public void updateAll()
+	{
+		updateVehiculesEnAttente();
+		updateTempsPassageMoyen();
+	}
+
 }
