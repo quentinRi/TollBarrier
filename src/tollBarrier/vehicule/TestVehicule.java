@@ -32,6 +32,8 @@ public class TestVehicule {
 	public void tearDown() throws Exception {
 	}
 	
+	
+	
 	//rejoindreFile() et quitterPeage() testés par effet de bord dans testGetTempsPassage()
 	
 	@Test
@@ -88,5 +90,12 @@ public class TestVehicule {
 		assertTrue(s.equals(c.toString()));
 		s = "DeuxRoues n°2";
 		assertTrue(s.equals(d.toString()));
+	}
+	
+	@Test
+	public void testGetMontantPaiment() {
+		assertTrue(v.getMontantPaiment() <= 40 && v.getMontantPaiment() >= 5);
+		assertTrue(d.getMontantPaiment() <= 40 && v.getMontantPaiment() >= 5);
+		assertTrue(c.getMontantPaiment() <= 60 && v.getMontantPaiment() >= 10);
 	}
 }

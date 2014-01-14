@@ -34,12 +34,10 @@ public class TestFabriqueDeVehicule {
    
 	@Test
 	public void testCreerVehicule() {
-
-
 		
 		Vehicule v1 = f.creerVehicule("Camion", s1);
-		Vehicule v2 = f.creerVehicule("DeuxRoues", s1);
-		Vehicule v3 = f.creerVehicule("Voiture", s1);
+		Vehicule v2 = f.creerVehicule("d", s1);
+		Vehicule v3 = f.creerVehicule("Voie", s1);
 
 		assertTrue(v1 instanceof Camion); 
 		assertTrue(v2 instanceof DeuxRoues); 
