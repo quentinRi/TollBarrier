@@ -4,5 +4,7 @@ public interface TollBarrierListener
 {
 	void updateVehiculesEnAttente();
 	void updateTempsPassageMoyen();
+	
+	void updateAll();
 
 }

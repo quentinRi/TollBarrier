@@ -423,6 +423,13 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 		barrier.demarrerSimulation();
 	}
 
+	@Override
+	public void updateAll()
+	{
+		updateVehiculesEnAttente();
+		updateTempsPassageMoyen();
+	}
+
 	private void jButton11MouseClicked(MouseEvent evt) {
 		System.out.println("Consulter débit, event=" + evt);
 		viewDebitFrame = new ViewDebit(this, TollBarrier.getInstance()
