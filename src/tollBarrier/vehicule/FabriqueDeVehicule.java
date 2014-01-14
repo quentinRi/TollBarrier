@@ -30,6 +30,7 @@ public class FabriqueDeVehicule
 		case 'c':
 			return new Camion(mdp);
 		case 'd':
+		case 'm': // moto
 			return new DeuxRoues(mdp);
 		case 'v':
 			return new Voiture(mdp);

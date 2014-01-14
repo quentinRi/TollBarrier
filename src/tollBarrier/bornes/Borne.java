@@ -125,7 +125,6 @@ public abstract class Borne extends Thread
 
 	public void run()
 	{
-		int n = 100;
 		while (TollBarrier.isRunning() && !stop)
 		{
 			try
@@ -136,10 +135,9 @@ public abstract class Borne extends Thread
 				try
 				{
 					if (_accFlag)
-						n = 10;
+						Thread.sleep(10);
 					else
-						n = 100;
-					Thread.sleep(n);
+						Thread.sleep(100);
 				} catch (InterruptedException e)
 				{
 					e.printStackTrace();
@@ -159,7 +157,6 @@ public abstract class Borne extends Thread
 			{
 				e.printStackTrace();
 			}
-
 		}
 	}
 
