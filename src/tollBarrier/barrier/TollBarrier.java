@@ -69,15 +69,13 @@ public class TollBarrier
 	public void addDebit(String typeVehicule, Integer nbParMinute,
 			Collection<String> typePaiement)
 	{
-		for (String s : typePaiement)
-			debits.add(new Debit(typeVehicule, nbParMinute, s, vehicules, this));
+			debits.add(new Debit(typeVehicule, nbParMinute, typePaiement, vehicules, this));
 	}
 
 	public void addDebit(String typeVehicule, Integer nbParMinute,
 			HashSet<MoyenDePaiment> mdp)
 	{
-		for (MoyenDePaiment m : mdp)
-			debits.add(new Debit(typeVehicule, nbParMinute, m.name(),
+			debits.add(new Debit(typeVehicule, nbParMinute, mdp,
 					vehicules, this));
 	}
 	
