@@ -200,9 +200,11 @@ public class TollBarrier
 		running = true;
 		_tempsDebutSimulation = System.currentTimeMillis() / 1000;
 		for (Borne b : bornes)
-			b.start();
+			if (!b.isAlive())
+				b.start();
 		for (Debit d : debits)
-			d.start();
+			if (!d.isAlive())
+				d.start();
 		for (TollBarrierListener listener : listeners)
 			listener.startRunning();
 	}
@@ -243,10 +245,11 @@ public class TollBarrier
 		return bornes.size();
 	}
 
-	public LinkedList<Borne> getBornes () {
+	public LinkedList<Borne> getBornes()
+	{
 		return bornes;
 	}
-	
+
 	public Integer getDebitEntree()
 	{
 		int nbVehParMn = 0;
