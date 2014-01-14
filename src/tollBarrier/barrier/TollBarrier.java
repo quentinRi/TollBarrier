@@ -157,7 +157,7 @@ public class TollBarrier
 	public synchronized void envoyerRapport()
 	{
 		for (TollBarrierListener listener : listeners)
-			listener.updateTempsPassageMoyen();
+			listener.updateAll();
 	}
 
 	public Double getTempsPassageMoyen()
