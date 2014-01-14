@@ -20,4 +20,9 @@ public class BoAutomatique extends Borne
 	{
 		return "Automatique";
 	}
+	
+protected int additionalTime(){
+		
+		return 1000;
+	}
 }
