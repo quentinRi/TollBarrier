@@ -431,11 +431,18 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 	}
 
 	private void jButton11MouseClicked(MouseEvent evt) {
-		System.out.println("Consulter débit, event=" + evt);
+		System.out.println("Consulter dï¿½bit, event=" + evt);
 		viewDebitFrame = new ViewDebit(this, TollBarrier.getInstance()
 				.getListDebit());
 		viewDebitFrame.setVisible(true);
 		this.setVisible(false);
+	}
+
+	@Override
+	public void updateArgentEncaisse()
+	{
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -8,12 +8,14 @@ import tollBarrier.vehicule.exceptions.NotGoneVehiculeException;
 public abstract class Vehicule
 {
 
-	private Set<MoyenDePaiment> _mdp;
-	private long _hDebut;
-	private long _hFin;
-	private static int instanceNumber = 0;
-	private int num;
+	private Set<MoyenDePaiment>	_mdp;
+	private long				_hDebut;
+	private long				_hFin;
+	private static int		instanceNumber	= 0;
+	private int				num;
 	private long _hArriveBorne;
+	protected int				_amount;
+
 
 	public Vehicule(Set<MoyenDePaiment> mdp)
 	{
@@ -21,6 +23,7 @@ public abstract class Vehicule
 		_hArriveBorne = 0;
 		_hFin = 0;
 		_mdp = mdp;
+		_amount = 0;
 		num = instanceNumber;
 		instanceNumber++;
 	}
@@ -41,6 +44,10 @@ public abstract class Vehicule
 	}
 
 	public abstract long getTimeMuliplier();
+	
+	public final int getMontantPaiment() {
+		return _amount;
+	}
 
 	public String toString()
 	{
