@@ -10,12 +10,7 @@ public class BoTelePeage extends Borne
 	{
 		super();
 		_paiement = new HashSet<MoyenDePaiment>();
-		_paiement.add(MoyenDePaiment.TELEPEAGE);	
-	}
-
-	@Override
-	protected int additionalTime() {
-		return 0;
+		_paiement.add(MoyenDePaiment.TELEPEAGE);
 	}
 
 	@Override
@@ -24,4 +19,29 @@ public class BoTelePeage extends Borne
 		return "Telepeage";
 	}
 
+	/*
+	 * public void envoyerRapport(){
+	 * 
+	 * }
+	 */
+	/*
+	 * public void paiement(){
+	 * 
+	 * try { Thread.sleep(4000); } catch (InterruptedException e) {
+	 * System.err.println(e); } }
+	 * 
+	 * public void alarme(){
+	 * 
+	 * try { Thread.sleep(120000); } catch (InterruptedException e){
+	 * System.err.println(e); } }
+	 * 
+	 * @Override public void run() {
+	 * 
+	 * // @todo Lire le moyen de paiment de la voiture paiement();
+	 * 
+	 * envoyerRapport(); leverBarriere();
+	 * 
+	 * _vehicule.quitterPeage(); long tmp = _vehicule.getTempsPassage();
+	 * calculerTmpMoyen(tmp); _vehicule = null; }
+	 */
 }

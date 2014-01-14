@@ -21,8 +21,4 @@ public class BorneTest {
 		fail("Not yet implemented");
 	}
 
-	public void testleverBarriere(){
-		
-	}
 }
-
