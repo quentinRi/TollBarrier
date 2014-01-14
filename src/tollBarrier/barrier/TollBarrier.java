@@ -133,43 +133,27 @@ public class TollBarrier
 		}
 	}
 
-	public void envoyerRapport()
+	public synchronized void envoyerRapport()
 	{
 		for (TollBarrierListener listener : listeners)
 			listener.updateTempsPassageMoyen();
 	}
 
-	public Float getTempsPassageMoyen()
+	public Double getTempsPassageMoyen()
 	{
-		float sum = 0;
-		int nbBorne = 0;
+		double tempsTotal = 0;
+		double nbVeh = 0;
 		for (int i = 0; i < getNombreBornes(); i++)
 		{
-			double a = bornes.get(i).getTempsPassageMoyen();
-			if (a > 0)
+			double nbVehAtBorne = bornes.get(i).getNbVeh();
+			if (nbVehAtBorne > 0)
 			{
-				sum += a;
-				nbBorne++;
+				tempsTotal += bornes.get(i).getTime();
+				nbVeh += nbVehAtBorne;
 			}
 		}
-		return sum / nbBorne;
+		return tempsTotal / nbVeh;
 	}
-
-	/*
-	 * public Float getTempsPassageMoyen() { int nbBornes = getNombreBornes();
-	 * float sum = 0;
-	 * 
-	 * for (int i = 0; i < nbBornes; i++) { sum +=
-	 * getTempsPassageMoyenParTypeDeBorne(i); } return sum / nbBornes; }
-	 */
-
-	/**
-	 * @return
-	 */
-	/*
-	 * public Float getTempsPassageMoyenParBorne(int numBorne) { Borne borne =
-	 * bornes.get(numBorne); return borne.getTempsPassage(); TODO }
-	 */
 
 	/**
 	 * @return
@@ -207,8 +191,11 @@ public class TollBarrier
 	 */
 	public Integer getNombreBornes(String typeBorne)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		int nb = 0;
+		for (Borne b : bornes)
+			if (b.getType().toLowerCase().charAt(0) == typeBorne.toLowerCase().charAt(0))
+				nb++;
+		return nb;
 	}
 
 	/**
@@ -272,7 +259,7 @@ public class TollBarrier
 		return null;
 	}
 
-	public static void main(String[] args)
+	/*public static void main(String[] args)
 	{
 		TollBarrier barriere = getInstance();
 
@@ -316,7 +303,8 @@ public class TollBarrier
 		for (Debit d : barriere.debits)
 			d.start();
 	}
-
+*/
+	
 	public void add(Vehicule v)
 	{
 		synchronized (vehicules)

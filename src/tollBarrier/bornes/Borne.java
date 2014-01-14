@@ -27,7 +27,7 @@ public abstract class Borne extends Thread
 	protected boolean _vehAmont = false;
 	protected long _nbVeh;
 	protected Vehicule _vehicule;
-	private long time;
+	private long _time;
 	private int num;
 	private static int nbInstance = 0;
 
@@ -144,27 +144,39 @@ public abstract class Borne extends Thread
 	public void envoyerRapport(long time) throws NotGoneVehiculeException
 	{
 		_nbVeh++;
-		this.time += time;
+		_time += time;
 		System.out.println(time + " " + _nbVeh);
 		TollBarrier.getInstance().envoyerRapport();
 	}
 
 	public String toString()
 	{
-		return "" + num;
+		return "" + num + " de type " + getType();
 	}
 
 	public double getTempsPassageMoyen()
 	{
-		if (time == 0)
-			return 0;
-		return time / _nbVeh;
+		if (_time == 0)
+			return -1;
+		return _time / _nbVeh;
+	}
+	
+	public long getNbVeh()
+	{
+		return _nbVeh;
 	}
 
 	public Set<MoyenDePaiment> getMoyenDePaiment()
 	{
 
 		return _paiement;
+	}
+
+	public abstract String getType();
+
+	public double getTime()
+	{
+		return _time;
 	}
 
 }
