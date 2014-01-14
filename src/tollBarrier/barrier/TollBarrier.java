@@ -16,6 +16,7 @@ package tollBarrier.barrier;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -61,17 +62,17 @@ public class TollBarrier
 	public void addDebit(String typeVehicule, Integer nbParMinute,
 			Collection<String> typePaiement)
 	{
-			debits.add(new Debit(typeVehicule, nbParMinute, typePaiement, vehicules, this));
+		debits.add(new Debit(typeVehicule, nbParMinute, typePaiement,
+				vehicules, this));
 	}
 
 	public void addDebit(String typeVehicule, Integer nbParMinute,
 			HashSet<MoyenDePaiment> mdp)
 	{
-			debits.add(new Debit(typeVehicule, nbParMinute, mdp,
-					vehicules, this));
+		debits.add(new Debit(typeVehicule, nbParMinute, mdp, vehicules, this));
 	}
-	
-	public List<Debit> getListDebit () 
+
+	public List<Debit> getListDebit()
 	{
 		return debits;
 	}
@@ -87,10 +88,32 @@ public class TollBarrier
 	{
 		try
 		{
-			bornes.add(new FabriqueDeBorne().creerBorne(typeborne));
+			Borne b = new FabriqueDeBorne().creerBorne(typeborne);
+			bornes.add(b);
+			for (TollBarrierListener listener : listeners)
+				listener.updateBornes();
+			if (running)
+				b.start();
 		} catch (NotAValidBorneTypeException e)
 		{
 			e.printStackTrace();
+		}
+	}
+
+	public void rmBorne(String string)
+	{
+		Iterator<Borne> iterator = bornes.iterator();
+		while (iterator.hasNext())
+		{
+			Borne b = iterator.next();
+			if (b.getType().toLowerCase().charAt(0) == string.toLowerCase()
+					.charAt(0))
+			{
+				iterator.remove();
+				for (TollBarrierListener listener : listeners)
+					listener.updateBornes();
+				return;
+			}
 		}
 	}
 
@@ -151,11 +174,11 @@ public class TollBarrier
 		}
 		return tempsTotal / nbVeh;
 	}
-	
+
 	public long getArgentEncaisse()
 	{
 		long argentTotal = 0;
-		
+
 		for (int i = 0; i < getNombreBornes(); i++)
 		{
 			argentTotal += bornes.get(i).getArgentEncaisse();
@@ -182,7 +205,7 @@ public class TollBarrier
 		for (TollBarrierListener listener : listeners)
 			listener.startRunning();
 	}
-	
+
 	public static void reset()
 	{
 		instance = new TollBarrier();
@@ -205,7 +228,8 @@ public class TollBarrier
 	{
 		int nb = 0;
 		for (Borne b : bornes)
-			if (b.getType().toLowerCase().charAt(0) == typeBorne.toLowerCase().charAt(0))
+			if (b.getType().toLowerCase().charAt(0) == typeBorne.toLowerCase()
+					.charAt(0))
 				nb++;
 		return nb;
 	}
@@ -240,52 +264,39 @@ public class TollBarrier
 		return null;
 	}
 
-	/*public static void main(String[] args)
-	{
-		TollBarrier barriere = getInstance();
+	/*
+	 * public static void main(String[] args) { TollBarrier barriere =
+	 * getInstance();
+	 * 
+	 * Scanner sc = new Scanner(System.in);
+	 * 
+	 * System.out.println("Combien de débits ?"); int nbDebits =
+	 * Integer.parseInt(sc.nextLine()); for (int i = 0; i < nbDebits; i++) {
+	 * System.out.println("Débit " + i); System.out
+	 * .println("Quel type de véhicules ((V)oiture,(C)amion,(D)eux-roues) ?");
+	 * String typeV = sc.nextLine();
+	 * System.out.println("Combien de véhicules par minute ?"); int nbV =
+	 * Integer.parseInt(sc.nextLine()); System.out
+	 * .println("Quel Moyen de paiment ((C)B,(A)bonnement,(L)iquide,(T)elepeage) ?"
+	 * ); String typeP = sc.nextLine(); HashSet<String> typesP = new
+	 * HashSet<String>(); typesP.add(typeP); barriere.addDebit(typeV, nbV,
+	 * typesP); }
+	 * 
+	 * System.out.println("Combien de bornes ?"); int nbBornes =
+	 * Integer.parseInt(sc.nextLine()); for (int i = 0; i < nbBornes; i++) {
+	 * System.out.println("Borne " + i); System.out
+	 * .println("Quel type de borne (T)elepeage, (A)utomatique, (M)anuelle ?");
+	 * String typeB = sc.nextLine();
+	 * 
+	 * barriere.addBorne(typeB); }
+	 * 
+	 * sc.close();
+	 * 
+	 * for (Borne b : barriere.bornes) b.start();
+	 * 
+	 * for (Debit d : barriere.debits) d.start(); }
+	 */
 
-		Scanner sc = new Scanner(System.in);
-
-		System.out.println("Combien de débits ?");
-		int nbDebits = Integer.parseInt(sc.nextLine());
-		for (int i = 0; i < nbDebits; i++)
-		{
-			System.out.println("Débit " + i);
-			System.out
-					.println("Quel type de véhicules ((V)oiture,(C)amion,(D)eux-roues) ?");
-			String typeV = sc.nextLine();
-			System.out.println("Combien de véhicules par minute ?");
-			int nbV = Integer.parseInt(sc.nextLine());
-			System.out
-					.println("Quel Moyen de paiment ((C)B,(A)bonnement,(L)iquide,(T)elepeage) ?");
-			String typeP = sc.nextLine();
-			HashSet<String> typesP = new HashSet<String>();
-			typesP.add(typeP);
-			barriere.addDebit(typeV, nbV, typesP);
-		}
-
-		System.out.println("Combien de bornes ?");
-		int nbBornes = Integer.parseInt(sc.nextLine());
-		for (int i = 0; i < nbBornes; i++)
-		{
-			System.out.println("Borne " + i);
-			System.out
-					.println("Quel type de borne (T)elepeage, (A)utomatique, (M)anuelle ?");
-			String typeB = sc.nextLine();
-
-			barriere.addBorne(typeB);
-		}
-
-		sc.close();
-
-		for (Borne b : barriere.bornes)
-			b.start();
-
-		for (Debit d : barriere.debits)
-			d.start();
-	}
-*/
-	
 	public void add(Vehicule v)
 	{
 		synchronized (vehicules)
