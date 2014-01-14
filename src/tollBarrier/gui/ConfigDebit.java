@@ -1,5 +1,7 @@
 package tollBarrier.gui;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.HashSet;
@@ -72,11 +74,12 @@ public class ConfigDebit extends javax.swing.JFrame
 			{
 				jButton2 = new JButton();
 				jButton2.setText("Cancel");
-				jButton2.addMouseListener(new MouseAdapter()
+				jButton2.addActionListener(new ActionListener()
 				{
-					public void mouseClicked(MouseEvent evt)
+					@Override
+					public void actionPerformed(ActionEvent evt)
 					{
-						jButton2MouseClicked(evt);
+						jButton2Evt();
 					}
 				});
 			}
@@ -257,7 +260,7 @@ public class ConfigDebit extends javax.swing.JFrame
 		this.setVisible(false);
 	}
 
-	private void jButton2MouseClicked(MouseEvent evt)
+	private void jButton2Evt()
 	{
 		parent.setVisible(true);
 		this.setVisible(false);

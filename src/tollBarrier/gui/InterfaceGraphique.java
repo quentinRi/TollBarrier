@@ -1,9 +1,8 @@
 
 package tollBarrier.gui;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.Timer;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
@@ -54,7 +53,6 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 	private JEditorPane jEditorPane3;
 	private JButton jButton6;
 
-	private Timer timer;
 	private ConfigDebit cd;
 	private ViewDebit viewDebitFrame;
 
@@ -92,9 +90,12 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 			{
 				jButton11 = new JButton();
 				jButton11.setText("Consulter Débits");
-				jButton11.addMouseListener(new MouseAdapter() {
-					public void mouseClicked(MouseEvent evt) {
-						jButton11MouseClicked(evt);
+				jButton11.addActionListener(new ActionListener()
+				{
+					@Override
+					public void actionPerformed(ActionEvent evt)
+					{
+						jButton11MouseClicked();
 					}
 				});
 			}
@@ -119,9 +120,10 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 			{
 				jButton7 = new JButton();
 				jButton7.setText("+");
-				jButton7.addMouseListener(new MouseAdapter()
+				jButton7.addActionListener(new ActionListener()
 				{
-					public void mouseClicked(MouseEvent evt)
+					@Override
+					public void actionPerformed(ActionEvent evt)
 					{
 						int tmp = Integer.parseInt(jTextField2.getText());
 						tmp++;
@@ -132,9 +134,10 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 			{
 				jButton8 = new JButton();
 				jButton8.setText("+");
-				jButton8.addMouseListener(new MouseAdapter()
+				jButton8.addActionListener(new ActionListener()
 				{
-					public void mouseClicked(MouseEvent evt)
+					@Override
+					public void actionPerformed(ActionEvent evt)
 					{
 						int tmp = Integer.parseInt(jTextField5.getText());
 						tmp++;
@@ -145,11 +148,11 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 			{
 				jButton9 = new JButton();
 				jButton9.setText("-");
-				jButton9.addMouseListener(new MouseAdapter()
+				jButton9.addActionListener(new ActionListener()
 				{
-					public void mouseClicked(MouseEvent evt)
+					@Override
+					public void actionPerformed(ActionEvent evt)
 					{
-
 						int tmp = Integer.parseInt(jTextField2.getText());
 						if (tmp > 0)
 							tmp--;
@@ -160,11 +163,11 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 			{
 				jButton10 = new JButton();
 				jButton10.setText("-");
-				jButton10.addMouseListener(new MouseAdapter()
+				jButton10.addActionListener(new ActionListener()
 				{
-					public void mouseClicked(MouseEvent evt)
+					@Override
+					public void actionPerformed(ActionEvent evt)
 					{
-
 						int tmp = Integer.parseInt(jTextField5.getText());
 						if (tmp > 0)
 							tmp--;
@@ -175,20 +178,22 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 			{
 				jButton6 = new JButton();
 				jButton6.setText("Ajouter Débit");
-				jButton6.addMouseListener(new MouseAdapter()
+				jButton6.addActionListener(new ActionListener()
 				{
-					public void mouseClicked(MouseEvent evt)
+					@Override
+					public void actionPerformed(ActionEvent evt)
 					{
-						jButton6MouseClicked(evt);
+						jButton6MouseClicked();
 					}
 				});
 			}
 			{
 				jButton3 = new JButton();
 				jButton3.setText("Démarrer simulation");
-				jButton3.addMouseListener(new MouseAdapter()
+				jButton3.addActionListener(new ActionListener()
 				{
-					public void mouseClicked(MouseEvent evt)
+					@Override
+					public void actionPerformed(ActionEvent evt)
 					{
 						demarrerSimulation();
 					}
@@ -197,9 +202,10 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 			{
 				jButton4 = new JButton();
 				jButton4.setText("Arrêter simulation");
-				jButton4.addMouseListener(new MouseAdapter()
+				jButton4.addActionListener(new ActionListener()
 				{
-					public void mouseClicked(MouseEvent evt)
+					@Override
+					public void actionPerformed(ActionEvent evt)
 					{
 						TollBarrier.getInstance().arreterSimulation();
 					}
@@ -208,9 +214,10 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 			{
 				jButton5 = new JButton();
 				jButton5.setText("Réinitialiser");
-				jButton5.addMouseListener(new MouseAdapter()
+				jButton5.addActionListener(new ActionListener()
 				{
-					public void mouseClicked(MouseEvent evt)
+					@Override
+					public void actionPerformed(ActionEvent evt)
 					{
 						TollBarrier.reset();
 					}
@@ -236,9 +243,10 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 			{
 				jButton1 = new JButton();
 				jButton1.setText("+");
-				jButton1.addMouseListener(new MouseAdapter()
+				jButton1.addActionListener(new ActionListener()
 				{
-					public void mouseClicked(MouseEvent evt)
+					@Override
+					public void actionPerformed(ActionEvent evt)
 					{
 						int tmp = Integer.parseInt(jTextField1.getText());
 						tmp++;
@@ -249,11 +257,11 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 			{
 				jButton2 = new JButton();
 				jButton2.setText("-");
-				jButton2.addMouseListener(new MouseAdapter()
+				jButton2.addActionListener(new ActionListener()
 				{
-					public void mouseClicked(MouseEvent evt)
+					@Override
+					public void actionPerformed(ActionEvent evt)
 					{
-
 						int tmp = Integer.parseInt(jTextField1.getText());
 						if (tmp > 0)
 							tmp--;
@@ -391,7 +399,7 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 		}
 	}
 
-	private void jButton6MouseClicked(MouseEvent evt) {
+	private void jButton6MouseClicked() {
 		cd = new ConfigDebit(this);
 		cd.setVisible(true);
 		this.setVisible(false);
@@ -428,7 +436,7 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 		updateArgentEncaisse();
 	}
 
-	private void jButton11MouseClicked(MouseEvent evt) {
+	private void jButton11MouseClicked() {
 		viewDebitFrame = new ViewDebit(this, TollBarrier.getInstance()
 				.getListDebit());
 		viewDebitFrame.setVisible(true);
