@@ -139,20 +139,20 @@ public class TollBarrier
 			listener.updateTempsPassageMoyen();
 	}
 
-	public Float getTempsPassageMoyen()
+	public Double getTempsPassageMoyen()
 	{
-		float sum = 0;
-		int nbBorne = 0;
+		double tempsTotal = 0;
+		double nbVeh = 0;
 		for (int i = 0; i < getNombreBornes(); i++)
 		{
-			double a = bornes.get(i).getTempsPassageMoyen();
-			if (a > 0)
+			double nbVehAtBorne = bornes.get(i).getNbVeh();
+			if (nbVehAtBorne > 0)
 			{
-				sum += a;
-				nbBorne++;
+				tempsTotal += bornes.get(i).getTime();
+				nbVeh += nbVehAtBorne;
 			}
 		}
-		return sum / nbBorne;
+		return tempsTotal / nbVeh;
 	}
 
 	/**
