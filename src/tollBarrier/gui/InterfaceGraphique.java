@@ -51,6 +51,10 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 	private JButton jButton7;
 	private JTextField jTextField5;
 	private JTextField jTextField6;
+	private JTextField jTextField8;
+	private JEditorPane jEditorPane9;
+	private JTextField jTextField7;
+	private JEditorPane jEditorPane8;
 	private JEditorPane jEditorPane7;
 	private JRadioButton jRadioButton1;
 	private JButton jButton11;
@@ -109,6 +113,24 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 				});
 			}
 			{
+				jEditorPane9 = new JEditorPane();
+				jEditorPane9.setText("Argent encaissé par borne en moyenne");
+			}
+			{
+				jTextField8 = new JTextField();
+				jTextField8.setText("0");
+				jTextField8.setEditable(false);
+			}
+			{
+				jEditorPane8 = new JEditorPane();
+				jEditorPane8.setText("Argent total encaissé");
+			}
+			{
+				jTextField7 = new JTextField();
+				jTextField7.setText("0");
+				jTextField7.setEditable(false);
+			}
+			{
 				jEditorPane7 = new JEditorPane();
 				jEditorPane7.setText("Nombre alarmes déclenchées");
 			}
@@ -116,13 +138,6 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 				jTextField6 = new JTextField();
 				jTextField6.setEditable(false);
 				jTextField6.setText("0");
-				jTextField6.addActionListener(new ActionListener()
-				{
-					public void actionPerformed(ActionEvent evt)
-					{
-						jTextField6ActionPerformed(evt);
-					}
-				});
 			}
 			{
 				jButton11 = new JButton();
@@ -305,483 +320,142 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 				jTextField1.setText("0");
 				jTextField1.setEditable(false);
 			}
-			thisLayout
-					.setVerticalGroup(thisLayout
-							.createSequentialGroup()
-							.addContainerGap()
-							.addGroup(
-									thisLayout
-											.createParallelGroup()
-											.addGroup(
-													GroupLayout.Alignment.LEADING,
-													thisLayout
-															.createParallelGroup(
-																	GroupLayout.Alignment.BASELINE)
-															.addComponent(
-																	jButton6,
-																	GroupLayout.Alignment.BASELINE,
-																	GroupLayout.PREFERRED_SIZE,
-																	23,
-																	GroupLayout.PREFERRED_SIZE)
-															.addComponent(
-																	jButton11,
-																	GroupLayout.Alignment.BASELINE,
-																	GroupLayout.PREFERRED_SIZE,
-																	GroupLayout.PREFERRED_SIZE,
-																	GroupLayout.PREFERRED_SIZE))
-											.addComponent(
-													jEditorPane1,
-													GroupLayout.Alignment.LEADING,
-													GroupLayout.PREFERRED_SIZE,
-													20,
-													GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(
-									LayoutStyle.ComponentPlacement.UNRELATED)
-							.addGroup(
-									thisLayout
-											.createParallelGroup()
-											.addGroup(
-													GroupLayout.Alignment.LEADING,
-													thisLayout
-															.createParallelGroup(
-																	GroupLayout.Alignment.BASELINE)
-															.addComponent(
-																	jTextField1,
-																	GroupLayout.Alignment.BASELINE,
-																	GroupLayout.PREFERRED_SIZE,
-																	GroupLayout.PREFERRED_SIZE,
-																	GroupLayout.PREFERRED_SIZE)
-															.addComponent(
-																	jButton1,
-																	GroupLayout.Alignment.BASELINE,
-																	GroupLayout.PREFERRED_SIZE,
-																	GroupLayout.PREFERRED_SIZE,
-																	GroupLayout.PREFERRED_SIZE)
-															.addComponent(
-																	jButton2,
-																	GroupLayout.Alignment.BASELINE,
-																	GroupLayout.PREFERRED_SIZE,
-																	GroupLayout.PREFERRED_SIZE,
-																	GroupLayout.PREFERRED_SIZE))
-											.addComponent(
-													jEditorPane2,
-													GroupLayout.Alignment.LEADING,
-													GroupLayout.PREFERRED_SIZE,
-													28,
-													GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(
-									LayoutStyle.ComponentPlacement.UNRELATED)
-							.addGroup(
-									thisLayout
-											.createParallelGroup()
-											.addGroup(
-													GroupLayout.Alignment.LEADING,
-													thisLayout
-															.createParallelGroup(
-																	GroupLayout.Alignment.BASELINE)
-															.addComponent(
-																	jButton9,
-																	GroupLayout.Alignment.BASELINE,
-																	GroupLayout.PREFERRED_SIZE,
-																	GroupLayout.PREFERRED_SIZE,
-																	GroupLayout.PREFERRED_SIZE)
-															.addComponent(
-																	jButton7,
-																	GroupLayout.Alignment.BASELINE,
-																	GroupLayout.PREFERRED_SIZE,
-																	GroupLayout.PREFERRED_SIZE,
-																	GroupLayout.PREFERRED_SIZE)
-															.addComponent(
-																	jTextField2,
-																	GroupLayout.Alignment.BASELINE,
-																	GroupLayout.PREFERRED_SIZE,
-																	GroupLayout.PREFERRED_SIZE,
-																	GroupLayout.PREFERRED_SIZE))
-											.addComponent(
-													jEditorPane3,
-													GroupLayout.Alignment.LEADING,
-													GroupLayout.PREFERRED_SIZE,
-													28,
-													GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(
-									LayoutStyle.ComponentPlacement.UNRELATED)
-							.addGroup(
-									thisLayout
-											.createParallelGroup()
-											.addGroup(
-													GroupLayout.Alignment.LEADING,
-													thisLayout
-															.createParallelGroup(
-																	GroupLayout.Alignment.BASELINE)
-															.addComponent(
-																	jButton10,
-																	GroupLayout.Alignment.BASELINE,
-																	GroupLayout.PREFERRED_SIZE,
-																	GroupLayout.PREFERRED_SIZE,
-																	GroupLayout.PREFERRED_SIZE)
-															.addComponent(
-																	jButton8,
-																	GroupLayout.Alignment.BASELINE,
-																	GroupLayout.PREFERRED_SIZE,
-																	GroupLayout.PREFERRED_SIZE,
-																	GroupLayout.PREFERRED_SIZE)
-															.addComponent(
-																	jTextField5,
-																	GroupLayout.Alignment.BASELINE,
-																	GroupLayout.PREFERRED_SIZE,
-																	GroupLayout.PREFERRED_SIZE,
-																	GroupLayout.PREFERRED_SIZE))
-											.addComponent(
-													jEditorPane6,
-													GroupLayout.Alignment.LEADING,
-													GroupLayout.PREFERRED_SIZE,
-													28,
-													GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(
-									LayoutStyle.ComponentPlacement.UNRELATED)
-							.addGroup(
-									thisLayout
-											.createParallelGroup(
-													GroupLayout.Alignment.BASELINE)
-											.addComponent(
-													jButton5,
-													GroupLayout.Alignment.BASELINE,
-													GroupLayout.PREFERRED_SIZE,
-													GroupLayout.PREFERRED_SIZE,
-													GroupLayout.PREFERRED_SIZE)
-											.addComponent(
-													jButton3,
-													GroupLayout.Alignment.BASELINE,
-													GroupLayout.PREFERRED_SIZE,
-													GroupLayout.PREFERRED_SIZE,
-													GroupLayout.PREFERRED_SIZE)
-											.addComponent(
-													jButton4,
-													GroupLayout.Alignment.BASELINE,
-													GroupLayout.PREFERRED_SIZE,
-													GroupLayout.PREFERRED_SIZE,
-													GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(
-									LayoutStyle.ComponentPlacement.UNRELATED)
-							.addComponent(jRadioButton1,
-									GroupLayout.PREFERRED_SIZE,
-									GroupLayout.PREFERRED_SIZE,
-									GroupLayout.PREFERRED_SIZE)
-							.addGap(31)
-							.addGroup(
-									thisLayout
-											.createParallelGroup()
-											.addGroup(
-													GroupLayout.Alignment.LEADING,
-													thisLayout
-															.createSequentialGroup()
-															.addComponent(
-																	jTextField3,
-																	GroupLayout.PREFERRED_SIZE,
-																	GroupLayout.PREFERRED_SIZE,
-																	GroupLayout.PREFERRED_SIZE)
-															.addGap(10))
-											.addComponent(
-													jEditorPane4,
-													GroupLayout.Alignment.LEADING,
-													GroupLayout.PREFERRED_SIZE,
-													32,
-													GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(
-									LayoutStyle.ComponentPlacement.UNRELATED)
-							.addGroup(
-									thisLayout
-											.createParallelGroup()
-											.addGroup(
-													GroupLayout.Alignment.LEADING,
-													thisLayout
-															.createSequentialGroup()
-															.addComponent(
-																	jTextField4,
-																	GroupLayout.PREFERRED_SIZE,
-																	GroupLayout.PREFERRED_SIZE,
-																	GroupLayout.PREFERRED_SIZE)
-															.addGap(6))
-											.addComponent(
-													jEditorPane5,
-													GroupLayout.Alignment.LEADING,
-													GroupLayout.PREFERRED_SIZE,
-													28,
-													GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(
-									LayoutStyle.ComponentPlacement.UNRELATED)
-							.addGroup(
-									thisLayout
-											.createParallelGroup()
-											.addGroup(
-													GroupLayout.Alignment.LEADING,
-													thisLayout
-															.createSequentialGroup()
-															.addComponent(
-																	jTextField6,
-																	GroupLayout.PREFERRED_SIZE,
-																	GroupLayout.PREFERRED_SIZE,
-																	GroupLayout.PREFERRED_SIZE)
-															.addGap(0,
-																	10,
-																	Short.MAX_VALUE))
-											.addGroup(
-													thisLayout
-															.createSequentialGroup()
-															.addComponent(
-																	jEditorPane7,
-																	GroupLayout.PREFERRED_SIZE,
-																	32,
-																	GroupLayout.PREFERRED_SIZE)
-															.addGap(0,
-																	0,
-																	Short.MAX_VALUE)))
-							.addContainerGap(133, 133));
-			thisLayout
-					.setHorizontalGroup(thisLayout
-							.createSequentialGroup()
-							.addContainerGap()
-							.addGroup(
-									thisLayout
-											.createParallelGroup()
-											.addGroup(
-													thisLayout
-															.createSequentialGroup()
-															.addGroup(
-																	thisLayout
-																			.createParallelGroup()
-																			.addComponent(
-																					jEditorPane7,
-																					GroupLayout.Alignment.LEADING,
-																					GroupLayout.PREFERRED_SIZE,
-																					268,
-																					GroupLayout.PREFERRED_SIZE)
-																			.addComponent(
-																					jEditorPane5,
-																					GroupLayout.Alignment.LEADING,
-																					GroupLayout.PREFERRED_SIZE,
-																					268,
-																					GroupLayout.PREFERRED_SIZE)
-																			.addComponent(
-																					jEditorPane4,
-																					GroupLayout.Alignment.LEADING,
-																					GroupLayout.PREFERRED_SIZE,
-																					268,
-																					GroupLayout.PREFERRED_SIZE))
-															.addPreferredGap(
-																	LayoutStyle.ComponentPlacement.UNRELATED)
-															.addGroup(
-																	thisLayout
-																			.createParallelGroup()
-																			.addComponent(
-																					jTextField6,
-																					GroupLayout.Alignment.LEADING,
-																					GroupLayout.PREFERRED_SIZE,
-																					62,
-																					GroupLayout.PREFERRED_SIZE)
-																			.addComponent(
-																					jTextField4,
-																					GroupLayout.Alignment.LEADING,
-																					GroupLayout.PREFERRED_SIZE,
-																					62,
-																					GroupLayout.PREFERRED_SIZE)
-																			.addComponent(
-																					jTextField3,
-																					GroupLayout.Alignment.LEADING,
-																					GroupLayout.PREFERRED_SIZE,
-																					62,
-																					GroupLayout.PREFERRED_SIZE))
-															.addGap(33))
-											.addGroup(
-													thisLayout
-															.createSequentialGroup()
-															.addGroup(
-																	thisLayout
-																			.createParallelGroup()
-																			.addComponent(
-																					jButton3,
-																					GroupLayout.Alignment.LEADING,
-																					GroupLayout.PREFERRED_SIZE,
-																					172,
-																					GroupLayout.PREFERRED_SIZE)
-																			.addComponent(
-																					jEditorPane1,
-																					GroupLayout.Alignment.LEADING,
-																					GroupLayout.PREFERRED_SIZE,
-																					170,
-																					GroupLayout.PREFERRED_SIZE)
-																			.addGroup(
-																					GroupLayout.Alignment.LEADING,
-																					thisLayout
-																							.createSequentialGroup()
-																							.addComponent(
-																									jRadioButton1,
-																									GroupLayout.PREFERRED_SIZE,
-																									142,
-																									GroupLayout.PREFERRED_SIZE)
-																							.addGap(30)))
-															.addGap(25)
-															.addGroup(
-																	thisLayout
-																			.createParallelGroup()
-																			.addGroup(
-																					GroupLayout.Alignment.LEADING,
-																					thisLayout
-																							.createSequentialGroup()
-																							.addComponent(
-																									jButton4,
-																									GroupLayout.PREFERRED_SIZE,
-																									170,
-																									GroupLayout.PREFERRED_SIZE)
-																							.addGap(8))
-																			.addGroup(
-																					GroupLayout.Alignment.LEADING,
-																					thisLayout
-																							.createSequentialGroup()
-																							.addGap(42)
-																							.addComponent(
-																									jButton6,
-																									GroupLayout.PREFERRED_SIZE,
-																									136,
-																									GroupLayout.PREFERRED_SIZE))))
-											.addGroup(
-													thisLayout
-															.createSequentialGroup()
-															.addGroup(
-																	thisLayout
-																			.createParallelGroup()
-																			.addComponent(
-																					jEditorPane6,
-																					GroupLayout.Alignment.LEADING,
-																					GroupLayout.PREFERRED_SIZE,
-																					289,
-																					GroupLayout.PREFERRED_SIZE)
-																			.addComponent(
-																					jEditorPane3,
-																					GroupLayout.Alignment.LEADING,
-																					GroupLayout.PREFERRED_SIZE,
-																					289,
-																					GroupLayout.PREFERRED_SIZE)
-																			.addComponent(
-																					jEditorPane2,
-																					GroupLayout.Alignment.LEADING,
-																					GroupLayout.PREFERRED_SIZE,
-																					289,
-																					GroupLayout.PREFERRED_SIZE))
-															.addPreferredGap(
-																	LayoutStyle.ComponentPlacement.UNRELATED)
-															.addGroup(
-																	thisLayout
-																			.createParallelGroup()
-																			.addComponent(
-																					jTextField5,
-																					GroupLayout.Alignment.LEADING,
-																					GroupLayout.PREFERRED_SIZE,
-																					62,
-																					GroupLayout.PREFERRED_SIZE)
-																			.addComponent(
-																					jTextField2,
-																					GroupLayout.Alignment.LEADING,
-																					GroupLayout.PREFERRED_SIZE,
-																					62,
-																					GroupLayout.PREFERRED_SIZE)
-																			.addComponent(
-																					jTextField1,
-																					GroupLayout.Alignment.LEADING,
-																					GroupLayout.PREFERRED_SIZE,
-																					62,
-																					GroupLayout.PREFERRED_SIZE))
-															.addGap(12)))
-							.addGroup(
-									thisLayout
-											.createParallelGroup()
-											.addGroup(
-													thisLayout
-															.createSequentialGroup()
-															.addGap(0,
-																	0,
-																	Short.MAX_VALUE)
-															.addGroup(
-																	thisLayout
-																			.createParallelGroup()
-																			.addComponent(
-																					jButton8,
-																					GroupLayout.Alignment.LEADING,
-																					GroupLayout.PREFERRED_SIZE,
-																					59,
-																					GroupLayout.PREFERRED_SIZE)
-																			.addComponent(
-																					jButton7,
-																					GroupLayout.Alignment.LEADING,
-																					GroupLayout.PREFERRED_SIZE,
-																					59,
-																					GroupLayout.PREFERRED_SIZE)
-																			.addComponent(
-																					jButton1,
-																					GroupLayout.Alignment.LEADING,
-																					GroupLayout.PREFERRED_SIZE,
-																					59,
-																					GroupLayout.PREFERRED_SIZE))
-															.addPreferredGap(
-																	LayoutStyle.ComponentPlacement.UNRELATED)
-															.addGroup(
-																	thisLayout
-																			.createParallelGroup()
-																			.addComponent(
-																					jButton10,
-																					GroupLayout.Alignment.LEADING,
-																					GroupLayout.PREFERRED_SIZE,
-																					59,
-																					GroupLayout.PREFERRED_SIZE)
-																			.addComponent(
-																					jButton9,
-																					GroupLayout.Alignment.LEADING,
-																					GroupLayout.PREFERRED_SIZE,
-																					59,
-																					GroupLayout.PREFERRED_SIZE)
-																			.addComponent(
-																					jButton2,
-																					GroupLayout.Alignment.LEADING,
-																					GroupLayout.PREFERRED_SIZE,
-																					59,
-																					GroupLayout.PREFERRED_SIZE))
-															.addGap(22))
-											.addGroup(
-													thisLayout
-															.createSequentialGroup()
-															.addPreferredGap(
-																	jButton8,
-																	jButton11,
-																	LayoutStyle.ComponentPlacement.INDENT)
-															.addGroup(
-																	thisLayout
-																			.createParallelGroup()
-																			.addGroup(
-																					thisLayout
-																							.createSequentialGroup()
-																							.addGap(0,
-																									0,
-																									Short.MAX_VALUE)
-																							.addComponent(
-																									jButton11,
-																									GroupLayout.PREFERRED_SIZE,
-																									139,
-																									GroupLayout.PREFERRED_SIZE))
-																			.addGroup(
-																					GroupLayout.Alignment.LEADING,
-																					thisLayout
-																							.createSequentialGroup()
-																							.addPreferredGap(
-																									jButton11,
-																									jButton5,
-																									LayoutStyle.ComponentPlacement.INDENT)
-																							.addComponent(
-																									jButton5,
-																									GroupLayout.PREFERRED_SIZE,
-																									117,
-																									GroupLayout.PREFERRED_SIZE)
-																							.addGap(10)))))
-							.addContainerGap(54, 54));
+			thisLayout.setVerticalGroup(thisLayout.createSequentialGroup()
+				.addContainerGap()
+				.addGroup(thisLayout.createParallelGroup()
+				    .addGroup(GroupLayout.Alignment.LEADING, thisLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+				        .addComponent(jButton6, GroupLayout.Alignment.BASELINE, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
+				        .addComponent(jButton11, GroupLayout.Alignment.BASELINE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE))
+				    .addComponent(jEditorPane1, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
+				.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+				.addGroup(thisLayout.createParallelGroup()
+				    .addGroup(GroupLayout.Alignment.LEADING, thisLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+				        .addComponent(jTextField1, GroupLayout.Alignment.BASELINE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
+				        .addComponent(jButton1, GroupLayout.Alignment.BASELINE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
+				        .addComponent(jButton2, GroupLayout.Alignment.BASELINE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE))
+				    .addComponent(jEditorPane2, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE))
+				.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+				.addGroup(thisLayout.createParallelGroup()
+				    .addGroup(GroupLayout.Alignment.LEADING, thisLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+				        .addComponent(jButton9, GroupLayout.Alignment.BASELINE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
+				        .addComponent(jButton7, GroupLayout.Alignment.BASELINE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
+				        .addComponent(jTextField2, GroupLayout.Alignment.BASELINE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE))
+				    .addComponent(jEditorPane3, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE))
+				.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+				.addGroup(thisLayout.createParallelGroup()
+				    .addGroup(GroupLayout.Alignment.LEADING, thisLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+				        .addComponent(jButton10, GroupLayout.Alignment.BASELINE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
+				        .addComponent(jButton8, GroupLayout.Alignment.BASELINE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
+				        .addComponent(jTextField5, GroupLayout.Alignment.BASELINE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE))
+				    .addComponent(jEditorPane6, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE))
+				.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+				.addGroup(thisLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+				    .addComponent(jButton5, GroupLayout.Alignment.BASELINE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
+				    .addComponent(jButton3, GroupLayout.Alignment.BASELINE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
+				    .addComponent(jButton4, GroupLayout.Alignment.BASELINE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE))
+				.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+				.addComponent(jRadioButton1, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
+				.addGap(31)
+				.addGroup(thisLayout.createParallelGroup()
+				    .addGroup(GroupLayout.Alignment.LEADING, thisLayout.createSequentialGroup()
+				        .addComponent(jTextField3, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
+				        .addGap(10))
+				    .addComponent(jEditorPane4, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE))
+				.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+				.addGroup(thisLayout.createParallelGroup()
+				    .addGroup(GroupLayout.Alignment.LEADING, thisLayout.createSequentialGroup()
+				        .addComponent(jTextField4, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
+				        .addGap(6))
+				    .addComponent(jEditorPane5, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE))
+				.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+				.addGroup(thisLayout.createParallelGroup()
+				    .addGroup(GroupLayout.Alignment.LEADING, thisLayout.createSequentialGroup()
+				        .addComponent(jTextField6, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
+				        .addGap(10))
+				    .addComponent(jEditorPane7, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE))
+				.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+				.addGroup(thisLayout.createParallelGroup()
+				    .addGroup(GroupLayout.Alignment.LEADING, thisLayout.createSequentialGroup()
+				        .addComponent(jTextField7, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
+				        .addGap(10))
+				    .addComponent(jEditorPane8, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE))
+				.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+				.addGroup(thisLayout.createParallelGroup()
+				    .addGroup(thisLayout.createSequentialGroup()
+				        .addComponent(jEditorPane9, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
+				        .addGap(0, 0, Short.MAX_VALUE))
+				    .addGroup(GroupLayout.Alignment.LEADING, thisLayout.createSequentialGroup()
+				        .addComponent(jTextField8, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
+				        .addGap(0, 10, Short.MAX_VALUE)))
+				.addContainerGap(91, 91));
+			thisLayout.setHorizontalGroup(thisLayout.createSequentialGroup()
+				.addContainerGap()
+				.addGroup(thisLayout.createParallelGroup()
+				    .addGroup(thisLayout.createSequentialGroup()
+				        .addGroup(thisLayout.createParallelGroup()
+				            .addComponent(jEditorPane8, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 268, GroupLayout.PREFERRED_SIZE)
+				            .addComponent(jEditorPane7, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 268, GroupLayout.PREFERRED_SIZE)
+				            .addComponent(jEditorPane5, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 268, GroupLayout.PREFERRED_SIZE)
+				            .addComponent(jEditorPane4, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 268, GroupLayout.PREFERRED_SIZE)
+				            .addComponent(jEditorPane9, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 268, GroupLayout.PREFERRED_SIZE))
+				        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+				        .addGroup(thisLayout.createParallelGroup()
+				            .addComponent(jTextField7, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE)
+				            .addComponent(jTextField6, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE)
+				            .addComponent(jTextField4, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE)
+				            .addComponent(jTextField3, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE)
+				            .addComponent(jTextField8, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE))
+				        .addGap(33))
+				    .addGroup(thisLayout.createSequentialGroup()
+				        .addGroup(thisLayout.createParallelGroup()
+				            .addComponent(jButton3, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 172, GroupLayout.PREFERRED_SIZE)
+				            .addComponent(jEditorPane1, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 170, GroupLayout.PREFERRED_SIZE)
+				            .addGroup(GroupLayout.Alignment.LEADING, thisLayout.createSequentialGroup()
+				                .addComponent(jRadioButton1, GroupLayout.PREFERRED_SIZE, 142, GroupLayout.PREFERRED_SIZE)
+				                .addGap(30)))
+				        .addGap(25)
+				        .addGroup(thisLayout.createParallelGroup()
+				            .addGroup(GroupLayout.Alignment.LEADING, thisLayout.createSequentialGroup()
+				                .addComponent(jButton4, GroupLayout.PREFERRED_SIZE, 170, GroupLayout.PREFERRED_SIZE)
+				                .addGap(8))
+				            .addGroup(GroupLayout.Alignment.LEADING, thisLayout.createSequentialGroup()
+				                .addGap(42)
+				                .addComponent(jButton6, GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE))))
+				    .addGroup(thisLayout.createSequentialGroup()
+				        .addGroup(thisLayout.createParallelGroup()
+				            .addComponent(jEditorPane6, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 289, GroupLayout.PREFERRED_SIZE)
+				            .addComponent(jEditorPane3, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 289, GroupLayout.PREFERRED_SIZE)
+				            .addComponent(jEditorPane2, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 289, GroupLayout.PREFERRED_SIZE))
+				        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+				        .addGroup(thisLayout.createParallelGroup()
+				            .addComponent(jTextField5, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE)
+				            .addComponent(jTextField2, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE)
+				            .addComponent(jTextField1, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE))
+				        .addGap(12)))
+				.addGroup(thisLayout.createParallelGroup()
+				    .addGroup(thisLayout.createSequentialGroup()
+				        .addGap(0, 0, Short.MAX_VALUE)
+				        .addGroup(thisLayout.createParallelGroup()
+				            .addComponent(jButton8, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE)
+				            .addComponent(jButton7, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE)
+				            .addComponent(jButton1, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE))
+				        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+				        .addGroup(thisLayout.createParallelGroup()
+				            .addComponent(jButton10, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE)
+				            .addComponent(jButton9, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE)
+				            .addComponent(jButton2, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE))
+				        .addGap(22))
+				    .addGroup(thisLayout.createSequentialGroup()
+				        .addPreferredGap(jButton8, jButton11, LayoutStyle.ComponentPlacement.INDENT)
+				        .addGroup(thisLayout.createParallelGroup()
+				            .addGroup(thisLayout.createSequentialGroup()
+				                .addGap(0, 0, Short.MAX_VALUE)
+				                .addComponent(jButton11, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE))
+				            .addGroup(GroupLayout.Alignment.LEADING, thisLayout.createSequentialGroup()
+				                .addPreferredGap(jButton11, jButton5, LayoutStyle.ComponentPlacement.INDENT)
+				                .addComponent(jButton5, GroupLayout.PREFERRED_SIZE, 117, GroupLayout.PREFERRED_SIZE)
+				                .addGap(0, 10, Short.MAX_VALUE)))))
+				.addContainerGap(46, 46));
 			pack();
 			this.setSize(594, 572);
 			TollBarrier.getInstance().addListener(this);
@@ -796,7 +470,27 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 	{
 		cd = new ConfigDebit(this);
 		cd.setVisible(true);
+
 		lockAll();
+	}
+
+	@Override
+	public void updateArgentEncaisseMoyen() {
+		jTextField8.setText("" + TollBarrier.getInstance().getArgentEncaisseMoyen());
+	}
+
+	@Override
+	public void updateNombreAlarmes() {
+		int nbAlarme = 0;
+		for (Borne b : TollBarrier.getInstance().getBornes())
+			nbAlarme += b.getNbAlarme();
+		jTextField6.setText("" + nbAlarme);
+	}
+	
+	@Override
+	public void updateArgentEncaisse()
+	{
+		jTextField7.setText("" + TollBarrier.getInstance().getArgentEncaisse());
 	}
 
 	@Override
@@ -820,6 +514,8 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 		updateTempsPassageMoyen();
 		updateArgentEncaisse();
 		updateBornes();
+		updateArgentEncaisseMoyen();
+		updateNombreAlarmes();
 	}
 
 	private void jButton11MouseClicked()
@@ -828,12 +524,6 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 				.getListDebit());
 		viewDebitFrame.setVisible(true);
 		lockAll();
-	}
-
-	@Override
-	public void updateArgentEncaisse()
-	{
-		// TODO Auto-generated method stub
 	}
 
 	@Override
@@ -897,20 +587,9 @@ public class InterfaceGraphique extends javax.swing.JFrame implements
 	@Override
 	public void updateBornes()
 	{
-		jTextField1.setText(""
-				+ TollBarrier.getInstance().getNombreBornes("Manuelles"));
-		jTextField2.setText(""
-				+ TollBarrier.getInstance().getNombreBornes("Automatiques"));
-		jTextField5.setText(""
-				+ TollBarrier.getInstance().getNombreBornes("Telepeage"));
-	}
-
-	private void jTextField6ActionPerformed(ActionEvent evt)
-	{
-		int nbAlarme = 0;
-		for (Borne b : TollBarrier.getInstance().getBornes())
-			nbAlarme += b.getNbAlarme();
-		jTextField6.setText("" + nbAlarme);
+		jTextField1.setText(""+TollBarrier.getInstance().getNombreBornes("Manuelles"));
+		jTextField2.setText(""+TollBarrier.getInstance().getNombreBornes("Automatiques"));
+		jTextField5.setText(""+TollBarrier.getInstance().getNombreBornes("Telepeage"));
 	}
 
 }
