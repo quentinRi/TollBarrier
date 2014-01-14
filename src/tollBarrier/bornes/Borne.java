@@ -167,4 +167,6 @@ public abstract class Borne extends Thread
 		return _paiement;
 	}
 
+	public abstract String getType();
+
 }

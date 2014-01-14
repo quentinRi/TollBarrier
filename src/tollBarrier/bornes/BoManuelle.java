@@ -78,4 +78,10 @@ public class BoManuelle extends Borne{
 	}
 	*/
 
+	@Override
+	public final String getType()
+	{
+		return "Manuelle";
+	}
+
 }

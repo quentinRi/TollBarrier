@@ -13,6 +13,12 @@ public class BoTelePeage extends Borne
 		_paiement.add(MoyenDePaiment.TELEPEAGE);
 	}
 
+	@Override
+	public final String getType()
+	{
+		return "Telepeage";
+	}
+
 	/*
 	 * public void envoyerRapport(){
 	 * 

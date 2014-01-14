@@ -14,4 +14,10 @@ public class BoAutomatique extends Borne
 		_paiement.add(MoyenDePaiment.LIQUIDE);
 		_paiement.add(MoyenDePaiment.ABONNEMENT);
 	}
+
+	@Override
+	public final String getType()
+	{
+		return "Automatique";
+	}
 }

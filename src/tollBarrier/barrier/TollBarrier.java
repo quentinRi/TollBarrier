@@ -155,22 +155,6 @@ public class TollBarrier
 		return sum / nbBorne;
 	}
 
-	/*
-	 * public Float getTempsPassageMoyen() { int nbBornes = getNombreBornes();
-	 * float sum = 0;
-	 * 
-	 * for (int i = 0; i < nbBornes; i++) { sum +=
-	 * getTempsPassageMoyenParTypeDeBorne(i); } return sum / nbBornes; }
-	 */
-
-	/**
-	 * @return
-	 */
-	/*
-	 * public Float getTempsPassageMoyenParBorne(int numBorne) { Borne borne =
-	 * bornes.get(numBorne); return borne.getTempsPassage(); TODO }
-	 */
-
 	/**
 	 * @return
 	 */
@@ -207,8 +191,11 @@ public class TollBarrier
 	 */
 	public Integer getNombreBornes(String typeBorne)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		int nb = 0;
+		for (Borne b : bornes)
+			if (b.getType().toLowerCase().charAt(0) == typeBorne.toLowerCase().charAt(0))
+				nb++;
+		return nb;
 	}
 
 	/**
