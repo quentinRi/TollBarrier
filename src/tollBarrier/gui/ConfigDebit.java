@@ -1,4 +1,6 @@
 package tollBarrier.gui;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -89,6 +91,11 @@ public class ConfigDebit extends javax.swing.JFrame
 						{ "Voiture", "Camion", "Moto" });
 				jComboBox1 = new JComboBox();
 				jComboBox1.setModel(jComboBox1Model);
+				jComboBox1.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent evt) {
+						jComboBox1ActionPerformed(evt);
+					}
+				});
 			}
 			{
 				jRadioButton1 = new JRadioButton();
@@ -104,7 +111,8 @@ public class ConfigDebit extends javax.swing.JFrame
 			}
 			{
 				jRadioButton4 = new JRadioButton();
-				jRadioButton4.setText("Télépéage");
+				jRadioButton4.setText("Tï¿½lï¿½pï¿½age");
+				
 			}
 			{
 				jTextField1 = new JTextField();
@@ -112,7 +120,7 @@ public class ConfigDebit extends javax.swing.JFrame
 			}
 			{
 				jLabel1 = new JLabel();
-				jLabel1.setText("Débit");
+				jLabel1.setText("Dï¿½bit");
 			}
 			thisLayout.setVerticalGroup(thisLayout
 					.createSequentialGroup()
@@ -251,9 +259,18 @@ public class ConfigDebit extends javax.swing.JFrame
 		if (jRadioButton2.isSelected())
 			mdp.add(MoyenDePaiment.LIQUIDE);
 		if (jRadioButton3.isSelected())
-			mdp.add(MoyenDePaiment.ABONNEMENT);
-		if (jRadioButton4.isSelected())
-			mdp.add(MoyenDePaiment.TELEPEAGE);
+			mdp.add(MoyenDePaiment.ABONNEMENT);		
+		
+		if (jComboBox1.getSelectedItem() == "Camion")
+		{
+			System.out.println("dÃ©sactivation du bouton");
+			jRadioButton4.setEnabled(false);
+		}
+		else 
+		{
+			if (jRadioButton4.isSelected())
+				mdp.add(MoyenDePaiment.TELEPEAGE);
+		}
 		tb.addDebit(jComboBox1.getSelectedItem().toString(),
 				Integer.parseInt(jTextField1.getText()), mdp);
 		parent.setVisible(true);
@@ -264,6 +281,16 @@ public class ConfigDebit extends javax.swing.JFrame
 	{
 		parent.setVisible(true);
 		this.setVisible(false);
+	}
+	
+	private void jComboBox1ActionPerformed(ActionEvent evt) {		
+		if (jComboBox1.getSelectedItem() == "Camion")
+		{
+			System.out.println("dÃ©sactivation du bouton");
+			jRadioButton4.setEnabled(false);
+		}
+		else
+			jRadioButton4.setEnabled(true);
 	}
 
 }
