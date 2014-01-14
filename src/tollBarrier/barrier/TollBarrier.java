@@ -18,7 +18,6 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Scanner;
 
 import tollBarrier.bornes.BoManuelle;
 import tollBarrier.bornes.Borne;
@@ -40,6 +39,7 @@ public class TollBarrier
 	private LinkedList<Vehicule> vehicules;
 	private ArrayList<Debit> debits;
 	private List<TollBarrierListener> listeners;
+	private long _tempsDebutSimulation;
 	private static boolean running = false;
 
 	public static boolean isRunning()
@@ -59,6 +59,8 @@ public class TollBarrier
 	{
 		instance = new TollBarrier();
 		running = false;
+		for (TollBarrierListener listener : instance.listeners)
+			listener.updateAll();
 	}
 
 	/**
@@ -67,16 +69,19 @@ public class TollBarrier
 	public void addDebit(String typeVehicule, Integer nbParMinute,
 			Collection<String> typePaiement)
 	{
-		for (String s : typePaiement)
-			debits.add(new Debit(typeVehicule, nbParMinute, s, vehicules, this));
+			debits.add(new Debit(typeVehicule, nbParMinute, typePaiement, vehicules, this));
 	}
 
 	public void addDebit(String typeVehicule, Integer nbParMinute,
 			HashSet<MoyenDePaiment> mdp)
 	{
-		for (MoyenDePaiment m : mdp)
-			debits.add(new Debit(typeVehicule, nbParMinute, m.name(),
+			debits.add(new Debit(typeVehicule, nbParMinute, mdp,
 					vehicules, this));
+	}
+	
+	public List<Debit> getListDebit () 
+	{
+		return debits;
 	}
 
 	public static TollBarrier getInstance()
@@ -133,43 +138,27 @@ public class TollBarrier
 		}
 	}
 
-	public void envoyerRapport()
+	public synchronized void envoyerRapport()
 	{
 		for (TollBarrierListener listener : listeners)
 			listener.updateTempsPassageMoyen();
 	}
 
-	public Float getTempsPassageMoyen()
+	public Double getTempsPassageMoyen()
 	{
-		float sum = 0;
-		int nbBorne = 0;
+		double tempsTotal = 0;
+		double nbVeh = 0;
 		for (int i = 0; i < getNombreBornes(); i++)
 		{
-			double a = bornes.get(i).getTempsPassageMoyen();
-			if (a > 0)
+			double nbVehAtBorne = bornes.get(i).getNbVeh();
+			if (nbVehAtBorne > 0)
 			{
-				sum += a;
-				nbBorne++;
+				tempsTotal += bornes.get(i).getTime();
+				nbVeh += nbVehAtBorne;
 			}
 		}
-		return sum / nbBorne;
+		return tempsTotal / nbVeh;
 	}
-
-	/*
-	 * public Float getTempsPassageMoyen() { int nbBornes = getNombreBornes();
-	 * float sum = 0;
-	 * 
-	 * for (int i = 0; i < nbBornes; i++) { sum +=
-	 * getTempsPassageMoyenParTypeDeBorne(i); } return sum / nbBornes; }
-	 */
-
-	/**
-	 * @return
-	 */
-	/*
-	 * public Float getTempsPassageMoyenParBorne(int numBorne) { Borne borne =
-	 * bornes.get(numBorne); return borne.getTempsPassage(); TODO }
-	 */
 
 	/**
 	 * @return
@@ -179,18 +168,10 @@ public class TollBarrier
 		return vehicules.size();
 	}
 
-	/**
-	 * @return
-	 */
-	public void addIntervenant()
-	{
-		// TODO Auto-generated method stub
-
-	}
-
 	public void demarrerSimulation()
 	{
 		running = true;
+		_tempsDebutSimulation = System.currentTimeMillis() / 1000;
 		for (Borne b : bornes)
 			b.start();
 		for (Debit d : debits)
@@ -200,6 +181,8 @@ public class TollBarrier
 	public void arreterSimulation()
 	{
 		running = false;
+		for (TollBarrierListener listener : listeners)
+			listener.updateTempsPassageMoyen();
 	}
 
 	/**
@@ -207,8 +190,11 @@ public class TollBarrier
 	 */
 	public Integer getNombreBornes(String typeBorne)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		int nb = 0;
+		for (Borne b : bornes)
+			if (b.getType().toLowerCase().charAt(0) == typeBorne.toLowerCase().charAt(0))
+				nb++;
+		return nb;
 	}
 
 	/**
@@ -219,18 +205,14 @@ public class TollBarrier
 		return bornes.size();
 	}
 
-	/**
-	 * @return
-	 */
-	public Float getDebitEntree()
+	public Integer getDebitEntree()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		int nbVehParMn = 0;
+		for (Debit d : debits)
+			nbVehParMn += d.getNb();
+		return nbVehParMn;
 	}
 
-	/**
-	 * @return
-	 */
 	public Float getTempsPassageMoyenParTypeDeBorne(String borne)
 			throws NotAValidBorneTypeException
 	{
@@ -238,9 +220,6 @@ public class TollBarrier
 		return null;
 	}
 
-	/**
-	 * @return
-	 */
 	public Float getTempsInnocupationBorne(String typeborne)
 			throws NotAValidBorneTypeException
 	{
@@ -248,31 +227,7 @@ public class TollBarrier
 		return null;
 	}
 
-	/**
-	 * @return
-	 */
-	public Integer getNombreIntervenants()
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/**
-	 * 
-	 */
-	public void removeIntervenant()
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	public Integer getNextNumeroBorne()
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public static void main(String[] args)
+	/*public static void main(String[] args)
 	{
 		TollBarrier barriere = getInstance();
 
@@ -316,7 +271,8 @@ public class TollBarrier
 		for (Debit d : barriere.debits)
 			d.start();
 	}
-
+*/
+	
 	public void add(Vehicule v)
 	{
 		synchronized (vehicules)

@@ -65,29 +65,6 @@ public class TollBarrierTest
 	}
 
 	@Test
-	public void testaddIntervenant()
-	{
-		int nb = tb.getNombreIntervenants();
-		tb.addIntervenant();
-		assertEquals(tb.getNombreIntervenants(), new Integer(nb + 1));
-	}
-
-	@Test
-	public void testremoveIntervenant()
-	{
-		int nb = tb.getNombreIntervenants();
-		tb.removeIntervenant();
-		assertEquals(tb.getNombreIntervenants(), new Integer(nb - 1));
-	}
-
-	@Test
-	public void testgetNombreIntervenant()
-	{
-		assertTrue(tb.getNombreIntervenants() instanceof Integer);
-		assertTrue(tb.getNombreIntervenants() >= 0);
-	}
-
-	@Test
 	public void testdemarrerSimulation()
 	{
 	}
@@ -118,7 +95,6 @@ public class TollBarrierTest
 	@Test
 	public void testgetDebitEntree()
 	{
-		assertTrue(tb.getDebitEntree() instanceof Float);
 		assertTrue(tb.getDebitEntree() >= 0);
 	}
 
@@ -183,13 +159,5 @@ public class TollBarrierTest
 		} catch (NotAValidBorneTypeException e)
 		{
 		}
-	}
-
-	public void testgetNextNumeroBorne()
-	{
-		assertTrue(tb.getNextNumeroBorne() instanceof Integer);
-		assertTrue(tb.getNextNumeroBorne() >= 0);
-		assertTrue(tb.getNextNumeroBorne() <= tb.getNombreBornes() + 1);
-
 	}
 }

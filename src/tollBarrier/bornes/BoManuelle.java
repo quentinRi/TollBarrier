@@ -16,72 +16,15 @@ public class BoManuelle extends Borne{
 		_paiement.add(MoyenDePaiment.ABONNEMENT);
 	}
 	
-	
-	public void envoyerRapport(){
-/*
-	}
-
-	public void paiement(MoyenDePaiment m){
+	protected int additionalTime(){
 		
-		switch(m){
-		
-		case CB :
-			try {
-				Thread.sleep(8000);
-			} catch (InterruptedException e){
-				System.err.println(e);
-			}
-		case Liquide :
-			try {
-				Thread.sleep(15000);
-			} catch (InterruptedException e){
-				System.err.println(e);
-			}
-		case Abonnement :
-			try {
-				Thread.sleep(6000);
-			} catch (InterruptedException e){
-				System.err.println(e);
-			}
-		}
-	}
-	
-	public void alarme(){
-		
-		try {
-			Thread.sleep(120000);
-		} catch (InterruptedException e){
-			System.err.println(e);
-		}
+		return 3000;
 	}
 	
 	@Override
-	public void run() {
-
-		// @todo Lire le moyen de paiment de la voiture
-		Set<MoyenDePaiment> mdp = _vehicule.getMoyensDePaiment();
-		Iterator<MoyenDePaiment> It = mdp.iterator();
-		MoyenDePaiment m = It.next();
-		boolean paiementEffectue = false;
-		do{
-			if(_paiement.contains(m)){
-				paiement(m);
-				paiementEffectue = true;
-			}
-		}while(It.hasNext() && paiementEffectue == false);
-		if(!paiementEffectue){
-			alarme();
-		}
-		
-		envoyerRapport();
-		leverBarriere();
-
-		_vehicule.quitterPeage();
-		long tmp = _vehicule.getTempsPassage();
-		calculerTmpMoyen(tmp);
-		_vehicule = null;
+	public final String getType()
+	{
+		return "Manuelle";
 	}
-	*/
 
-	}	
 }

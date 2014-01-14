@@ -13,11 +13,14 @@ public abstract class Vehicule
 	private long				_hFin;
 	private static int		instanceNumber	= 0;
 	private int				num;
+	private long _hArriveBorne;
 	protected int				_amount;
+
 
 	public Vehicule(Set<MoyenDePaiment> mdp)
 	{
-		_hDebut = 0;
+		_hDebut = System.currentTimeMillis() / 1000;
+		_hArriveBorne = 0;
 		_hFin = 0;
 		_mdp = mdp;
 		_amount = 0;
@@ -27,12 +30,12 @@ public abstract class Vehicule
 
 	public void rejoindreFile()
 	{
-		_hDebut = System.currentTimeMillis()/1000;
+		_hArriveBorne = System.currentTimeMillis() / 1000;
 	}
 
 	public void quitterPeage()
 	{
-		_hFin = System.currentTimeMillis()/1000;
+		_hFin = System.currentTimeMillis() / 1000;
 	}
 
 	public Set<MoyenDePaiment> getMoyensDePaiment()
@@ -49,14 +52,28 @@ public abstract class Vehicule
 	public String toString()
 	{
 		String s = "";
-		s+= getClass().getSimpleName();
-		s+= " n°"+num;
+		s += getClass().getSimpleName();
+		s += " n°" + num;
 		return s;
+	}
+	
+	public long getTimeAtBorne()  throws NotGoneVehiculeException
+	{
+		if (_hArriveBorne == 0 || _hFin == 0)
+			throw new NotGoneVehiculeException();
+		return _hFin - _hArriveBorne;
+	}
+	
+	public long getTimeWaiting()  throws NotGoneVehiculeException
+	{
+		if (_hArriveBorne == 0 || _hFin == 0)
+			throw new NotGoneVehiculeException();
+		return _hArriveBorne - _hDebut;
 	}
 
 	public long getTime() throws NotGoneVehiculeException
 	{
-		if (_hDebut == 0 || _hFin == 0)
+		if (_hFin == 0)
 			throw new NotGoneVehiculeException();
 		return _hFin - _hDebut;
 	}

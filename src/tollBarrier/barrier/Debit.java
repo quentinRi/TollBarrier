@@ -16,6 +16,7 @@ package tollBarrier.barrier;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.LinkedList;
 
 import tollBarrier.vehicule.FabriqueDeVehicule;
 import tollBarrier.vehicule.MoyenDePaiment;
@@ -27,9 +28,8 @@ import tollBarrier.vehicule.vehiculesObjects.Vehicule;
  */
 public class Debit extends Thread
 {
-	private FabriqueDeVehicule	fabrique	= FabriqueDeVehicule.getInstance();	;
 	private String				typeVehicule;
-	private String				typePaiement;
+	private Collection<String> 	typePaiement;
 	private int					nbParMn;
 	private TollBarrier			tb;
 
@@ -39,10 +39,22 @@ public class Debit extends Thread
 	 * @param typePaiement
 	 * @param vehicules
 	 */
-	public Debit(String typeVehicule, Integer nbParMinute, String typePaiement,
+	public Debit(String typeVehicule, Integer nbParMinute, Collection<String> typePaiement,
 			Collection<Vehicule> vehicules, TollBarrier tb)
 	{
 		this.typePaiement = typePaiement;
+		this.typeVehicule = typeVehicule;
+		this.nbParMn = nbParMinute;
+		this.tb = tb;
+	}
+
+	public Debit(String typeVehicule, Integer nbParMinute,
+			HashSet<MoyenDePaiment> mdp, LinkedList<Vehicule> vehicules,
+			TollBarrier tb)
+	{
+		this.typePaiement = new HashSet<String>();
+		for (MoyenDePaiment moyen : mdp)
+			typePaiement.add(moyen.name());
 		this.typeVehicule = typeVehicule;
 		this.nbParMn = nbParMinute;
 		this.tb = tb;
@@ -54,8 +66,9 @@ public class Debit extends Thread
 		while (TollBarrier.isRunning())
 		{
 			HashSet<MoyenDePaiment> moyens = new HashSet<MoyenDePaiment>();
-			moyens.add(MoyenDePaiment.getByName(typePaiement));
-			Vehicule v = fabrique.creerVehicule(typeVehicule, moyens);
+			for (String mdp : typePaiement)
+			moyens.add(MoyenDePaiment.getByName(mdp));
+			Vehicule v = FabriqueDeVehicule.getInstance().creerVehicule(typeVehicule, moyens);
 			tb.add(v);
 			try
 			{
@@ -65,6 +78,16 @@ public class Debit extends Thread
 				e.printStackTrace();
 			}
 		}
+	}
+
+	public int getNb()
+	{
+		return nbParMn;
+	}
+	
+	public String toString()
+	{
+		return nbParMn + " " + typeVehicule + " dotés de: " + typePaiement;
 	}
 
 }
